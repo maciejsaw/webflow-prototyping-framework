@@ -79,6 +79,7 @@ You can copy/paste pre-made framework elements from this project to your project
 ### Radio buttons
 ### Dropdowns
 ### Checkboxes
+### Errors
 ## Collapsible sections
 ## Tooltips
 ## Wizards
@@ -94,6 +95,7 @@ You can copy/paste pre-made framework elements from this project to your project
 ### Button with preloader
 ## Fake Two-Factor-Authentication
 ## New user onboarding
+## Animations and transitions
 
 
 
