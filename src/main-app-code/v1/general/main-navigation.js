@@ -26,8 +26,9 @@ QueryStringRouter.onParamChange('subpage', function(value) {
 
 // $(document).on('click', '[action-go-to-invoices]', function(event) {
 // 	QueryStringRouter.setFreshParams({
-//     	subpage: 'my-account',
-//     	activeTab: 'invoices'
+//     	subpage: 'invoices',
+//     	mainTab: 'my-account',
+//      secondaryTab: 'invoices',
 // 	});
 // });
 
