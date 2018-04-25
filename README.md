@@ -11,21 +11,21 @@ Robust rapid prototyping with Webflow and JS code
 
 # Features
 - Create prototypes that have the same feeling as real web-app
--- Support for native back button, even for modals
--- Instant page switching thanks to preloading Webflow separate pages into one Single-Page-Application
+  - Support for native back button, even for modals
+  - Instant page switching thanks to preloading Webflow separate pages into one Single-Page-Application
 - Build complex forms with logic
--- Pre-made components like checkboxes, radio-buttons, input fields
--- Easy to maintain
+  - Pre-made components like checkboxes, radio-buttons, input fields
+  - Easy to maintain
 - Build complex wizards
--- Handle complex paths with complex logic
+  - Handle complex paths with complex logic
 - Solve problems before developers see them
--- Your prototype code will be much closer to real life scenario, so you can foresee problems before developers encounter them
+  - Your prototype code will be much closer to real life scenario, so you can foresee problems before developers encounter them
 - Simulate server
--- Store your user data in local storage, so that it is persistent even if he refreshes the page
+  - Store your user data in local storage, so that it is persistent even if he refreshes the page
 - Share specific screens
--- You can send links that directly open a specific state, for example link directly to a modal or directly to a specific step of a wizard
+  - You can send links that directly open a specific state, for example link directly to a modal or directly to a specific step of a wizard
 - Deliver CSS code together with prototype in BEM methodology
--- Webfloe exported CSS code can be directly used by developers
+  - Webfloe exported CSS code can be directly used by developers
 
 
 # Set up: simple version
