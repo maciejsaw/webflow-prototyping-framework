@@ -25,8 +25,11 @@ Robust rapid prototyping with Webflow and JS code
   - Store your user data in local storage, so that it is persistent even if he refreshes the page
 - Share specific screens
   - You can send links that directly open a specific state, for example link directly to a modal or directly to a specific step of a wizard
-- Deliver CSS code together with prototype in BEM methodology
-  - Webfloe exported CSS code can be directly used by developers
+- Be consistent with design
+  - Maintain interactive styleguide with basic reusable components, like buttons, headers, forms etc.
+- Deliver responsive web design CSS code in BEM methodology
+  - Webflow is faster than coding by hadn and exported CSS code can be directly used by developers
+  
 
 
 # Set up: simple version
