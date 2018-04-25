@@ -1,0 +1,53 @@
+/* change checkbox border color when hovering over label */
+.bem-checkbox:hover .bem-checkbox__checkmark {
+  border-color: #0081ff;
+}
+
+
+/* custom scroll bar */
+/*
+
+::-webkit-scrollbar {
+  width : 10px;
+  height :10px;
+  background :  #fafafa;
+}
+
+::-webkit-scrollbar:horizontal {
+  border-style: solid;
+  border-color: #E8E8E8;
+  border-width: 1px 0;
+}
+
+::-webkit-scrollbar:vertical {
+  border-style: solid;
+  border-color: #E8E8E8;
+  border-width: 0 1px;
+}
+
+::-webkit-scrollbar:hover {
+  background :  #f6f6f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background : rgba(193, 193, 193, .8);
+  background-clip: padding-box;
+  height: 6px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  -webkit-border-radius: 7px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background : rgba(193, 193, 193, 1);
+  background-clip: padding-box;
+  height: 6px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  -webkit-border-radius: 7px;
+}
+::-webkit-scrollbar-corner {
+  background :  #f6f6f6;
+  border-style: solid;
+  border-color: #E8E8E8;
+  border-width: 1px 0 0 1px;
+}
+
+*/

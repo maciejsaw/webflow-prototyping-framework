@@ -1,0 +1,178 @@
+/* https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away */
+html {
+  touch-action: manipulation;
+}
+
+/* Add font awesome rendering sharpness
+*/
+.fontawesome, .font-icon {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+
+/* truncate thing with attribute truncate="true" and other classes*/
+[truncate=true] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[truncate="false"] {
+  white-space: normal;
+}
+
+[cursor="resize"] {
+  cursor: ew-resize;
+}
+
+[noselect='true'], [user-select="none"] {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+[user-select="all"] {
+    -webkit-user-select: all;
+    -khtml-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
+}
+
+[disable-native-tap-highlight="true"] {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+textarea {
+    outline: none;
+}
+
+@keyframes yellowHighlight {
+  0% {
+    background: #ffffdd;
+  }
+  100% {
+    background: #fdfdfd;
+  }
+}
+
+.yellow-highlight, [yellow-highlight] {
+  animation: yellowHighlight 6s ease;
+}
+
+.is-grayed-out {
+  pointer-events: none;
+}
+
+.is-grayed-out[tooltipster] {
+  pointer-events: auto;
+}
+
+.is-grayed-out[tooltipster]:active {
+  pointer-events: none;
+}
+
+[pointer-events="none"] {
+  pointer-events: none;
+}
+
+.bem-button-with-spinner.is-inactive-with-preloader {
+  pointer-events: none;
+}
+
+[webkit-touch-callout="none"] {
+  -webkit-touch-callout: none;
+}
+
+[webkit-touch-callout="default"] {
+  -webkit-touch-callout: default!important;
+}
+
+[webkit-overflow-scrolling="touch"] {
+  -webkit-overflow-scrolling: touch;
+}
+
+.w-webflow-badge {
+	display: none!important;
+}
+
+.initial-load-overlay, [initial-load-overlay] {
+  display: block;
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+[animation-spin="true"], .bem-spinner {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 2000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 2000;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 2000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+[will-change="transform"] {
+  will-change: transform;
+}
+
+[will-change="opacity"] {
+  will-change: opacity;
+}
+
+
+input[type=text] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type=password] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type=email] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+input[type=text][disabled] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea, input, button {
+  outline: none;
+}
