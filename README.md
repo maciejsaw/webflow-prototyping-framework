@@ -61,10 +61,29 @@ You can copy/paste pre-made framework elements from this project to your project
 
 # Documentation
 ## State
+### Clicks should only change state
+### Actions are triggered when state changes
 ### Persistent state in local storage
 ### Navigation state in query string
-### Actions are triggered when state changes
-
+### Use attributes as selectors
+### Use attributes for simple show/hide elements based on state
+### Write functions for better flexibility
+## Modals
+## Forms
+### Radio buttons
+### Dropdowns
+### Checkboxes
+## Wizards
+## Wizards in modals
+## Preloading subpages
+## Flashing notifications
+## Multi-level navigation and tabs
+## CSS Utilities
+## User generated lists
+### Empty states
+## Preloaders
+### Fake preloaders
+### Button with preloader
 
 
 
