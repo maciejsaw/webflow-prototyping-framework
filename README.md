@@ -10,7 +10,7 @@ Paste the following code inside the head section
 ```TODO Rawgit link```
 
 Paste the following code inside the bottom custom code section, before end of "body" tag
-```<script src="https://rawgit.com/maciejsaw/webflow-prototyping-framework/master/webflow-prototyping-framework-bundle.js"></script>```
+```<script src="http://maciejsawicki.com/webflow-prototyping-framework/webflow-prototyping-framework-bundle.js"></script>```
 
 # Set up: pro version
 - Fork this repository to another GitHub repo
