@@ -13,6 +13,7 @@ Robust rapid prototyping with Webflow and JS code
 - Create prototypes that have the same feeling as real web-app
   - Support for native back button, even for modals
   - Instant page switching thanks to preloading Webflow separate pages into one Single-Page-Application
+  - Tooltips, modals, dynamic layouts, animations etc.
 - Build complex forms with logic
   - Pre-made components like checkboxes, radio-buttons, input fields
   - Easy to maintain
@@ -75,6 +76,8 @@ You can copy/paste pre-made framework elements from this project to your project
 ### Radio buttons
 ### Dropdowns
 ### Checkboxes
+## Collapsible sections
+## Tooltips
 ## Wizards
 ## Wizards in modals
 ## Preloading subpages
@@ -86,6 +89,9 @@ You can copy/paste pre-made framework elements from this project to your project
 ## Preloaders
 ### Fake preloaders
 ### Button with preloader
+## Fake Two-Factor-Authentication
+## New user onboarding
+
 
 
 
