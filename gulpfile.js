@@ -14,8 +14,6 @@ var scriptsToConcat = [
 	"./src/general-framework/plugins-and-libraries/jquery-deparam.js",
 	"./src/general-framework/plugins-and-libraries/jquery.scrollTo.min.js",
 	"./src/general-framework/plugins-and-libraries/jquery.jsonp-2.4.0.js",
-	"./src/general-framework/plugins-and-libraries/jquery-event-drag/jquery.event.drag-2.2.js",
-	"./src/general-framework/plugins-and-libraries/jquery-event-drag/jquery.event.drag.live-2.2.js",
 	"./src/general-framework/js-utilities/queryStringRouter.js",
 	"./src/general-framework/js-utilities/reactiveLocalStorage.js",
 	"./src/general-framework/js-utilities/webflowComponentsFixes.js",
