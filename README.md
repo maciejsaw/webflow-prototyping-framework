@@ -11,12 +11,12 @@ Robust rapid prototyping with Webflow and JS code
 
 # Features
 - Create prototypes that have the same feeling as real web-app
+  - Tooltips, modals, dynamic layouts, animations, autofocus, native keyboards, fixed topbars, scrollable containers etc.
   - Support for native back button, even for modals
   - Instant page switching thanks to preloading Webflow separate pages into one Single-Page-Application
-  - Tooltips, modals, dynamic layouts, animations etc.
 - Build complex forms with logic
   - Pre-made components like checkboxes, radio-buttons, input fields
-  - Easy to maintain
+  - Easy to maintain and change
 - Build complex wizards
   - Handle complex paths with complex logic
 - Solve problems before developers see them
