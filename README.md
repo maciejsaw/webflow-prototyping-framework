@@ -63,11 +63,13 @@ You can copy/paste pre-made framework elements from this project to your project
 ## State
 ### Clicks should only change state
 ### Actions are triggered when state changes
+### All state is global so use name-spacing
 ### Persistent state in local storage
 ### Navigation state in query string
 ### Use attributes as selectors
 ### Use attributes for simple show/hide elements based on state
 ### Write functions for better flexibility
+## CSS Conventions
 ## Modals
 ## Forms
 ### Radio buttons
