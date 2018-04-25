@@ -20,3 +20,4 @@ Paste the following code inside the bottom custom code section, before end of "b
 - Add your prototype JS code organized as features inside ```main-app-code/v1/features/```
 - In terminal type ```gulp watchFilesAndAutomaticallyPushChanges``` - all changes that you make will be automatically bundled in one file and published to your GitHub page
 - add the JS and CSS bundles links in your Webflow projects, CSS goes in "head", JS goes at the end of "body"
+- edit files and each change will be automatically pushed to server, after couple of seconds refresh Webflow site to see you changes
