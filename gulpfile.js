@@ -6,7 +6,7 @@ var git = require('gulp-git');
 var autoRestart = require('gulp-auto-restart');
 autoRestart({'task': 'watch'});
 
-var scriptsToConcat = [
+var generalFrameworkScripts = [
 	"./src/general-framework/plugins-and-libraries/underscore-min.js",
 	"./src/general-framework/plugins-and-libraries/uuid.js",
 	"./src/general-framework/plugins-and-libraries/jquery.transit.min.js",
@@ -31,14 +31,17 @@ var scriptsToConcat = [
 	"./src/general-framework/js-utilities/initial-preloading.js",
 	"./src/general-framework/js-utilities/flashing-notifications.js",
 	"./src/general-framework/js-utilities/collapsible-sections.js",
-	"./src/main-app-code/v1/general/main-navigation.js",
+];
+
+var mainAppScripts = [
+    "./src/main-app-code/v1/general/main-navigation.js",
 	//"./src/main-code/v1/features/add-your-scripts-like-this-in-features-folder.js",
 ];
 
 var jsDestination = '.';
 
-gulp.task('concatScripts', function() {  
-    return gulp.src(scriptsToConcat)
+gulp.task('concatGeneralFrameworkScripts', function() {  
+    return gulp.src(generalFrameworkScripts)
         .pipe(concat('webflow-prototyping-framework-bundle.js'), {sourceRoot: '/'})
         .pipe(gulp.dest(jsDestination));
         // .pipe(rename('scripts.min.js'))
@@ -46,30 +49,35 @@ gulp.task('concatScripts', function() {
         // .pipe(gulp.dest(jsDestination));
 });
 
-gulp.task('buildScriptsThenAddAndCommit', ['concatScripts'], function() {  
+gulp.task('concatMainAppScripts', function() {  
+    return gulp.src(mainAppScripts)
+        .pipe(concat('webflow-prototyping-main-app-bundle.js'), {sourceRoot: '/'})
+        .pipe(gulp.dest(jsDestination));
+        // .pipe(rename('scripts.min.js'))
+        // .pipe(uglify())
+        // .pipe(gulp.dest(jsDestination));
+});
+
+gulp.task('buildScriptsThenAddAndCommit', ['concatGeneralFrameworkScripts', 'concatMainAppScripts'], function() {  
     return gulp.src('.')
   		.pipe(git.add())
-  		.pipe(git.commit('automatic commit from webflow-prototping-framework'));
+  		.pipe(git.commit('automatic commit from webflow-prototyping-framework'));
 });
 
-gulp.task('push', function() {  
-	git.push('origin', 'master', function (err) {
-	  if (err) throw err;
-	});
+gulp.task('buildScriptsThenAddAndCommitThenPush', ['buildScriptsThenAddAndCommit'], function() {
+    setTimeout(function() {
+    	git.push('origin', 'master', function (err) {
+    	  if (err) throw err;
+    	});
+    }, 2000);
 });
 
-gulp.task('buildScriptsThenAddAndCommitThenPush', ['buildScriptsThenAddAndCommit'], function() {  
-	git.push('origin', 'master', function (err) {
-	  if (err) throw err;
-	});
-});
+//////////
 
 var filesToWatch = [
 	"**/*.js",
 	"**/*.css"
 ];
-
-//////////
 
 gulp.task('watchFilesAndAutomaticallyPushChanges', ['buildScriptsThenAddAndCommitThenPush'], function() {
   gulp.watch(filesToWatch, ['buildScriptsThenAddAndCommitThenPush']);
