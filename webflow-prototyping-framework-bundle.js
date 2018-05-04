@@ -1832,14 +1832,14 @@ function recursivelyPreloadElements() {
 		var numberOfInProgressElements = $('[preload-from][preloading-started]').not('[preloading-done]').length;
 
 		if (numberOfUnitialisedElements === 0 && numberOfInProgressElements === 0) {
-			return 'everything-preloaded-and-nothing-in-progress';
 			console.log('everything-preloaded-and-nothing-in-progress');
+			return 'everything-preloaded-and-nothing-in-progress';
 		} else if (numberOfUnitialisedElements === 0 && numberOfInProgressElements > 0) {
-			return 'some-elements-still-in-progress';
 			console.log('some-elements-still-in-progress');
+			return 'some-elements-still-in-progress';
 		} else if (numberOfUnitialisedElements > 0){
-			return 'there-are-elements-that-need-preloading';
 			console.log('there-are-elements-that-need-preloading');
+			return 'there-are-elements-that-need-preloading';
 		}
 	};
 
