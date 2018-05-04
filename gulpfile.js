@@ -30,6 +30,7 @@ var generalFrameworkScripts = [
 	"./src/general-framework/js-utilities/initial-preloading.js",
 	"./src/general-framework/js-utilities/flashing-notifications.js",
 	"./src/general-framework/js-utilities/collapsible-sections.js",
+	"./src/general-framework/js-utilities/eventBindingUtilities.js",
 ];
 
 var mainAppScripts = [
