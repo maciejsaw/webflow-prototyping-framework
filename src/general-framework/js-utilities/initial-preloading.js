@@ -118,10 +118,10 @@ function recursivelyPreloadElements() {
 		if (checkIfEverythingIsPreloaded() === 'everything-preloaded-and-nothing-in-progress') {
 			console.log('preloadedElementsReady');
 			$(document).trigger('preloadedElementsReady');
-		} else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
-			preloadMissingElements(); //rerun this function
 		} else if (checkIfEverythingIsPreloaded() === 'some-elements-still-in-progress') {
-			return; //do nothing because other elements will continue recursive preloading
+			//do nothing because other elements will continue recursive preloading
+		}  else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
+			preloadMissingElements(); //rerun this function
 		}
 	};
 
