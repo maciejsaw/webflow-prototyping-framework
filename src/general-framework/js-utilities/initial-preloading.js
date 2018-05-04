@@ -121,8 +121,8 @@ function recursivelyPreloadElements() {
 
 	var checkAndRerunPreloadinIfNeccessary = function() {
 		if (checkIfEverythingIsPreloaded() === 'everything-preloaded-and-nothing-in-progress') {
-			$(document).trigger('preloadedElementsReady');
 			console.log('preloadedElementsReady');
+			$(document).trigger('preloadedElementsReady');
 		} else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
 			preloadMissingElements(); //rerun this function
 		} else if (checkIfEverythingIsPreloaded() === 'some-elements-still-in-progress') {
