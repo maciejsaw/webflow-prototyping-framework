@@ -1822,6 +1822,7 @@ function initTheUIAfterPreloading() {
 	$(document).trigger('preloadingComplete');
 	QueryStringRouter.retriggerOnParamChangeForAll();
 	ReactiveLocalStorage.retriggerOnParamChangeForAll();
+	console.log('retriggerOnParamChangeForAll');
 	$('.initial-load-overlay').fadeOutAndHide(500);
 }
 
