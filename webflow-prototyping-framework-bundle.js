@@ -1553,7 +1553,7 @@ function ReactiveLocalStorageDataBindText(objectWithAttrubiteValuePairs) {
 	$.each(objectWithAttrubiteValuePairs, function(attribute, bidedParamValue) {
 		ReactiveLocalStorage.onParamChange(bidedParamValue, function(value) {
 			$('[data-bind="'+attribute+'"]').text(value);
-		});
+		}, {disableRetriggerOnParamChange: true});
 	});
 }
 
@@ -1561,7 +1561,7 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-radio-group="'+paramName+'"]').not('[action-show-when-radio-selected="'+value+'"]').addClass('is-hidden');
 		$('[depends-on-radio-group="'+paramName+'"]').filter('[action-show-when-radio-selected="'+value+'"]').removeClass('is-hidden');
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 
