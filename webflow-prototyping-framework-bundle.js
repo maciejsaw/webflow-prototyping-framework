@@ -1807,10 +1807,11 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 
 function recursivelyPreloadElements() {
 	var preloadMissingElements = function() {
+		var elementsThatWillBePreloaded = $('[preload-from]').not('[preloading-started]').not('[preloading-done]');
 		//mark all elements that will be preloaded
-		$('[preload-from]').not('[preloading-started]').not('[preloading-done]').attr('preloading-started', 'true');
+		elementsThatWillBePreloaded.attr('preloading-started', 'true');
 
-		$('[preload-from]').not('[preloading-started]').not('[preloading-done]').each(function() {
+		elementsThatWillBePreloaded.each(function() {
 			var elemToLoad = $(this).attr('preload-from');
 			var $this = $(this);
 			$this.load(elemToLoad + " .content-to-load", function() {
