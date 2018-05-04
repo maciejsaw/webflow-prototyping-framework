@@ -115,12 +115,14 @@ function recursivelyPreloadElements() {
 	};
 
 	var checkAndRerunPreloadinIfNeccessary = function() {
-		if (checkIfEverythingIsPreloaded() === 'everything-preloaded-and-nothing-in-progress') {
+		var check = checkIfEverythingIsPreloaded();
+
+		if (check === 'everything-preloaded-and-nothing-in-progress') {
 			console.log('preloadedElementsReady');
 			$(document).trigger('preloadedElementsReady');
-		} else if (checkIfEverythingIsPreloaded() === 'some-elements-still-in-progress') {
+		} else if (check === 'some-elements-still-in-progress') {
 			//do nothing because other elements will continue recursive preloading
-		}  else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
+		}  else if (check === 'there-are-elements-that-need-preloading') {
 			preloadMissingElements(); //rerun this function
 		}
 	};
