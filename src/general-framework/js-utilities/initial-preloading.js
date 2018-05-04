@@ -27,6 +27,7 @@ function initialLoadHtmlsubpages(callbackFunction) {
 				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
 					if (typeof callbackFunction === 'function') { callbackFunction(); };
 					$(document).trigger('subpagesReady');
+					console.log('subpagesReady');
 				}
 			});
 		});	
@@ -51,6 +52,7 @@ function initialLoadModalsContent(callbackFunction) {
 				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
 					if (typeof callbackFunction === 'function') { callbackFunction(); };
 					$(document).trigger('modalsReady');
+					console.log('modalsReady');
 				}
 			});
 		});	
@@ -75,6 +77,7 @@ function initialLoadComponents(callbackFunction) {
 				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
 					if (typeof callbackFunction === 'function') { callbackFunction(); };
 					$(document).trigger('componentsReady');
+					console.log('componentsReady');
 				}
 			});
 		});	
