@@ -63,30 +63,30 @@ function initialLoadModalsContent(callbackFunction) {
 
 }
 
-function initialLoadComponents(callbackFunction) {
-	var numberOfSubpagesToLoad = $('[component-id]').length;
-	var numberOfCompletedLoads = 0;
+// function initialLoadComponents(callbackFunction) {
+// 	var numberOfSubpagesToLoad = $('[component-id]').length;
+// 	var numberOfCompletedLoads = 0;
 
-	if (numberOfSubpagesToLoad > 0) {
-		$('[component-id]').each(function() {
-			var urlSlug = "/components";
-		    var subpageToLoad = $(this).attr('component-id');
-			$(this).load(urlSlug + "/" + subpageToLoad + " .content-to-load", function() {
-				numberOfCompletedLoads = numberOfCompletedLoads + 1;
+// 	if (numberOfSubpagesToLoad > 0) {
+// 		$('[component-id]').each(function() {
+// 			var urlSlug = "/components";
+// 		    var subpageToLoad = $(this).attr('component-id');
+// 			$(this).load(urlSlug + "/" + subpageToLoad + " .content-to-load", function() {
+// 				numberOfCompletedLoads = numberOfCompletedLoads + 1;
 
-				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
-					if (typeof callbackFunction === 'function') { callbackFunction(); };
-					$(document).trigger('componentsReady');
-					console.log('componentsReady');
-				}
-			});
-		});	
-	} else {
-		$(document).trigger('componentsReady');
-		if (typeof callbackFunction === 'function') { callbackFunction(); };
-		console.log('componentsReady');
-	}
-}
+// 				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
+// 					if (typeof callbackFunction === 'function') { callbackFunction(); };
+// 					$(document).trigger('componentsReady');
+// 					console.log('componentsReady');
+// 				}
+// 			});
+// 		});	
+// 	} else {
+// 		$(document).trigger('componentsReady');
+// 		if (typeof callbackFunction === 'function') { callbackFunction(); };
+// 		console.log('componentsReady');
+// 	}
+// }
 
 function recursivelyPreloadElements() {
 	var preloadMissingElements = function() {
@@ -162,9 +162,9 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 	// 'subpagesReady',
 	'preloadedElementsReady'
 ], function() {
-	initialLoadComponents(function() {
+	// initialLoadComponents(function() {
 		initTheUIAfterPreloading();
-	});
+	// });
 });
 
 //after all the load dependencies are defined, start loading modals and subpages simulataneously
