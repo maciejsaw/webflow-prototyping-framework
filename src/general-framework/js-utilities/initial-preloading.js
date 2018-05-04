@@ -119,8 +119,8 @@ function recursivelyPreloadElements() {
 
 function initTheUIAfterPreloading() {
 	$('.initial-load-overlay').fadeOutAndHide(500);
-	//QueryStringRouter.retriggerOnParamChangeForAll();
-	//ReactiveLocalStorage.retriggerOnParamChangeForAll();
+	QueryStringRouter.retriggerOnParamChangeForAll();
+	ReactiveLocalStorage.retriggerOnParamChangeForAll();
 }
 
 function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFunction) {
