@@ -1834,11 +1834,13 @@ function recursivelyPreloadElements() {
 
 			$this.load(elemToLoad + " .content-to-load", function() {
 				$this.attr('preloading-done', 'true');
-				if (!checkIfEverythingIsPreloaded()) {
-					preloadMissingElements(); //recursively preload until everything is preloaded
-				} else {
+				if (checkIfEverythingIsPreloaded() === 'everything-preloaded-and-nothing-in-progress') {
 					$(document).trigger('preloadedElementsReady');
 					console.log('preloadedElementsReady');
+				} else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
+					preloadMissingElements(); //rerun this function
+				} else if (checkIfEverythingIsPreloaded() === 'some-elements-still-in-progress') {
+					return; //do nothing because other elements will continue recursive preloading
 				}
 			});
 		});
@@ -1846,11 +1848,12 @@ function recursivelyPreloadElements() {
 
 	var checkIfEverythingIsPreloaded = function() {
 		//check if there are no elements that has not yet been started preloading
-		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length === 0 
-			 && $('[preload-element-from][preloading-started]').not('[preloading-done]').length === 0 ) {
-			return true;
+		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length === 0 && $('[preload-element-from][preloading-started]').not('[preloading-done]').length === 0 ) {
+			return 'everything-preloaded-and-nothing-in-progress';
+		} else if ($('[preload-element-from][preloading-started]').not('[preloading-done]').length > 0) {
+			return 'some-elements-still-in-progress';
 		} else {
-			return false;
+			return 'there-are-elements-that-need-preloading';
 		}
 	};
 
