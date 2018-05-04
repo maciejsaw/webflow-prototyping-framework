@@ -1811,8 +1811,8 @@ function initialLoadComponents(callbackFunction) {
 
 function recursivelyPreloadElements() {
 	var preloadMissingElements = function() {
-		$('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').each(function() {
-			var elemToLoad = $(this).attr('preload-element-from');
+		$('[preload-from]').not('[preloading-started]').not('[preloading-done]').each(function() {
+			var elemToLoad = $(this).attr('preload-from');
 			var $this = $(this);
 			$this.attr('preloading-started', 'true');
 
@@ -1825,8 +1825,8 @@ function recursivelyPreloadElements() {
 
 	var checkIfEverythingIsPreloaded = function() {
 		//check if there are no elements that has not yet been started preloading
-		var numberOfUnitialisedElements = $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length;
-		var numberOfInProgressElements = $('[preload-element-from][preloading-started]').not('[preloading-done]').length;
+		var numberOfUnitialisedElements = $('[preload-from]').not('[preloading-started]').not('[preloading-done]').length;
+		var numberOfInProgressElements = $('[preload-from][preloading-started]').not('[preloading-done]').length;
 
 		if (numberOfUnitialisedElements === 0 && numberOfInProgressElements === 0) {
 			return 'everything-preloaded-and-nothing-in-progress';
@@ -1870,7 +1870,8 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
 				if (typeof callbackFunction === 'function') { callbackFunction(); };
 				$(document).trigger('preloadingComplete');
-				console.log('preloading complete');
+				console.log('preloading complete'); 
+				//TODO refactor so that it checks if the specific events happened, not number of elements
 			}
 		});
 	});
