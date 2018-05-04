@@ -1875,7 +1875,7 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 
 //components should load after subapges and modals
 waitForInitialAjaxLoadingToFinishThenShowUI([
-	'modalsReady',
+	// 'modalsReady',
 	// 'subpagesReady',
 	'preloadedElementsReady'
 ], function() {
