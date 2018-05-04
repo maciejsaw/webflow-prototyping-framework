@@ -124,11 +124,14 @@ function recursivelyPreloadElements() {
 
 	var checkIfEverythingIsPreloaded = function() {
 		//check if there are no elements that has not yet been started preloading
-		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length === 0 && $('[preload-element-from][preloading-started]').not('[preloading-done]').length === 0 ) {
+		var numberOfUnitialisedElements = $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length;
+		var numberOfInProgressElements = $('[preload-element-from][preloading-started]').not('[preloading-done]').length;
+
+		if (numberOfUnitialisedElements === 0 && numberOfInProgressElements === 0) {
 			return 'everything-preloaded-and-nothing-in-progress';
-		} else if ($('[preload-element-from][preloading-started]').not('[preloading-done]').length > 0) {
+		} else if (numberOfUnitialisedElements === 0 && numberOfInProgressElements > 0) {
 			return 'some-elements-still-in-progress';
-		} else {
+		} else if (numberOfUnitialisedElements > 0){
 			return 'there-are-elements-that-need-preloading';
 		}
 	};
