@@ -1856,9 +1856,10 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			//TODO refactor so that it checks if the specific events happened, not number of elements
 			numberOfEventsThatHappened = numberOfEventsThatHappened + 1;
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
+				console.log('preloading complete start'); 
 				if (typeof callbackFunction === 'function') { callbackFunction(); }
 				$(document).trigger('preloadingComplete');
-				console.log('preloading complete'); 
+				console.log('preloading complete end'); 
 			}
 		});
 	});
