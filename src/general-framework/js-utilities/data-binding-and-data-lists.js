@@ -75,7 +75,7 @@ function ReactiveLocalStorageDataBindArrayList(paramNameWithArray, functionToMod
 			}
 
 		});
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 //use this to bind elements with attribute data-bind to selected reactive local storage params
