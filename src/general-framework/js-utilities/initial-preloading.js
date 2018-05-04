@@ -132,6 +132,7 @@ function recursivelyPreloadElements() {
 		preloadMissingElements();
 	} else {
 		$(document).trigger('preloadedElementsReady');
+		console.log('preloadedElementsReady');
 	}
 }
 
