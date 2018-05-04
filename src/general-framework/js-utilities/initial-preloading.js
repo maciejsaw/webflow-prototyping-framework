@@ -114,6 +114,7 @@ function recursivelyPreloadElements() {
 					preloadMissingElements(); //recursively preload until everything is preloaded
 				} else {
 					$(document).trigger('preloadedElementsReady');
+					console.log('preloadedElementsReady');
 				}
 			});
 		});
