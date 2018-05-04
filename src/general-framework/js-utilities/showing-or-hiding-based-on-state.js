@@ -16,13 +16,6 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	});
 }
 
-$(document).on('preloadingComplete', function() {
-	$('[depends-on-param]').each(function() {
-		var paramToDependOn = $(this).attr('depends-on-param');
-		ReactiveLocalStorageDependVisibilityOnParam(paramToDependOn);
-	});
-});
-
 function ReactiveLocalStorageHideWhenParamEquals(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-param="'+paramName+'"]').not('[action-hide-when-param-equals="'+value+'"]').not('[action-show-when-param-equals]').removeClass('is-hidden');
@@ -30,12 +23,6 @@ function ReactiveLocalStorageHideWhenParamEquals(paramName) {
 	});
 }
 
-$(document).on('preloadingComplete', function() {
-	$('[depends-on-param]').each(function() {
-		var paramToDependOn = $(this).attr('depends-on-param');
-		ReactiveLocalStorageHideWhenParamEquals(paramToDependOn);
-	});
-});
 
 function ReactiveLocalStorageHideIfParamNotUndefined(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
@@ -47,13 +34,6 @@ function ReactiveLocalStorageHideIfParamNotUndefined(paramName) {
 	});
 }
 
-$(document).on('preloadingComplete', function() {
-	$('[depends-on-param]').each(function() {
-		var paramToDependOn = $(this).attr('depends-on-param');
-		ReactiveLocalStorageHideIfParamNotUndefined(paramToDependOn);
-	});
-});
-
 function ReactiveLocalStorageShowIfParamUndefined(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		if ( (typeof value === 'undefined') || (value === 'not-selected') ) {
@@ -63,13 +43,6 @@ function ReactiveLocalStorageShowIfParamUndefined(paramName) {
 		}
 	});
 }
-
-$(document).on('preloadingComplete', function() {
-	$('[depends-on-param]').each(function() {
-		var paramToDependOn = $(this).attr('depends-on-param');
-		ReactiveLocalStorageShowIfParamUndefined(paramToDependOn);
-	});
-});
 
 function ReactiveLocalStorageHideIfParamUndefined(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
@@ -84,11 +57,13 @@ function ReactiveLocalStorageHideIfParamUndefined(paramName) {
 $(document).on('preloadingComplete', function() {
 	$('[depends-on-param]').each(function() {
 		var paramToDependOn = $(this).attr('depends-on-param');
+		ReactiveLocalStorageDependVisibilityOnParam(paramToDependOn);
+		ReactiveLocalStorageHideWhenParamEquals(paramToDependOn);
+		ReactiveLocalStorageHideIfParamNotUndefined(paramToDependOn);
+		ReactiveLocalStorageShowIfParamUndefined(paramToDependOn);
 		ReactiveLocalStorageHideIfParamUndefined(paramToDependOn);
 	});
-});
 
-$(document).on('preloadingComplete', function() {
 	ReactiveLocalStorage.setDefaultParam('show-elements-hidden-for-future', 'false');
 	$('[hide-for-future]').each(function() {
 		if (ReactiveLocalStorage.getParam('show-elements-hidden-for-future') === 'false') {
