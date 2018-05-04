@@ -1326,11 +1326,9 @@ QueryStringRouter.onParamChange('modalContent', function(value) {
 
 
 //modal generic action
-$(document).on('preloadingComplete', function() {
-    $(document).on('click', '[action-show-modal]', function() {
-        var modalContentToShow = $(this).attr('action-show-modal');
-        QueryStringRouter.setParam('modalContent', modalContentToShow);
-    });
+$(document).on('click', '[action-show-modal]', function() {
+    var modalContentToShow = $(this).attr('action-show-modal');
+    QueryStringRouter.setParam('modalContent', modalContentToShow);
 });
 
 $(document).on('preloadingComplete', function() { //need to wait for all the ajax to load
