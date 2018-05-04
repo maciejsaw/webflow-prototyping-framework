@@ -110,14 +110,7 @@ function recursivelyPreloadElements() {
 
 			$this.load(elemToLoad + " .content-to-load", function() {
 				$this.attr('preloading-done', 'true');
-				if (checkIfEverythingIsPreloaded() === 'everything-preloaded-and-nothing-in-progress') {
-					$(document).trigger('preloadedElementsReady');
-					console.log('preloadedElementsReady');
-				} else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
-					preloadMissingElements(); //rerun this function
-				} else if (checkIfEverythingIsPreloaded() === 'some-elements-still-in-progress') {
-					return; //do nothing because other elements will continue recursive preloading
-				}
+				checkAndRerunPreloadinIfNeccessary();
 			});
 		});
 	};
@@ -136,12 +129,18 @@ function recursivelyPreloadElements() {
 		}
 	};
 
-	if ( !checkIfEverythingIsPreloaded() ) {
-		preloadMissingElements();
-	} else {
-		$(document).trigger('preloadedElementsReady');
-		console.log('preloadedElementsReady');
-	}
+	var checkAndRerunPreloadinIfNeccessary = function() {
+		if (checkIfEverythingIsPreloaded() === 'everything-preloaded-and-nothing-in-progress') {
+			$(document).trigger('preloadedElementsReady');
+			console.log('preloadedElementsReady');
+		} else if (checkIfEverythingIsPreloaded() === 'there-are-elements-that-need-preloading') {
+			preloadMissingElements(); //rerun this function
+		} else if (checkIfEverythingIsPreloaded() === 'some-elements-still-in-progress') {
+			return; //do nothing because other elements will continue recursive preloading
+		}
+	};
+
+	checkAndRerunPreloadinIfNeccessary();
 }
 
 function initTheUIAfterPreloading() {
