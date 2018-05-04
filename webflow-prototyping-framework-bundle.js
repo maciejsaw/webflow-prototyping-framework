@@ -1845,7 +1845,9 @@ function recursivelyPreloadElements() {
 	};
 
 	var checkIfEverythingIsPreloaded = function() {
-		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length === 0) {
+		//check if there are no elements that has not yet been started preloading
+		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').length === 0 
+			 && $('[preload-element-from][preloading-started]').not('[preloading-done]').length === 0 ) {
 			return true;
 		} else {
 			return false;
