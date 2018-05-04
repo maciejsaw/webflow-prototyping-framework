@@ -110,7 +110,7 @@ function recursivelyPreloadElements() {
 
 			$this.load(elemToLoad + " .content-to-load", function() {
 				$this.attr('preloading-done', 'true');
-				if (checkIfEverythingIsPreloaded) {
+				if (!checkIfEverythingIsPreloaded()) {
 					preloadMissingElements(); //recursively preload until everything is preloaded
 				} else {
 					$(document).trigger('preloadedElementsReady');
