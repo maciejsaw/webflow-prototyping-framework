@@ -64,12 +64,14 @@ gulp.task('buildScriptsThenAddAndCommit', ['concatGeneralFrameworkScripts', 'con
   		.pipe(git.commit('automatic commit from webflow-prototyping-framework'));
 });
 
+var gitPushTimer;
 gulp.task('buildScriptsThenAddAndCommitThenPush', ['buildScriptsThenAddAndCommit'], function() {
-    setTimeout(function() {
-    	git.push('origin', 'master', function (err) {
-    	  if (err) throw err;
-    	});
-    }, 2000);
+	clearTimeout(gitPushTimer);
+	gitPushTimer = setTimeout(function() {
+		git.push('origin', 'master', function (err) {
+		  if (err) throw err;
+		});
+	}, 500);
 });
 
 //////////
