@@ -1852,7 +1852,7 @@ function recursivelyPreloadElements() {
 		}
 	};
 
-	if (!checkIfEverythingIsPreloaded) {
+	if ( !checkIfEverythingIsPreloaded() ) {
 		preloadMissingElements();
 	} else {
 		$(document).trigger('preloadedElementsReady');
