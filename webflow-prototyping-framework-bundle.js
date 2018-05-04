@@ -1809,22 +1809,6 @@ function initialLoadComponents(callbackFunction) {
 	}
 }
 
-function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFunction) {
-
-	var numberOfEventsThatHappened = 0;
-
-	$.each(eventsToWaitFor, function(index, value) {
-		$(document).one(value, function() {
-			numberOfEventsThatHappened = numberOfEventsThatHappened + 1;
-			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
-				if (typeof callbackFunction === 'function') { callbackFunction(); };
-				$(document).trigger('preloadingComplete');
-				console.log('preloading complete');
-			}
-		});
-	});
-}
-
 function recursivelyPreloadElements() {
 	var preloadMissingElements = function() {
 		$('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').each(function() {
@@ -1876,10 +1860,27 @@ function initTheUIAfterPreloading() {
 	$('.initial-load-overlay').fadeOutAndHide(500);
 }
 
+function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFunction) {
+
+	var numberOfEventsThatHappened = 0;
+
+	$.each(eventsToWaitFor, function(index, value) {
+		$(document).one(value, function() {
+			numberOfEventsThatHappened = numberOfEventsThatHappened + 1;
+			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
+				if (typeof callbackFunction === 'function') { callbackFunction(); };
+				$(document).trigger('preloadingComplete');
+				console.log('preloading complete');
+			}
+		});
+	});
+}
+
 //components should load after subapges and modals
 waitForInitialAjaxLoadingToFinishThenShowUI([
 	'modalsReady',
-	'subpagesReady'
+	'subpagesReady',
+	'preloadedElementsReady'
 ], function() {
 	initialLoadComponents(function() {
 		initTheUIAfterPreloading();
@@ -1889,6 +1890,7 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 //after all the load dependencies are defined, start loading modals and subpages simulataneously
 initialLoadHtmlsubpages();
 initialLoadModalsContent();
+recursivelyPreloadElements();
 
 
 
