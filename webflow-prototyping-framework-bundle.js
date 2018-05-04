@@ -1892,7 +1892,7 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 });
 
 //after all the load dependencies are defined, start loading modals and subpages simulataneously
-initialLoadHtmlsubpages();
+// initialLoadHtmlsubpages();
 initialLoadModalsContent();
 recursivelyPreloadElements();
 
