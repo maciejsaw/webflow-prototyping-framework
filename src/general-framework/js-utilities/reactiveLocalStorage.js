@@ -174,7 +174,7 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	var actionsOnParamChange = {};
-	function onParamChange(key, actionFunction) {
+	function onParamChange(key, actionFunction, options) {
 		$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
 			var paramsObject = deparam(paramsString);
 			var value = paramsObject[key];
@@ -188,8 +188,12 @@ var ReactiveLocalStorage = (function() {
 		}
 		actionsOnParamChange[key].push(actionFunction);
 
-		//when the onParamChanged is defined, also retrigger the state
-		retriggerOnParamChange(key);
+		if (options && options.disableRetriggerOnParamChange === true) {
+			//do nothing
+		} else {
+			//when the onParamChanged is defined, also retrigger the state
+			retriggerOnParamChange(key);
+		}
 	}
 
 	function retriggerOnParamChange(key) {
