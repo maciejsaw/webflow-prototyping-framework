@@ -1842,9 +1842,9 @@ function recursivelyPreloadElements() {
 }
 
 function initTheUIAfterPreloading() {
+	$('.initial-load-overlay').fadeOutAndHide(500);
 	QueryStringRouter.retriggerOnParamChangeForAll();
 	ReactiveLocalStorage.retriggerOnParamChangeForAll();
-	$('.initial-load-overlay').fadeOutAndHide(500);
 }
 
 function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFunction) {
