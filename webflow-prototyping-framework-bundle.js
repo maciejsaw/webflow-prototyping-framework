@@ -1727,7 +1727,7 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 - subpages are preloaded on page load into their containers
 - Only one active subpage is shown at a time
 - Tabs and subpages containers share the same id and are binded together this way
-*///////
+*/////////
 
 //preload all views into respective containers
 //until the subpages are loaded the UI is covered by loading overlay
