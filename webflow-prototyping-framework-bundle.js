@@ -1862,31 +1862,24 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 
 	$.each(eventsToWaitFor, function(index, value) {
 		$(document).one(value, function() {
+			//TODO refactor so that it checks if the specific events happened, not number of elements
 			numberOfEventsThatHappened = numberOfEventsThatHappened + 1;
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
-				if (typeof callbackFunction === 'function') { callbackFunction(); };
+				if (typeof callbackFunction === 'function') { callbackFunction(); }
 				$(document).trigger('preloadingComplete');
 				console.log('preloading complete'); 
-				//TODO refactor so that it checks if the specific events happened, not number of elements
 			}
 		});
 	});
 }
 
-//components should load after subapges and modals
 waitForInitialAjaxLoadingToFinishThenShowUI([
-	// 'modalsReady',
-	// 'subpagesReady',
+	// reserved place in case we need to wait for more events
 	'preloadedElementsReady'
 ], function() {
-	// initialLoadComponents(function() {
-		initTheUIAfterPreloading();
-	// });
+	initTheUIAfterPreloading();
 });
 
-//after all the load dependencies are defined, start loading modals and subpages simulataneously
-// initialLoadHtmlsubpages();
-// initialLoadModalsContent();
 recursivelyPreloadElements();
 
 
