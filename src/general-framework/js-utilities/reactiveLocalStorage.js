@@ -192,6 +192,8 @@ var ReactiveLocalStorage = (function() {
 			//do nothing
 		} else {
 			//when the onParamChanged is defined, also retrigger the state
+			//this is useful for basic usages when there is no global retrigger
+			//at the init of the document at the end of all scripts
 			retriggerOnParamChange(key);
 		}
 	}
