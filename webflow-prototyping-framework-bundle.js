@@ -1331,18 +1331,17 @@ $(document).on('click', '[action-show-modal]', function() {
     QueryStringRouter.setParam('modalContent', modalContentToShow);
 });
 
+//Webflow dropdowns as select dropdown
+//Each dropdown state is stored in a separate reactive local storage state
+$(document).on('click', '[choice-value]', function() {
+    var valueToSet = $(this).attr('choice-value');
+    var paramToSet = $(this).closest('[action-select-dropdown]').attr('action-select-dropdown');
+    ReactiveLocalStorage.setParam(paramToSet, valueToSet);
+    $(this).closest('[action-select-dropdown]').find('.select-dropdown__list.w-dropdown-list').removeClass('w--open');
+    hideWebflowDropdowns();
+});
+
 $(document).on('preloadingComplete', function() { //need to wait for all the ajax to load
-
-    //Webflow dropdowns as select dropdown
-    //Each dropdown state is stored in a separate reactive local storage state
-    $(document).on('click', '[choice-value]', function() {
-        var valueToSet = $(this).attr('choice-value');
-        var paramToSet = $(this).closest('[action-select-dropdown]').attr('action-select-dropdown');
-        ReactiveLocalStorage.setParam(paramToSet, valueToSet);
-        $(this).closest('[action-select-dropdown]').find('.select-dropdown__list.w-dropdown-list').removeClass('w--open');
-        hideWebflowDropdowns();
-    });
-
     $('[action-select-dropdown]').each(function() {
         var paramToChange = $(this).attr('action-select-dropdown');
         
@@ -1357,7 +1356,6 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             otherNotChosenItems.addClass('is-hidden');
         });
     });
-
 });
 
 
