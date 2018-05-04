@@ -1842,6 +1842,7 @@ function recursivelyPreloadElements() {
 }
 
 function initTheUIAfterPreloading() {
+	$(document).trigger('preloadingComplete');
 	QueryStringRouter.retriggerOnParamChangeForAll();
 	ReactiveLocalStorage.retriggerOnParamChangeForAll();
 	$('.initial-load-overlay').fadeOutAndHide(500);
@@ -1858,7 +1859,6 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
 				console.log('preloading complete start'); 
 				if (typeof callbackFunction === 'function') { callbackFunction(); }
-				$(document).trigger('preloadingComplete');
 				console.log('preloading complete end'); 
 			}
 		});
