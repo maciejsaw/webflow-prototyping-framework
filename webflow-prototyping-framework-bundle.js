@@ -824,8 +824,11 @@ var ReactiveLocalStorage = (function() {
 
 	return {
 		varsion: {
-			version: 3,
-			versionNotes: 'Added fallback for Safari incognito not supporting localStorage'
+			version: 4,
+			versionNotes: {
+				4: 'Added options to disable retrigger on param change while creating onParamChange',
+				3: 'Added fallback for Safari incognito not supporting localStorage',
+			},
 		},
 		setParam: setParam,
 		getAllParams: getAllParams,
