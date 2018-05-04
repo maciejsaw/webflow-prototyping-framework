@@ -7,7 +7,6 @@ var autoRestart = require('gulp-auto-restart');
 autoRestart({'task': 'watch'});
 
 var generalFrameworkScripts = [
-	"./src/general-framework/plugins-and-libraries/underscore-min.js",
 	"./src/general-framework/plugins-and-libraries/uuid.js",
 	"./src/general-framework/plugins-and-libraries/jquery.transit.min.js",
 	"./src/general-framework/plugins-and-libraries/tooltipster/tooltipster.bundle.min.js",
