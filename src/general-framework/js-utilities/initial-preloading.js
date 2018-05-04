@@ -103,14 +103,13 @@ function recursivelyPreloadElements() {
 		var numberOfInProgressElements = $('[preload-from][preloading-started]').not('[preloading-done]').length;
 
 		if (numberOfUnitialisedElements === 0 && numberOfInProgressElements === 0) {
-			console.log('everything-preloaded-and-nothing-in-progress');
-			console.log('preloadedElementsReady');
+			console.log('Everything preloaded and nothing in progress');
 			$(document).trigger('preloadedElementsReady');
 		} else if (numberOfUnitialisedElements === 0 && numberOfInProgressElements > 0) {
-			console.log('some-elements-still-in-progress');
+			//console.log('Preloading still in progress...');
 			//do nothing because other elements will continue recursive preloading
 		} else if (numberOfUnitialisedElements > 0){
-			console.log('there-are-elements-that-need-preloading.....');
+			console.log('Noticed elements to preload...');
 			preloadMissingElements(); //rerun the checking function
 		}
 	};
