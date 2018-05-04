@@ -74,6 +74,14 @@ gulp.task('buildScriptsThenAddAndCommitThenPush', ['buildScriptsThenAddAndCommit
 	}, 500);
 });
 
+gulp.task('buildScriptsThenAddAndCommitThenPush', ['buildScriptsThenAddAndCommit'], function() {
+    setTimeout(function() {
+    	git.push('origin', 'master', function (err) {
+    	  if (err) throw err;
+    	});
+    }, 2000);
+});
+
 //////////
 
 var filesToWatch = [
