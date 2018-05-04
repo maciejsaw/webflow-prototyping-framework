@@ -37,39 +37,6 @@ function initialLoadHtmlsubpages(callbackFunction) {
 
 }
 
-function recursivelyPreloadElements() {
-	var preloadMissingElements = function() {
-		$('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').each(function() {
-			var elemToLoad = $(this).attr('preload-element-from');
-			var $this = $(this);
-			$this.attr('preloading-started', 'true');
-
-			$this.load(elemToLoad + " .content-to-load", function() {
-				$this.attr('preloading-done', 'true');
-				if (checkIfEverythingIsPreloaded) {
-					preloadMissingElements(); //recursively preload until everything is preloaded
-				} else {
-					$(document).trigger('preloadedElementsReady');
-				}
-			});
-		});
-	};
-
-	var checkIfEverythingIsPreloaded = function() {
-		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').lenght > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	if (!checkIfEverythingIsPreloaded) {
-		preloadMissingElements();
-	} else {
-		$(document).trigger('preloadedElementsReady');
-	}
-}
-
 function initialLoadModalsContent(callbackFunction) {
 	var numberOfSubpagesToLoad = $('[modal-id]').length;
 	var numberOfCompletedLoads = 0;
@@ -132,6 +99,39 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			}
 		});
 	});
+}
+
+function recursivelyPreloadElements() {
+	var preloadMissingElements = function() {
+		$('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').each(function() {
+			var elemToLoad = $(this).attr('preload-element-from');
+			var $this = $(this);
+			$this.attr('preloading-started', 'true');
+
+			$this.load(elemToLoad + " .content-to-load", function() {
+				$this.attr('preloading-done', 'true');
+				if (checkIfEverythingIsPreloaded) {
+					preloadMissingElements(); //recursively preload until everything is preloaded
+				} else {
+					$(document).trigger('preloadedElementsReady');
+				}
+			});
+		});
+	};
+
+	var checkIfEverythingIsPreloaded = function() {
+		if ( $('[preload-element-from]').not('[preloading-started]').not('[preloading-done]').lenght > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	if (!checkIfEverythingIsPreloaded) {
+		preloadMissingElements();
+	} else {
+		$(document).trigger('preloadedElementsReady');
+	}
 }
 
 function initTheUIAfterPreloading() {
