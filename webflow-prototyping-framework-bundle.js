@@ -1344,7 +1344,7 @@ $(document).on('click', '[choice-value]', function() {
 $(document).on('preloadingComplete', function() { //need to wait for all the ajax to load
     $('[action-select-dropdown]').each(function() {
         var paramToChange = $(this).attr('action-select-dropdown');
-        
+
         //default state is the first from the dropdown chosen-values options
         var firstAvailableChoice = $(this).find('[chosen-value]').attr('chosen-value');
         ReactiveLocalStorage.setDefaultParam(paramToChange, firstAvailableChoice );
