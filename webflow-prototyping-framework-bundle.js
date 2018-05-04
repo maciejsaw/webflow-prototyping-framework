@@ -1737,30 +1737,30 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 //for example we may want to preload not only subpages, but additional promo modals etc.
 
 
-function initialLoadHtmlsubpages(callbackFunction) {
-	var numberOfSubpagesToLoad = $('[subpage-id]').not('[disable-preloading]').length;
-	var numberOfCompletedLoads = 0;
+// function initialLoadHtmlsubpages(callbackFunction) {
+// 	var numberOfSubpagesToLoad = $('[subpage-id]').not('[disable-preloading]').length;
+// 	var numberOfCompletedLoads = 0;
 
-	if (numberOfSubpagesToLoad > 0) {
-		$('[subpage-id]').not('[disable-preloading]').each(function() {
-			var urlSlug = "/subpages";
-		    var subpageToLoad = $(this).attr('subpage-id');
-			$(this).load(urlSlug + "/" + subpageToLoad + " .content-to-load", function() {
-				numberOfCompletedLoads = numberOfCompletedLoads + 1;
+// 	if (numberOfSubpagesToLoad > 0) {
+// 		$('[subpage-id]').not('[disable-preloading]').each(function() {
+// 			var urlSlug = "/subpages";
+// 		    var subpageToLoad = $(this).attr('subpage-id');
+// 			$(this).load(urlSlug + "/" + subpageToLoad + " .content-to-load", function() {
+// 				numberOfCompletedLoads = numberOfCompletedLoads + 1;
 
-				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
-					if (typeof callbackFunction === 'function') { callbackFunction(); };
-					$(document).trigger('subpagesReady');
-					console.log('subpagesReady');
-				}
-			});
-		});	
-	} else {
-		$(document).trigger('subpagesReady');
-		console.log('subpagesReady');
-	}
+// 				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
+// 					if (typeof callbackFunction === 'function') { callbackFunction(); };
+// 					$(document).trigger('subpagesReady');
+// 					console.log('subpagesReady');
+// 				}
+// 			});
+// 		});	
+// 	} else {
+// 		$(document).trigger('subpagesReady');
+// 		console.log('subpagesReady');
+// 	}
 
-}
+// }
 
 function initialLoadModalsContent(callbackFunction) {
 	var numberOfSubpagesToLoad = $('[modal-id]').length;
@@ -1883,7 +1883,7 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 //components should load after subapges and modals
 waitForInitialAjaxLoadingToFinishThenShowUI([
 	'modalsReady',
-	'subpagesReady',
+	// 'subpagesReady',
 	'preloadedElementsReady'
 ], function() {
 	initialLoadComponents(function() {
