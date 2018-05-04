@@ -1456,7 +1456,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             } else if (value == 'false') {
             	$thisCheckmark.removeClass('is-checked').addClass('is-unchecked');
             }
-        });
+        }, {disableRetriggerOnParamChange: true});
     });
 
 });
