@@ -1577,21 +1577,21 @@ function ReactiveLocalStorageOnParamChangeShowElementsOnlyWhenParamXEqualsY(para
 		} else {
 			$('[show-when-'+param+']').not('[show-when-'+param+'='+paramValue+']').addClass('is-hidden');
 		}
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-param="'+paramName+'"]').not('[action-show-when-param-equals="'+value+'"]').not('[action-hide-when-param-equals]').addClass('is-hidden');
 		$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-param-equals="'+value+'"]').removeClass('is-hidden');
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 function ReactiveLocalStorageHideWhenParamEquals(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-param="'+paramName+'"]').not('[action-hide-when-param-equals="'+value+'"]').not('[action-show-when-param-equals]').removeClass('is-hidden');
 		$('[depends-on-param="'+paramName+'"]').filter('[action-hide-when-param-equals="'+value+'"]').addClass('is-hidden');
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 
@@ -1602,7 +1602,7 @@ function ReactiveLocalStorageHideIfParamNotUndefined(paramName) {
 		} else {
 			$('[depends-on-param="'+paramName+'"]').filter('[action-hide-when-not-undefined]').removeClass('is-hidden');
 		}
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 function ReactiveLocalStorageShowIfParamUndefined(paramName) {
@@ -1612,7 +1612,7 @@ function ReactiveLocalStorageShowIfParamUndefined(paramName) {
 		} else {
 			$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-undefined]').addClass('is-hidden');
 		}
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 function ReactiveLocalStorageHideIfParamUndefined(paramName) {
@@ -1622,7 +1622,7 @@ function ReactiveLocalStorageHideIfParamUndefined(paramName) {
 		} else {
 			$('[depends-on-param="'+paramName+'"]').filter('[action-hide-when-undefined]').removeClass('is-hidden');
 		}
-	});
+	}, {disableRetriggerOnParamChange: true});
 }
 
 $(document).on('preloadingComplete', function() {
