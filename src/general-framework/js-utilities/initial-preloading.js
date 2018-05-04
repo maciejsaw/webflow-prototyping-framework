@@ -1,10 +1,3 @@
-/* Notes about the convention used here
-- subpages are main content views, like a separate subpage in the main card
-- subpages are preloaded on page load into their containers
-- Only one active subpage is shown at a time
-- Tabs and subpages containers share the same id and are binded together this way
-*/////////
-
 //preload all views into respective containers
 //until the subpages are loaded the UI is covered by loading overlay
 //after they are preloaded, we retrigger the state of all components
@@ -38,30 +31,30 @@
 
 // }
 
-function initialLoadModalsContent(callbackFunction) {
-	var numberOfSubpagesToLoad = $('[modal-id]').length;
-	var numberOfCompletedLoads = 0;
+// function initialLoadModalsContent(callbackFunction) {
+// 	var numberOfSubpagesToLoad = $('[modal-id]').length;
+// 	var numberOfCompletedLoads = 0;
 
-	if (numberOfSubpagesToLoad > 0) {
-		$('[modal-id]').each(function() {
-			var urlSlug = "/modals";
-		    var subpageToLoad = $(this).attr('modal-id');
-			$(this).load(urlSlug + "/" + subpageToLoad + " .content-to-load", function() {
-				numberOfCompletedLoads = numberOfCompletedLoads + 1;
+// 	if (numberOfSubpagesToLoad > 0) {
+// 		$('[modal-id]').each(function() {
+// 			var urlSlug = "/modals";
+// 		    var subpageToLoad = $(this).attr('modal-id');
+// 			$(this).load(urlSlug + "/" + subpageToLoad + " .content-to-load", function() {
+// 				numberOfCompletedLoads = numberOfCompletedLoads + 1;
 
-				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
-					if (typeof callbackFunction === 'function') { callbackFunction(); };
-					$(document).trigger('modalsReady');
-					console.log('modalsReady');
-				}
-			});
-		});	
-	} else {
-		$(document).trigger('modalsReady');
-		console.log('modalsReady');
-	}
+// 				if (numberOfCompletedLoads === numberOfSubpagesToLoad) {
+// 					if (typeof callbackFunction === 'function') { callbackFunction(); };
+// 					$(document).trigger('modalsReady');
+// 					console.log('modalsReady');
+// 				}
+// 			});
+// 		});	
+// 	} else {
+// 		$(document).trigger('modalsReady');
+// 		console.log('modalsReady');
+// 	}
 
-}
+// }
 
 // function initialLoadComponents(callbackFunction) {
 // 	var numberOfSubpagesToLoad = $('[component-id]').length;
@@ -169,6 +162,6 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 
 //after all the load dependencies are defined, start loading modals and subpages simulataneously
 // initialLoadHtmlsubpages();
-initialLoadModalsContent();
+// initialLoadModalsContent();
 recursivelyPreloadElements();
 
