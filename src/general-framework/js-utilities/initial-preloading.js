@@ -134,7 +134,7 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
 				console.log('preloading complete start'); 
 				if (typeof callbackFunction === 'function') { callbackFunction(); }
-				//$(document).trigger('preloadingComplete');
+				$(document).trigger('preloadingComplete');
 				console.log('preloading complete end'); 
 			}
 		});
