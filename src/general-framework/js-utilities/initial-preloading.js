@@ -109,7 +109,7 @@ function recursivelyPreloadElements() {
 			console.log('some-elements-still-in-progress');
 			return 'some-elements-still-in-progress';
 		} else if (numberOfUnitialisedElements > 0){
-			console.log('there-are-elements-that-need-preloading');
+			console.log('there-are-elements-that-need-preloading...');
 			return 'there-are-elements-that-need-preloading';
 		}
 	};
