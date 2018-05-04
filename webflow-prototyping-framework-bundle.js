@@ -1385,7 +1385,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             chosenItem.find('[chosen-icon-inside]').removeClass('is-hidden');
             otherNotChosenItems.removeClass('is-selected');
             otherNotChosenItems.find('[chosen-icon-inside]').addClass('is-hidden');
-        });
+        }, {disableRetriggerOnParamChange: true});
     });
 });
 
