@@ -146,7 +146,9 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 	// reserved place in case we need to wait for more events
 	'preloadedElementsReady'
 ], function() {
-	initTheUIAfterPreloading();
+	$(document).ready(function() {
+		initTheUIAfterPreloading();
+	});
 });
 
 recursivelyPreloadElements();
