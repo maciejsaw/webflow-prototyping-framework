@@ -1850,6 +1850,7 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 	'preloadedElementsReady'
 ], function() {
 	$(document).ready(function() {
+		console.log('document ready');
 		initTheUIAfterPreloading();
 	});
 });
