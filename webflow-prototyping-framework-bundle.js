@@ -798,15 +798,6 @@ var ReactiveLocalStorage = (function() {
 			actionsOnParamChange[key] = [];
 		}
 		actionsOnParamChange[key].push(actionFunction);
-
-		if (options && options.disableRetriggerOnParamChange === true) {
-			//do nothing
-		} else {
-			//when the onParamChanged is defined, also retrigger the state
-			//this is useful for basic usages when there is no global retrigger
-			//at the init of the document at the end of all scripts
-			retriggerOnParamChange(key);
-		}
 	}
 
 	function retriggerOnParamChange(key) {
@@ -828,6 +819,7 @@ var ReactiveLocalStorage = (function() {
 		varsion: {
 			version: 4,
 			versionNotes: {
+				5: 'Removed default retrigger on param change while creating the onParamChage',
 				4: 'Added options to disable retrigger on param change while creating onParamChange',
 				3: 'Added fallback for Safari incognito not supporting localStorage',
 			},
@@ -1363,7 +1355,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             var otherNotChosenItems = $('[action-select-dropdown="'+paramToChange+'"]').find('[chosen-value]').not(chosenItem);
             chosenItem.removeClass('is-hidden');
             otherNotChosenItems.addClass('is-hidden');
-        }, {disableRetriggerOnParamChange: true});
+        });
     });
 });
 
@@ -1387,7 +1379,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             chosenItem.find('[chosen-icon-inside]').removeClass('is-hidden');
             otherNotChosenItems.removeClass('is-selected');
             otherNotChosenItems.find('[chosen-icon-inside]').addClass('is-hidden');
-        }, {disableRetriggerOnParamChange: true});
+        });
     });
 });
 
@@ -1416,7 +1408,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
 
         ReactiveLocalStorage.onParamChange(paramToChange, function(value) {
             $('[action-text-input="'+paramToChange+'"]').val(value);
-        }, {disableRetriggerOnParamChange: true});
+        });
     });
 
 });
@@ -1458,7 +1450,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             } else if (value == 'false') {
             	$thisCheckmark.removeClass('is-checked').addClass('is-unchecked');
             }
-        }, {disableRetriggerOnParamChange: true});
+        });
     });
 
 });
@@ -1547,7 +1539,7 @@ function ReactiveLocalStorageDataBindArrayList(paramNameWithArray, functionToMod
 			}
 
 		});
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 //use this to bind elements with attribute data-bind to selected reactive local storage params
@@ -1555,7 +1547,7 @@ function ReactiveLocalStorageDataBindText(objectWithAttrubiteValuePairs) {
 	$.each(objectWithAttrubiteValuePairs, function(attribute, bidedParamValue) {
 		ReactiveLocalStorage.onParamChange(bidedParamValue, function(value) {
 			$('[data-bind="'+attribute+'"]').text(value);
-		}, {disableRetriggerOnParamChange: true});
+		});
 	});
 }
 
@@ -1563,7 +1555,7 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-radio-group="'+paramName+'"]').not('[action-show-when-radio-selected="'+value+'"]').addClass('is-hidden');
 		$('[depends-on-radio-group="'+paramName+'"]').filter('[action-show-when-radio-selected="'+value+'"]').removeClass('is-hidden');
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 
@@ -1579,21 +1571,21 @@ function ReactiveLocalStorageOnParamChangeShowElementsOnlyWhenParamXEqualsY(para
 		} else {
 			$('[show-when-'+param+']').not('[show-when-'+param+'='+paramValue+']').addClass('is-hidden');
 		}
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-param="'+paramName+'"]').not('[action-show-when-param-equals="'+value+'"]').not('[action-hide-when-param-equals]').addClass('is-hidden');
 		$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-param-equals="'+value+'"]').removeClass('is-hidden');
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 function ReactiveLocalStorageHideWhenParamEquals(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-param="'+paramName+'"]').not('[action-hide-when-param-equals="'+value+'"]').not('[action-show-when-param-equals]').removeClass('is-hidden');
 		$('[depends-on-param="'+paramName+'"]').filter('[action-hide-when-param-equals="'+value+'"]').addClass('is-hidden');
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 
@@ -1604,7 +1596,7 @@ function ReactiveLocalStorageHideIfParamNotUndefined(paramName) {
 		} else {
 			$('[depends-on-param="'+paramName+'"]').filter('[action-hide-when-not-undefined]').removeClass('is-hidden');
 		}
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 function ReactiveLocalStorageShowIfParamUndefined(paramName) {
@@ -1614,7 +1606,7 @@ function ReactiveLocalStorageShowIfParamUndefined(paramName) {
 		} else {
 			$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-undefined]').addClass('is-hidden');
 		}
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 function ReactiveLocalStorageHideIfParamUndefined(paramName) {
@@ -1624,7 +1616,7 @@ function ReactiveLocalStorageHideIfParamUndefined(paramName) {
 		} else {
 			$('[depends-on-param="'+paramName+'"]').filter('[action-hide-when-undefined]').removeClass('is-hidden');
 		}
-	}, {disableRetriggerOnParamChange: true});
+	});
 }
 
 $(document).on('preloadingComplete', function() {

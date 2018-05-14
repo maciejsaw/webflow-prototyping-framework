@@ -23,7 +23,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
 
         ReactiveLocalStorage.onParamChange(paramToChange, function(value) {
             $('[action-text-input="'+paramToChange+'"]').val(value);
-        }, {disableRetriggerOnParamChange: true});
+        });
     });
 
 });

@@ -187,15 +187,6 @@ var ReactiveLocalStorage = (function() {
 			actionsOnParamChange[key] = [];
 		}
 		actionsOnParamChange[key].push(actionFunction);
-
-		if (options && options.disableRetriggerOnParamChange === true) {
-			//do nothing
-		} else {
-			//when the onParamChanged is defined, also retrigger the state
-			//this is useful for basic usages when there is no global retrigger
-			//at the init of the document at the end of all scripts
-			retriggerOnParamChange(key);
-		}
 	}
 
 	function retriggerOnParamChange(key) {
@@ -217,6 +208,7 @@ var ReactiveLocalStorage = (function() {
 		varsion: {
 			version: 4,
 			versionNotes: {
+				5: 'Removed default retrigger on param change while creating the onParamChage',
 				4: 'Added options to disable retrigger on param change while creating onParamChange',
 				3: 'Added fallback for Safari incognito not supporting localStorage',
 			},
