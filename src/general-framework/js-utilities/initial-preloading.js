@@ -2,6 +2,9 @@
 //until the subpages are loaded the UI is covered by loading overlay
 //after they are preloaded, we retrigger the state of all components
 //and fade in the UI to prevent flicker
+//we can define for what specific events we wait until we show the UI, 
+//for example we may want to preload not only subpages, but additional promo modals etc.
+
 
 function recursivelyPreloadElements() {
 	var preloadMissingElements = function() {
