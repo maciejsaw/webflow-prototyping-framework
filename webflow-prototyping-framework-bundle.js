@@ -566,6 +566,7 @@ var QueryStringRouter = (function() {
 
 		//when the onParamChanged is being defined, also retrigger the state
 		retriggerOnParamChange(key);
+		console.log(key);
 	}
 
 	function retriggerOnParamChange(key) {
