@@ -1582,7 +1582,7 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 			var paramToCompare = $(this).attr('action-show-when-param-not-equals');
 			if (paramToCompare !== value && typeof value !== 'undefined') {
 				$(this).removeClass('is-hidden');
-			} else {
+			} else if (typeof value !== 'undefined') {
 				$(this).addClass('is-hidden');
 			}
 		});
