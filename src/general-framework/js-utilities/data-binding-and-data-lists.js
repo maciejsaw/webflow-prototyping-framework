@@ -87,13 +87,6 @@ function ReactiveLocalStorageDataBindText(objectWithAttrubiteValuePairs) {
 	});
 }
 
-function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
-	ReactiveLocalStorage.onParamChange(paramName, function(value) {
-		$('[depends-on-radio-group="'+paramName+'"]').not('[action-show-when-radio-selected="'+value+'"]').addClass('is-hidden');
-		$('[depends-on-radio-group="'+paramName+'"]').filter('[action-show-when-radio-selected="'+value+'"]').removeClass('is-hidden');
-	});
-}
-
 
 
 
