@@ -23,6 +23,7 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 				console.log('test');
 			}
 		});
+		console.log('test outer');
 	});
 }
 
