@@ -1576,7 +1576,7 @@ function ReactiveLocalStorageOnParamChangeShowElementsOnlyWhenParamXEqualsY(para
 
 function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
-		//TODOrefactor needed
+		//TODO refactor needed
 		$('[depends-on-param="'+paramName+'"]').not('[action-show-when-param-equals="'+value+'"]').not('[action-hide-when-param-equals]').not('[action-show-when-param-not-equals]').addClass('is-hidden');
 		$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-param-equals="'+value+'"]').removeClass('is-hidden');
 		$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-param-not-equals]').each(function() {
@@ -1585,6 +1585,7 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 				$(this).removeClass('is-hidden');
 			} else if (typeof value !== 'undefined') {
 				$(this).addClass('is-hidden');
+				console.log('test');
 			}
 		});
 	});
