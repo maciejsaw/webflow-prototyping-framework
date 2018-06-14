@@ -1581,9 +1581,9 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 		$('[depends-on-param="'+paramName+'"]').filter('[action-show-when-param-not-equals]').each(function() {
 			var paramToCompare = $(this).attr('action-show-when-param-not-equals');
 			if (paramToCompare !== value && typeof value !== 'undefined') {
-				$(this).addClass('is-hidden');
-			} else {
 				$(this).removeClass('is-hidden');
+			} else {
+				$(this).addClass('is-hidden');
 			}
 		});
 	});
