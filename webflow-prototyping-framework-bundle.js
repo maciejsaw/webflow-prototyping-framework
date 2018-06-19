@@ -520,10 +520,11 @@ var QueryStringRouter = (function() {
 						number = number + 1;
 					}
 
+					console.log(number);
 					return number;
 				};
 
-				console.log(number);
+
 
 				window.history.pushState({numberOfPreviousNavigationStepsInModal: getNumberOfPreviousNaviationStepsInModal()},'', '?'+newQueryString);
 			} else {
