@@ -51,7 +51,7 @@ var QueryStringRouter = (function() {
 			options = options || {};
 			if (options.doNotCreateHistoryState === true) {
 				window.history.replaceState('','', '?'+newQueryString);
-			} else if (options.inInModal === true) {
+			} else if (options.isInModal === true) {
 				var getNumberOfPreviousNaviationStepsInModal = function() {
 					var number;
 					if (window.history.state === '') {
