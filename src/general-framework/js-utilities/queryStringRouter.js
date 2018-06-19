@@ -75,6 +75,11 @@ var QueryStringRouter = (function() {
 		
 	}
 
+	function goBackBeforeModal() {
+		var numberOfStepsToGoBack = window.history.state.numberOfPreviousNavigationStepsInModal;
+		window.history.go(-numberOfStepsToGoBack);
+	}
+
 	function removeParam(key, options) {
 		var queryStringParams = getQueryStringParams();
 		if (typeof queryStringParams[key] !== 'undefined') {
