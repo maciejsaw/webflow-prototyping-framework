@@ -65,8 +65,6 @@ var QueryStringRouter = (function() {
 					return number;
 				};
 
-
-
 				window.history.pushState({numberOfPreviousNavigationStepsInModal: getNumberOfPreviousNaviationStepsInModal()},'', '?'+newQueryString);
 			} else {
 				window.history.pushState('','', '?'+newQueryString);
