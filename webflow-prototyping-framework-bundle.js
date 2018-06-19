@@ -612,6 +612,12 @@ var QueryStringRouter = (function() {
 		});
 	}
 
+	function getNumberOfPreviousNavigationStepsInModal() {
+		if (typeof window.history.state.numberOfPreviousNavigationStepsInModal === 'number') {
+			return window.history.state.numberOfPreviousNavigationStepsInModal;
+		}
+	}
+
 	return {
 		setParam: setParam,
 		getParam: getQueryStringParam,
