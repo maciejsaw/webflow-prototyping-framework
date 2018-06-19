@@ -1312,6 +1312,7 @@ $(document).on('click', '[action-open-modal]', function(event) {
 
 $(document).on('click', '[action-close-modal="true"]', function(event) {
     QueryStringRouter.removeParam('modalContent', {doNotCreateHistoryState: true});
+    QueryStringRouter.goBackBeforeModal();
 });
 
 function bindEscButtonToCloseModal() {
