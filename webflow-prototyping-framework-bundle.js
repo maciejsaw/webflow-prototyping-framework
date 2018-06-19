@@ -511,7 +511,7 @@ var QueryStringRouter = (function() {
 			if (options.doNotCreateHistoryState === true) {
 				window.history.replaceState('','', '?'+newQueryString);
 			} else if (options.isInModal === true) {
-				var getNumberOfPreviousNaviationStepsInModal = function() {
+				var calculateNumberOfPreviousNaviationStepsInModal = function() {
 					var number;
 					if (window.history.state === '') {
 						number = 1;
@@ -524,7 +524,7 @@ var QueryStringRouter = (function() {
 					return number;
 				};
 
-				window.history.pushState({numberOfPreviousNavigationStepsInModal: getNumberOfPreviousNaviationStepsInModal()},'', '?'+newQueryString);
+				window.history.pushState({numberOfPreviousNavigationStepsInModal: calculateNumberOfPreviousNaviationStepsInModal()},'', '?'+newQueryString);
 			} else {
 				window.history.pushState('','', '?'+newQueryString);
 			}
