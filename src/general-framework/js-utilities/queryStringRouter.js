@@ -51,6 +51,20 @@ var QueryStringRouter = (function() {
 			options = options || {};
 			if (options.doNotCreateHistoryState === true) {
 				window.history.replaceState('','', '?'+newQueryString);
+			} else if (options.inInModal === true) {
+				var getNumberOfPreviousNaviationStepsInModal = function() {
+					var number;
+					if (window.history.state === '') {
+						number = 1;
+					} else {
+						number = window.history.state.numberOfPreviousNavigationStepsInModal;
+						number = number + 1;
+					}
+
+					return number;
+				};
+
+				window.history.pushState({numberOfPreviousNavigationStepsInModal: getNumberOfPreviousNaviationStepsInModal()},'', '?'+newQueryString);
 			} else {
 				window.history.pushState('','', '?'+newQueryString);
 			}
