@@ -8,7 +8,7 @@ $(document).on('click', '[action-open-modal]', function(event) {
 });
 
 $(document).on('click', '[action-close-modal="true"]', function(event) {
-    if (QueryStringRouter.getNumberOfPreviousNavigationStepsInModal >= 1) {
+    if (QueryStringRouter.getNumberOfPreviousNavigationStepsInModal() >= 1) {
         QueryStringRouter.goBackBeforeModal();
     } else {
         QueryStringRouter.removeParam('modalContent', {doNotCreateHistoryState: true});
