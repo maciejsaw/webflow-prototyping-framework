@@ -512,14 +512,8 @@ var QueryStringRouter = (function() {
 				window.history.replaceState('','', '?'+newQueryString);
 			} else if (options.isInModal === true) {
 				var calculateNumberOfPreviousNaviationStepsInModal = function() {
-					var number;
-					if (window.history.state === '') {
-						number = 1;
-					} else {
-						number = window.history.state.numberOfPreviousNavigationStepsInModal;
-						number = number + 1;
-					}
-
+					var number = getNumberOfPreviousNavigationStepsInModal();
+					number = number + 1;
 					console.log(number);
 					return number;
 				};
