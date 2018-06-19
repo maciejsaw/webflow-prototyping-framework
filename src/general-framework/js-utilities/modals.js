@@ -8,8 +8,11 @@ $(document).on('click', '[action-open-modal]', function(event) {
 });
 
 $(document).on('click', '[action-close-modal="true"]', function(event) {
-    QueryStringRouter.goBackBeforeModal();
-    QueryStringRouter.removeParam('modalContent', {doNotCreateHistoryState: true});
+    if (typeof window.history.state.numberOfPreviousNavigationStepsInModal === 'number' || window.history.state.numberOfPreviousNavigationStepsInModal > 1) {
+        QueryStringRouter.goBackBeforeModal();
+    } else {
+        QueryStringRouter.removeParam('modalContent', {doNotCreateHistoryState: true});
+    }
 });
 
 function bindEscButtonToCloseModal() {
