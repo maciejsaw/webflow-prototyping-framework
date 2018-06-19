@@ -630,6 +630,7 @@ var QueryStringRouter = (function() {
 		removeParam: removeParam,
 		version: '21',
 		goBackBeforeModal: goBackBeforeModal,
+		getNumberOfPreviousNavigationStepsInModal: getNumberOfPreviousNavigationStepsInModal,
 		releaseNotes: {
 			v22: 'added optional counting of states inside modal and ability to go back before modal',
 			v21: 'only fire events when param changed',
