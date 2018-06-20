@@ -529,11 +529,9 @@ var QueryStringRouter = (function() {
 	}
 
 	function goBackBeforeModal() {
-		if (window.history && window.history.state) {
-			if (typeof window.history.state.numberOfPreviousNavigationStepsInModal === 'number' && window.history.state.numberOfPreviousNavigationStepsInModal > 1) {
-				var numberOfStepsToGoBack = window.history.state.numberOfPreviousNavigationStepsInModal;
-				window.history.go(-numberOfStepsToGoBack - 1);
-			}
+		var numberOfStepsToGoBack = getNumberOfPreviousNavigationStepsInModal();
+		if (numberOfStepsToGoBack >= 1) {
+			window.history.go(-numberOfStepsToGoBack - 1);
 		}
 	}
 
