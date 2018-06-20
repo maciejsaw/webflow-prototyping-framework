@@ -150,10 +150,12 @@ var QueryStringRouter = (function() {
 	}
 
 	function getNumberOfPreviousNavigationStepsInModal() {
-		if (typeof window.history.state.numberOfPreviousNavigationStepsInModal === 'number') {
-			return window.history.state.numberOfPreviousNavigationStepsInModal;
-		} else {
-			return 0;
+		if (window.history && window.history.state) {
+			if (typeof window.history.state.numberOfPreviousNavigationStepsInModal === 'number') {
+				return window.history.state.numberOfPreviousNavigationStepsInModal;
+			} else {
+				return 0;
+			}
 		}
 	}
 
