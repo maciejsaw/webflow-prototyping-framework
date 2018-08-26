@@ -3558,7 +3558,7 @@ function ReactiveLocalStorageDataBindText(objectWithAttrubiteValuePairs) {
 //automatically bind [data-bind-param] to related local storage param
 $(document).on('preloadingComplete', function() {
 	$('[data-bind-param]').each(function() {
-		var paramToBind = $(this).attr('[data-bind-param]');
+		var paramToBind = $(this).attr('data-bind-param');
 		ReactiveLocalStorage.onParamChange(paramToBind, function(value) {
 			$('[data-bind-param="'+paramToBind+'"]').text(value);
 		});
