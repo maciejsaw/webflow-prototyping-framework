@@ -100,9 +100,7 @@ ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options
 	if (options && options.default) {
 		ReactiveLocalStorage.setDefaultParam(param, options.default);
 	}
-	ReactiveLocalStorage.registerParamValidator(param, function(value) {
-		options.validationFunction(value);
-	});
+	ReactiveLocalStorage.registerParamValidator(param, options.validationFunction(value));
 }
 
 // validation on blur for elements with additional attribute validate-on-blur
