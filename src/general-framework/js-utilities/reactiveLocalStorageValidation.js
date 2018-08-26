@@ -94,6 +94,14 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 	//IDEA/TODO: validateElementChildren could return an array of errors
 };
 
+ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options) {
+	if (options.default) {
+		ReactiveLocalStorage.setDefaultParam(param, options.default);
+	}
+	ReactiveLocalStorage.registerParamValidator(param, function(value) {
+		options.validationFunction(value);
+	});
+}
 
 // validation on blur for elements with additional attribute validate-on-blur
 // we will show errors only if usered focused the field at least once
@@ -124,15 +132,6 @@ $(document).on('preloadingComplete', function() {
 
 	});
 });
-
-ReactiveLocalStorage.prepareParamForValidation = function(param, options) {
-	if (options.default) {
-		ReactiveLocalStorage.setDefaultParam(param, options.default);
-	}
-	ReactiveLocalStorage.registerParamValidator(param, function(value) {
-		options.validationFunction(value);
-	});
-}
 
 // you can decide if you want to revalidate the field after it was changed by user
 // just add attribute 'validate-on-click' -- better for radio buttons
