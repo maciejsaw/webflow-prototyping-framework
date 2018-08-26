@@ -3709,7 +3709,7 @@ function showLoadingInBemButton(elm) {
 	.find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
 }
 
-function hideLoadingInBemButton(elm) {
+function hideLoadingInButton(elm) {
 	elm = $(elm);
 	elm.removeClass('is-grayed-out');
 	elm.removeClass('is-with-spinner-shown');
