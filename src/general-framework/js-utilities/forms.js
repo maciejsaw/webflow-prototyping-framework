@@ -31,7 +31,7 @@ function showLoadingInBemButton(elm) {
 	elm = $(elm);
 	elm.addClass('is-grayed-out');
 	elm.addClass('is-with-spinner-shown');
-	elm.parent().attr('is-inactive-with-preloader', 'true');
+	elm.parent().attr('is-inactive-with-preloader', 'true')
 	.find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
 }
 
@@ -39,7 +39,7 @@ function hideLoadingInBemButton(elm) {
 	elm = $(elm);
 	elm.removeClass('is-grayed-out');
 	elm.removeClass('is-with-spinner-shown');
-	elm.parent().removeAattr('is-inactive-with-preloader');
+	elm.parent().removeAattr('is-inactive-with-preloader')
 	.find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
 }
 
