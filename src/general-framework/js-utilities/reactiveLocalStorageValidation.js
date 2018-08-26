@@ -36,6 +36,8 @@ function showErrorForElement(elm, validationResult) {
 	}
 
 	errorMsgFromElm = elm.attr('err-txt__'+validationResult);
+	console.log(errorMsgFromElm);
+	console.log(validationResult);
 	if (typeof errorMsgFromElm !== "undefined") {
 		errorMsg = errorMsgFromElm;
 	}
