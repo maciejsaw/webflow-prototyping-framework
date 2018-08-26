@@ -2735,6 +2735,15 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 	//IDEA/TODO: validateElementChildren could return an array of errors
 };
 
+window.alert('test');
+ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options) {
+	if (options && options.default) {
+		ReactiveLocalStorage.setDefaultParam(param, options.default);
+	}
+	ReactiveLocalStorage.registerParamValidator(param, function(value) {
+		options.validationFunction(value);
+	});
+}
 
 // validation on blur for elements with additional attribute validate-on-blur
 // we will show errors only if usered focused the field at least once
