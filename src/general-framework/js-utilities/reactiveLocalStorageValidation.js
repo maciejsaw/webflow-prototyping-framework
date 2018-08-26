@@ -125,6 +125,15 @@ $(document).on('preloadingComplete', function() {
 	});
 });
 
+ReactiveLocalStorage.prepareParamForValidation = function(param, options) {
+	if (options.default) {
+		ReactiveLocalStorage.setDefaultParam(param, options.default);
+	}
+	ReactiveLocalStorage.registerParamValidator(param, function(value) {
+		options.validationFunction(value);
+	});
+}
+
 // you can decide if you want to revalidate the field after it was changed by user
 // just add attribute 'validate-on-click' -- better for radio buttons
 $(document).on('preloadingComplete', function() {
