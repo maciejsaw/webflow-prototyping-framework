@@ -98,6 +98,7 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 
 ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options) {
 	if (options && options.default) {
+		console.log(options);
 		ReactiveLocalStorage.setDefaultParam(param, options.default);
 	}
 	ReactiveLocalStorage.registerParamValidator(param, options.validationFunction);
