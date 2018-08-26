@@ -2738,7 +2738,7 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 };
 
 ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options) {
-	if (options && options.default) {
+	if (options && typeof options.default !== 'undefined') {
 		console.log(options);
 		ReactiveLocalStorage.setDefaultParam(param, options.default);
 	}
