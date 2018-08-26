@@ -2735,7 +2735,6 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 	//IDEA/TODO: validateElementChildren could return an array of errors
 };
 
-window.alert('test');
 ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options) {
 	if (options && options.default) {
 		ReactiveLocalStorage.setDefaultParam(param, options.default);
