@@ -30,6 +30,13 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 function showLoadingInButton(elm) {
 	elm.addClass('is-grayed-out');
 	elm.addClass('is-with-spinner-shown');
-	elm.parent().addClass('is-inactive-with-preloader')
+	elm.parent().attr('is-inactive-with-preloader', 'true')
 	.find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
 }
+
+$(document).on('click', '[is-inactive-with-preloader]', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+	e.stopImmediatePropagation();
+	return false;
+})
