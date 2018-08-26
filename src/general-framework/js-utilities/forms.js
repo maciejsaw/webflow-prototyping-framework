@@ -39,7 +39,7 @@ function hideLoadingInBemButton(elm) {
 	elm = $(elm);
 	elm.removeClass('is-grayed-out');
 	elm.removeClass('is-with-spinner-shown');
-	elm.parent().removeAattr('is-inactive-with-preloader')
+	elm.parent().removeAttr('is-inactive-with-preloader')
 	.find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
 }
 
