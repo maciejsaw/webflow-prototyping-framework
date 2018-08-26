@@ -2713,7 +2713,7 @@ function handleErrorForElement(elm, validationResult) {
 //automatically searches for DOM elements that need to be validated and show error for them
 //based on DOM attributes
 ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
-	elm.find('[validated-param]').each(function() {
+	elm.find('[validated-param]').filter(':visible').each(function() {
 		var relatedField = $(this);
 		var paramToValidate = $(this).attr('validated-param');
 		ReactiveLocalStorage.validateParam(paramToValidate, function(validationResult) {
