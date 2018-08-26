@@ -27,7 +27,7 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 	}, 1500);
 }
 
-function showLoadingInButton(elm) {
+function showLoadingInBemButton(elm) {
 	elm.addClass('is-grayed-out');
 	elm.addClass('is-with-spinner-shown');
 	elm.parent().attr('is-inactive-with-preloader', 'true')
