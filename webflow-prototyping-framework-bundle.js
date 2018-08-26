@@ -3701,7 +3701,7 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 	}, 1500);
 }
 
-function showLoadingInBemButton(elm) {
+function showLoadingInButton(elm) {
 	elm = $(elm);
 	elm.addClass('is-grayed-out');
 	elm.addClass('is-with-spinner-shown');
