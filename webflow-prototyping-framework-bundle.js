@@ -3701,6 +3701,13 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 	}, 1500);
 }
 
+function showLoadingInButton(elm) {
+	elm.addClass('is-grayed-out');
+	elm.addClass('is-with-spinner-shown');
+	elm.parent().addClass('is-inactive-with-preloader')
+	.find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
+}
+
 //preload all views into respective containers
 //until the subpages are loaded the UI is covered by loading overlay
 //after they are preloaded, we retrigger the state of all components
