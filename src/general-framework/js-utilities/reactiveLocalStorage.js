@@ -204,6 +204,11 @@ var ReactiveLocalStorage = (function() {
 		});
 	}
 
+	function refreshFromLocalStorage() {
+		checkIfParamsAreAlreadyStoredInLocalStorage();
+		retriggerOnParamChangeForAll();
+	}
+
 	return {
 		varsion: {
 			version: 4,
@@ -221,6 +226,7 @@ var ReactiveLocalStorage = (function() {
 		onParamChange: onParamChange,
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
+		refreshFromLocalStorage: refreshFromLocalStorage,
 		removeParam: removeParam,
 		appendToBeginningOfTheArray: appendToBeginningOfTheArray,
 		appendToArray: appendToArray,
