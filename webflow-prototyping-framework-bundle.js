@@ -845,6 +845,7 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function refreshFromLocalStorage() {
+		//use it for syncing content in different open tabs, for example fake email etc.
 		checkIfParamsAreAlreadyStoredInLocalStorage();
 		retriggerOnParamChangeForAll();
 	}
