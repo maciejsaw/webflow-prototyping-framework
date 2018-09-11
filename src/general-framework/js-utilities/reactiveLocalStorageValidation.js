@@ -47,6 +47,7 @@ function showErrorForElement(elm, validationResult) {
 	elm.removeClass('is-correct');
 	elm.find('[validation-add-class]').removeClass('is-correct');
 	elm.addClass('is-error');
+	elm.children().first().addClass('is-error');
 	elm.find('[validation-add-class]').addClass('is-error');
 	elm.attr('has-error', 'true');
 }
