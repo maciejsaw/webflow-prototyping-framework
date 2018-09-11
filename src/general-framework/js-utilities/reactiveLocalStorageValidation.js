@@ -175,6 +175,19 @@ $(document).on('preloadingComplete', function() {
 	});
 });
 
+$(document).on('preloadingComplete', function() {
+  $(document).on('click', '[validated-param][has-error]', function() {
+    var relatedParam = $(this).attr('validated-param');
+    var relatedInput = $(this);
+    $(document).on('input', relatedInput, function() {
+    	ReactiveLocalStorage.setParam(relatedParam, relatedInput.val());
+    	ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
+    	  handleErrorForElement(relatedInput, validationResult);
+    	});
+    });
+  });
+});
+
 /*=====  End of ReactiveLocalStorage validation extension  ======*/
 
 
