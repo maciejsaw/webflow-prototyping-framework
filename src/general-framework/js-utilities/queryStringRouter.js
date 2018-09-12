@@ -9,7 +9,7 @@ var QueryStringRouter = (function() {
 
 	function getQueryStringParam(key) {
 		return deparam(window.location.search.substring(1))[key];
-	} 
+	}
 
 	//we diff against the previous params, so that we can remove the params that are not present
 	//in the query string from the reactive params
@@ -37,8 +37,12 @@ var QueryStringRouter = (function() {
 	//when document loads
 	processQueryStringParams();
 
+	var popstateDebouncingTimer; //needed to fix browsers not handling well multiple popstates at once
 	$(window).on('popstate', function() {
-		processQueryStringParams();
+		clearTimeout(popstateDebouncingTimer);
+		popstateDebouncingTimer = setTimeout(function() {
+			processQueryStringParams();
+		}, 10);
 	});
 
 	function setParam(key, value, options) {
@@ -66,7 +70,7 @@ var QueryStringRouter = (function() {
 
 			$(window).trigger('popstate');
 		}
-		
+
 	}
 
 	function goBackBeforeModal() {
@@ -90,7 +94,7 @@ var QueryStringRouter = (function() {
 				window.history.pushState('','', '?'+newQueryString);
 			}
 
-			$(window).trigger('popstate');  
+			$(window).trigger('popstate');
 		}
 	}
 
