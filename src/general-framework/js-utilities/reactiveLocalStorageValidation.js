@@ -47,7 +47,6 @@ function showErrorForElement(elm, validationResult) {
 	elm.removeClass('is-correct');
 	elm.find('[validation-add-class]').removeClass('is-correct');
 	elm.addClass('is-error');
-	elm.children().first().addClass('is-error');
 	elm.find('[validation-add-class]').addClass('is-error');
 	elm.attr('has-error', 'true');
 }
@@ -57,7 +56,6 @@ function hideErrorForElement(elm) {
 	elm.addClass('is-correct');
 	elm.find('[validation-add-class]').addClass('is-correct');
 	elm.removeClass('is-error');
-	elm.children().first().removeClass('is-error');
 	elm.find('[validation-add-class]').removeClass('is-error');
 	elm.removeAttr('has-error');
 	errorDiv.remove();
@@ -175,6 +173,7 @@ $(document).on('preloadingComplete', function() {
 
 	});
 });
+
 
 $(document).on('preloadingComplete', function() {
   $(document).on('click', '[validated-param][has-error]', function() {
