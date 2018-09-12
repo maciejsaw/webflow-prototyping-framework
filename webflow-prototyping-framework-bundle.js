@@ -2725,11 +2725,13 @@ function handleErrorForElement(elm, validationResult) {
 //based on DOM attributes
 ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 	elm.find('[validated-param]').filter(':visible').each(function() {
-		var relatedField = $(this);
-		var paramToValidate = $(this).attr('validated-param');
-		ReactiveLocalStorage.validateParam(paramToValidate, function(validationResult) {
-			handleErrorForElement(relatedField, validationResult);
-		});
+		if ( $(this).closest('.is-hidden').length === 0 ) { //only validate visible fields
+			var relatedField = $(this);
+			var paramToValidate = $(this).attr('validated-param');
+			ReactiveLocalStorage.validateParam(paramToValidate, function(validationResult) {
+				handleErrorForElement(relatedField, validationResult);
+			});
+		}
 	});
 	var numberOfErrors = elm.find('[has-error]').length;
 
