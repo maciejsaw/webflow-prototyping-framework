@@ -204,6 +204,12 @@ var ReactiveLocalStorage = (function() {
 		});
 	}
 
+	function refreshFromLocalStorage() {
+		//use it for syncing content in different open tabs, for example fake email etc.
+		checkIfParamsAreAlreadyStoredInLocalStorage();
+		retriggerOnParamChangeForAll();
+	}
+
 	return {
 		varsion: {
 			version: 4,
@@ -221,6 +227,7 @@ var ReactiveLocalStorage = (function() {
 		onParamChange: onParamChange,
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
+		refreshFromLocalStorage: refreshFromLocalStorage,
 		removeParam: removeParam,
 		appendToBeginningOfTheArray: appendToBeginningOfTheArray,
 		appendToArray: appendToArray,

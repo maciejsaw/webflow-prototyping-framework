@@ -26,3 +26,26 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 		actionAfter();
 	}, 1500);
 }
+
+function showLoadingInButton(elm) {
+	elm = $(elm);
+	elm.addClass('is-grayed-out');
+	elm.addClass('is-with-spinner-shown');
+	elm.parent().attr('is-inactive-with-preloader', 'true')
+	.find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
+}
+
+function hideLoadingInButton(elm) {
+	elm = $(elm);
+	elm.removeClass('is-grayed-out');
+	elm.removeClass('is-with-spinner-shown');
+	elm.parent().removeAttr('is-inactive-with-preloader')
+	.find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
+}
+
+$(document).on('click', '[is-inactive-with-preloader]', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+	e.stopImmediatePropagation();
+	return false;
+})

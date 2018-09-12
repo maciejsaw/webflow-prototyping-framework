@@ -15,6 +15,8 @@ var generalFrameworkScripts = [
 	"./src/general-framework/plugins-and-libraries/jquery.jsonp-2.4.0.js",
 	"./src/general-framework/js-utilities/queryStringRouter.js",
 	"./src/general-framework/js-utilities/reactiveLocalStorage.js",
+	"./node_modules/validator/validator.js",
+	"./src/general-framework/js-utilities/reactiveLocalStorageValidation.js",
 	"./src/general-framework/js-utilities/webflowComponentsFixes.js",
 	"./src/general-framework/js-utilities/transitions-functions-wrapper.js",
 	"./src/general-framework/js-utilities/tooltipster-for-webflow.js",
