@@ -3855,6 +3855,28 @@ $(document).on('preloadingComplete', function() {
 
 //idea  - fallback hiding if is-hidden class is not set TODO
 
+
+(function( $ ) {
+  $.fn.ReactiveLocalStorage__onlyShowWhenParamEquals = function(paramName, valueToEqual) {
+
+  	var thisInstance = this;
+
+  	ReactiveLocalStorage.onParamChange(paramName, function(value) {
+  		if (value === valueToEqual) {
+  			thisInstance.each(function() {
+  			  $(this).isShown();
+  			});
+  		} else {
+  			thisInstance.each(function() {
+  			  $(this).isHidden();
+  			});
+  		}
+  	});
+
+    return this;
+  };
+}( jQuery ));
+
 (function( $ ) {
   $.fn.ReactiveLocalStorage.onlyShowWhenParamEquals = function(paramName, valueToEqual) {
 
