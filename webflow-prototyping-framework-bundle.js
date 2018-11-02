@@ -3759,7 +3759,7 @@ $(document).on('click', '[is-inactive-with-preloader]', function(e) {
 //until the subpages are loaded the UI is covered by loading overlay
 //after they are preloaded, we retrigger the state of all components
 //and fade in the UI to prevent flicker
-//we can define for what specific events we wait until we show the UI, 
+//we can define for what specific events we wait until we show the UI,
 //for example we may want to preload not only subpages, but additional promo modals etc.
 
 
@@ -3804,7 +3804,9 @@ function initTheUIAfterPreloading() {
 	QueryStringRouter.retriggerOnParamChangeForAll();
 	ReactiveLocalStorage.retriggerOnParamChangeForAll();
 	console.log('retriggerOnParamChangeForAll');
-	$('.initial-load-overlay').fadeOutAndHide(500);
+	if ($('.initial-load-overlay').length > 0) {
+		$('.initial-load-overlay').fadeOutAndHide(500);
+	}
 }
 
 function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFunction) {
@@ -3816,9 +3818,9 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			//TODO refactor so that it checks if the specific events happened, not number of elements
 			numberOfEventsThatHappened = numberOfEventsThatHappened + 1;
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
-				console.log('preloading complete start'); 
+				console.log('preloading complete start');
 				if (typeof callbackFunction === 'function') { callbackFunction(); }
-				console.log('preloading complete end'); 
+				console.log('preloading complete end');
 			}
 		});
 	});
@@ -3835,8 +3837,6 @@ waitForInitialAjaxLoadingToFinishThenShowUI([
 });
 
 recursivelyPreloadElements();
-
-
 
 /*========================================================================================================
 =            FLashing notifications https://github.com/maciejsaw/jQuery-FlashingNotifications            =
