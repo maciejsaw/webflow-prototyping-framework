@@ -1,18 +1,20 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat-sourcemap'); 
-var rename = require('gulp-rename'); 
+var concat = require('gulp-concat-sourcemap');
+var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var git = require('gulp-git');
 var autoRestart = require('gulp-auto-restart');
 autoRestart({'task': 'watch'});
 
 var generalFrameworkScripts = [
+
 	"./src/general-framework/plugins-and-libraries/uuid.js",
 	"./src/general-framework/plugins-and-libraries/jquery.transit.min.js",
 	"./src/general-framework/plugins-and-libraries/tooltipster/tooltipster.bundle.min.js",
 	"./src/general-framework/plugins-and-libraries/jquery-deparam.js",
 	"./src/general-framework/plugins-and-libraries/jquery.scrollTo.min.js",
 	"./src/general-framework/plugins-and-libraries/jquery.jsonp-2.4.0.js",
+	"./src/general-framework/js-utilities/fallback-localstorage-clear.js",
 	"./src/general-framework/js-utilities/queryStringRouter.js",
 	"./src/general-framework/js-utilities/reactiveLocalStorage.js",
 	"./node_modules/validator/validator.js",
@@ -42,7 +44,7 @@ var mainAppScripts = [
 
 var jsDestination = '.';
 
-gulp.task('concatGeneralFrameworkScripts', function() {  
+gulp.task('concatGeneralFrameworkScripts', function() {
     return gulp.src(generalFrameworkScripts)
         .pipe(concat('webflow-prototyping-framework-bundle.js'), {sourceRoot: '/'})
         .pipe(gulp.dest(jsDestination));
@@ -51,7 +53,7 @@ gulp.task('concatGeneralFrameworkScripts', function() {
         // .pipe(gulp.dest(jsDestination));
 });
 
-gulp.task('concatMainAppScripts', function() {  
+gulp.task('concatMainAppScripts', function() {
     return gulp.src(mainAppScripts)
         .pipe(concat('webflow-prototyping-main-app-bundle.js'), {sourceRoot: '/'})
         .pipe(gulp.dest(jsDestination));
@@ -60,7 +62,7 @@ gulp.task('concatMainAppScripts', function() {
         // .pipe(gulp.dest(jsDestination));
 });
 
-gulp.task('buildScriptsThenAddAndCommit', ['concatGeneralFrameworkScripts', 'concatMainAppScripts'], function() {  
+gulp.task('buildScriptsThenAddAndCommit', ['concatGeneralFrameworkScripts', 'concatMainAppScripts'], function() {
     return gulp.src('.')
   		.pipe(git.add())
   		.pipe(git.commit('automatic commit from webflow-prototyping-framework'));
