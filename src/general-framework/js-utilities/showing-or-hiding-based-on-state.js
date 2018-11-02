@@ -100,3 +100,7 @@ $(document).on('preloadingComplete', function() {
 // }
 
 //idea  - fallback hiding if is-hidden class is not set TODO
+
+//idea - todo - reusable attribute that makes element visible only when its value matches param value
+//is-shown-when-param__param-name="yourvalue"
+
