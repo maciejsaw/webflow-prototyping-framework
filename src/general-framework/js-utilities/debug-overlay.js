@@ -15,6 +15,10 @@ function webflowPrototypingFrameworkShowDebugOverlay() {
 	});
 
 	overlay.appendTo('body');
+
+	$(document).on('click.debugOverlay', function() {
+		ReactiveLocalStorage.retriggerOnParamChangeForAll();
+	});
 }
 
 function webflowPrototypingFrameworkHideDebugOverlay() {
