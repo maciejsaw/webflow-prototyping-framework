@@ -7,7 +7,7 @@ function webflowPrototypingFrameworkShowDebugOverlay() {
 	  allParamsOrdered[key] = allParams[key];
 	});
 
-	var overlay = $('<div js-debug-overlay style="position:fixed; left: 30px; bottom: 0; padding: 10px; max-height: 300px; max-width: 600px; background: #fff; overflow: auto; z-index: 1000; box-shadow: 10px 10px 108px 0px rgba(0,0,0,0.75);"></div>');
+	var overlay = $('<div js-debug-overlay style="position:fixed; left: 30px; bottom: 0; padding: 10px; max-height: 300px; max-width: 600px; background: #fff; overflow: auto; z-index: 1000; box-shadow: 10px 10px 108px 0px rgba(0,0,0,0.75); border-radius: 5px; font-size: 13px;"></div>');
 
 	$.each(allParamsOrdered, function(key, value) {
 		var row = $('<div><span style="padding-right: 8px;">'+key+'</span><input value="'+value+'" action-text-input="'+key+'"></input></div>');
