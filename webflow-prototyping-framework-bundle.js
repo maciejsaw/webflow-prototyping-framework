@@ -4266,7 +4266,7 @@ function webflowPrototypingFrameworkShowDebugOverlay() {
 
 $(document).on('keypress', function(e) {
 	console.log('keypress');
-	if ( e.ctrlKey && ( e.which === 46 ) ) {
+	if ( e.shiftKey && ( e.which === 192 ) ) {
 	  webflowPrototypingFrameworkShowDebugOverlay();
 	}
 });
