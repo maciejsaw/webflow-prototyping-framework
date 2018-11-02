@@ -20,10 +20,8 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 				$(this).removeClass('is-hidden');
 			} else if (typeof value !== 'undefined') {
 				$(this).addClass('is-hidden');
-				console.log('test');
 			}
 		});
-		console.log('test outer');
 	});
 }
 
