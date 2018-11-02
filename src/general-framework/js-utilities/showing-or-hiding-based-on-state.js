@@ -107,6 +107,8 @@ $(document).on('preloadingComplete', function() {
 
   	var thisInstance = this;
 
+  	console.log(expression);
+
 	if (!!expression) {
 		thisInstance.each(function() {
 		  $(this).isShown();
