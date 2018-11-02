@@ -39,8 +39,6 @@
 
     var thisInstance = this;
 
-    console.log(expression);
-
   if (!!expression) {
     thisInstance.each(function() {
       $(this).isShown();
@@ -54,6 +52,22 @@
     return this;
   };
 }( jQuery ));
+
+(function( $ ) {
+  $.fn.isShownWhenAttrValueMatches = function(valueToMatch) {
+
+    var thisInstance = this;
+
+    thisInstance.each(function() {
+      console.log(thisInstance);
+    });
+
+    return this;
+  };
+}( jQuery ));
+
+
+
 
 
 (function( $ ) {
