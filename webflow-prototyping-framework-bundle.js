@@ -605,6 +605,23 @@ function isNotEmpty(val) {
 }( jQuery ));
 
 
+(function( $ ) {
+  $.fn.onlyShowWhenReactiveLocalStorageParamEquals = function(paramName, valueToEqual) {
+
+    var thisInstance = this;
+
+    ReactiveLocalStorage.onParamChange(paramName, function(value) {
+      thisInstance.each(function() {
+        $(this).isShownWhen(value === valueToEqual);
+      });
+    });
+
+    return this;
+  };
+}( jQuery ));
+
+
+
 
 //QueryStringRouter - designed by Maciej Sawicki documented on https://github.com/maciejsaw/query-string-router
 

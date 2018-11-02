@@ -54,3 +54,19 @@
     return this;
   };
 }( jQuery ));
+
+
+(function( $ ) {
+  $.fn.onlyShowWhenReactiveLocalStorageParamEquals = function(paramName, valueToEqual) {
+
+    var thisInstance = this;
+
+    ReactiveLocalStorage.onParamChange(paramName, function(value) {
+      thisInstance.each(function() {
+        $(this).isShownWhen(value === valueToEqual);
+      });
+    });
+
+    return this;
+  };
+}( jQuery ));
