@@ -36,6 +36,7 @@ var generalFrameworkScripts = [
 	"./src/general-framework/js-utilities/flashing-notifications.js",
 	"./src/general-framework/js-utilities/collapsible-sections.js",
 	"./src/general-framework/js-utilities/eventBindingUtilities.js",
+	"./src/general-framework/js-utilities/debug-overlay.js",
 ];
 
 var mainAppScripts = [
