@@ -39,7 +39,8 @@ function ReactiveLocalStorageDataBindArrayList(paramNameWithArray, functionToMod
 
 			//the template is stored in html, so we want to hide it and only use it later
 			//as a tempalte source for repeatable items
-			$repeatableElementTemplate.addClass('is-hidden'); 
+			$repeatableElementTemplate.find('.tooltipstered').tooltipster('destroy');
+			$repeatableElementTemplate.addClass('is-hidden');
 
 			//empty the list before rerendering
 			$thisList.find('[data-bind-repeatable-clone]').remove();
@@ -58,14 +59,14 @@ function ReactiveLocalStorageDataBindArrayList(paramNameWithArray, functionToMod
 					//we need this to quickly reference respective object in ReactiveLocalStorage
 					if (typeof arrayValue == 'object') {
 						$.each(arrayValue, function(objectIndex, objectValue) {
-							$elementToAppend.attr(objectIndex, objectValue);
+							$elementToAppend.attr('item-data-'+objectIndex, objectValue);
 						});
 					}
 
 					$elementToAppend.appendTo($parentContainerWhereWeAppend);
 
-					$elementToAppend.showAndFadeIn(0, function() {
-						//we pass the $elementToAppend to the function, so that we can 
+					$elementToAppend.showWithFunctionBeforeShowing(function() {
+						//we pass the $elementToAppend to the function, so that we can
 						//refer to it from other places where we init the binding
 						functionToModifyEachItemBeforeShowing($elementToAppend, arrayValue);
 					});
@@ -73,6 +74,8 @@ function ReactiveLocalStorageDataBindArrayList(paramNameWithArray, functionToMod
 			} else {
 				$thisList.find('[data-bind-array-empty-state]').removeClass('is-hidden');
 			}
+
+			initTooltipster($thisList);
 
 		});
 	});
@@ -96,9 +99,3 @@ $(document).on('preloadingComplete', function() {
 		});
 	});
 });
-
-
-
-
-
-
