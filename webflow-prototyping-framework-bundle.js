@@ -602,22 +602,12 @@ function isNotEmpty(val) {
   };
 }( jQuery ));
 
-(function( $ ) {
-  $.fn.isShownWhenAttrValueMatches = function(valueToMatch) {
-
-    var thisInstance = this;
-
-    thisInstance.each(function() {
-      console.log(thisInstance);
-    });
-
-    return this;
-  };
-}( jQuery ));
-
-
-
-
+function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
+  $('['+attributeName+']').each(function() {
+    var attrVal = $(this).attr(attributeName);
+    $(this).isShownWhen(attrVal === value);
+  });
+}
 
 (function( $ ) {
   $.fn.onlyShowWhenReactiveLocalStorageParamEquals = function(paramName, valueToEqual) {
