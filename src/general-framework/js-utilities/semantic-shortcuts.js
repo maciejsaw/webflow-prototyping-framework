@@ -81,3 +81,30 @@ function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
     return this;
   };
 }( jQuery ));
+
+// function ReactiveLocalStorageIsSetToTrueWhen(paramName, expression) {
+//   if (!!expression) {
+//     ReactiveLocalStorage.setParam(paramName, 'true');
+//   } else {
+//     ReactiveLocalStorage.setParam(paramName, 'false');
+//   }
+// }
+
+/*
+IDEA TODO
+make the params work like jquery, so that you can first select the param and then choose if you want to set it, add on param change etc
+for example
+
+ReactiveLocalStorage.param('is-logged-in').get();
+
+or
+
+$$('is-logged-in').onChange(function(value) {
+  $('[some-element]').isShownWhen(value === true);
+});
+
+ReactiveState('is-logged-in').isSetToTrueWhen('is-finished-loggin-in', 'true');
+
+//this way we can have more methods on params and support chaining?
+
+*/
