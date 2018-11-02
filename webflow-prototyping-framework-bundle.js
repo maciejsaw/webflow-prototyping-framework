@@ -2997,28 +2997,44 @@ jQuery.fn.extend({
             classToAdd = 'is-hidden';
         }
 
-    	if (this.hasClass(classToAdd) === false) {
-    		this.transition({opacity: 0}, duration, function() {
-    			$(this).addClass(classToAdd);
+        if (this.hasClass(classToAdd) === false) {
+            this.transition({opacity: 0}, duration, function() {
+                $(this).addClass(classToAdd);
                 if (typeof functionAfterFadeOut !== 'undefined') functionAfterFadeOut();
-    		});	
-    	}
+            });
+        }
     },
-    showAndFadeIn: function(duration, classToRemove, functionBeforeShowing) {
-    	if (typeof classToRemove === 'undefined') {
+    showWithFunctionBeforeShowing: function(classToRemove, functionBeforeShowing) {
+        if (typeof classToRemove === 'undefined') {
             classToRemove = 'is-hidden';
         } else if (typeof classToRemove === 'function') {
             functionBeforeShowing = classToRemove;
             classToRemove = 'is-hidden';
         }
 
-    	if (this.hasClass(classToRemove) === true) {
-	    	this.transition({opacity: 0}, 0, function() {
+        if (this.hasClass(classToRemove) === true) {
+            if (typeof functionBeforeShowing !== 'undefined') {
+                functionBeforeShowing();
+            }
+
+            $(this).removeClass(classToRemove);
+        }
+    },
+    showAndFadeIn: function(duration, classToRemove, functionBeforeShowing) {
+        if (typeof classToRemove === 'undefined') {
+            classToRemove = 'is-hidden';
+        } else if (typeof classToRemove === 'function') {
+            functionBeforeShowing = classToRemove;
+            classToRemove = 'is-hidden';
+        }
+
+        if (this.hasClass(classToRemove) === true) {
+            this.transition({opacity: 0}, 0, function() {
                 $(this).removeClass(classToRemove);
                 if (typeof functionBeforeShowing !== 'undefined') functionBeforeShowing();
-	    		$(this).transition({opacity: 1}, duration);
-	    	});
-    	}
+                $(this).transition({opacity: 1}, duration);
+            });
+        }
     },
     showWithScaleEffect: function(duration, classToToggle, functionBeforeShowing) {
         if (typeof classToToggle === 'undefined') {
@@ -3027,7 +3043,7 @@ jQuery.fn.extend({
             functionBeforeShowing = classToToggle;
             classToToggle = 'is-hidden';
         }
-        
+
         if (this.hasClass(classToToggle) === true) {
             this.transition({opacity: 0, scale: 0.8}, 0, function() {
                 if (typeof functionBeforeShowing !== 'undefined') functionBeforeShowing();
@@ -3037,7 +3053,7 @@ jQuery.fn.extend({
         }
     },
     hideWithScaleEffect: function(duration, classToToggle, functionAfterFadeOut) {
-        
+
         if (typeof classToToggle === 'undefined') {
             classToToggle = 'is-hidden';
         } else if (typeof classToToggle === 'function') {
@@ -3049,7 +3065,7 @@ jQuery.fn.extend({
             this.transition({opacity: 0, scale: 0.8}, duration, function() {
                 $(this).addClass(classToToggle);
                 if (typeof functionAfterFadeOut !== 'undefined') functionAfterFadeOut();
-            }); 
+            });
         }
     },
     showWithScaleEffect: function(duration, classToToggle, functionBeforeShowing) {
@@ -3063,7 +3079,7 @@ jQuery.fn.extend({
         if (typeof functionBeforeShowing === 'undefined') {
             functionBeforeShowing = function() {};
         }
-        
+
         if (this.hasClass(classToToggle) === true) {
             this.transition({opacity: 0, scale: 0.8}, 0, function() {
                 functionBeforeShowing();
@@ -3071,7 +3087,7 @@ jQuery.fn.extend({
                 $(this).transition({opacity: 1, scale: 1}, duration);
             });
         }
-    },    
+    },
     loadAndFadeIn: function(whatToLoad, duration, callbackFunctionBeforeFadeIn) {
         var containerToLoadAndFadeIn = this;
         containerToLoadAndFadeIn.transition({opacity: 0}, 0, function() {
@@ -3079,7 +3095,7 @@ jQuery.fn.extend({
                 if (typeof callbackFunctionBeforeFadeIn !== 'undefined') callbackFunctionBeforeFadeIn();
                 containerToLoadAndFadeIn.transition({opacity: 1}, duration);
             });
-        });   
+        });
     },
     // showWithVerticalSlideEffect: function(duration, classToToggle, functionBeforeShowing) {
     //     if (typeof classToToggle === 'undefined') {
@@ -3095,7 +3111,7 @@ jQuery.fn.extend({
 
     //     var $thisTransitionWrapper = $(this).closest('.slide-transition-wrapper');
     //     var $thisElement = $(this);
-        
+
     //     if ($thisElement.hasClass(classToToggle) === true) {
     //         $thisTransitionWrapper.transition({opacity: 0, maxHeight: 0, overflow: 'hidden'}, 0, function() {
     //             if (typeof functionBeforeShowing !== 'undefined') functionBeforeShowing();
@@ -3106,7 +3122,7 @@ jQuery.fn.extend({
     //             });
     //         });
     //     }
-    // }, 
+    // },
     // hideWithVerticalSlideEffect: function(duration, classToToggle, functionAfterFadeOut) {
 
     //     if (typeof classToToggle === 'undefined') {
@@ -3132,7 +3148,7 @@ jQuery.fn.extend({
     //                 $thisElement.addClass(classToToggle);
     //                 if (typeof functionAfterFadeOut !== 'undefined') functionAfterFadeOut();
     //                 $thisElement.attr({style: ''});
-    //             }); 
+    //             });
     //         });
     //     }
     // },
@@ -3188,12 +3204,6 @@ jQuery.fn.extend({
 
     }
 });
-
-
-
-
-
-
 
 var tooltipsterTrigger = 'custom';
 
