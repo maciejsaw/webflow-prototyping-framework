@@ -11,8 +11,8 @@ function webflowPrototypingFrameworkShowDebugOverlay() {
 	overlay.appendTo('body');
 }
 
-$(document).on('keypress', function(e) {
-	console.log('keypress');
+$(document).on('keydown', function(e) {
+	console.log('keydown');
 	if ( e.shiftKey && ( e.which === 192 ) ) {
 	  webflowPrototypingFrameworkShowDebugOverlay();
 	}
