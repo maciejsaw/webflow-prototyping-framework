@@ -56,7 +56,7 @@
 function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   $('['+attributeName+']').each(function() {
     var attrVal = $(this).attr(attributeName);
-    $(this).isShownWhen(attrVal === value);
+    $(this).isShownWhen(attrVal === valueToMatch);
   });
 }
 
