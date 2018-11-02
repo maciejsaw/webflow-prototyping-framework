@@ -14,6 +14,7 @@ var generalFrameworkScripts = [
 	"./src/general-framework/plugins-and-libraries/jquery-deparam.js",
 	"./src/general-framework/plugins-and-libraries/jquery.scrollTo.min.js",
 	"./src/general-framework/plugins-and-libraries/jquery.jsonp-2.4.0.js",
+	"./src/general-framework/js-utilities/utility-functions.js",
 	"./src/general-framework/js-utilities/fallback-localstorage-clear.js",
 	"./src/general-framework/js-utilities/queryStringRouter.js",
 	"./src/general-framework/js-utilities/reactiveLocalStorage.js",
