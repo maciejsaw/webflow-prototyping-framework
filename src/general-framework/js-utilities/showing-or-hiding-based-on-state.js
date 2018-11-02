@@ -108,7 +108,7 @@ $(document).on('preloadingComplete', function() {
 }( jQuery ));
 
 (function( $ ) {
-  $.fn.ReactiveLocalStorage__onlyShowWhenParamEquals = function(paramName, valueToEqual) {
+  $.fn.ReactiveLocalStorage.onlyShowWhenParamEquals = function(paramName, valueToEqual) {
 
   	var thisInstance = this;
 
