@@ -3877,27 +3877,6 @@ $(document).on('preloadingComplete', function() {
   };
 }( jQuery ));
 
-(function( $ ) {
-  $.fn.ReactiveLocalStorage.onlyShowWhenParamEquals = function(paramName, valueToEqual) {
-
-  	var thisInstance = this;
-
-  	ReactiveLocalStorage.onParamChange(paramName, function(value) {
-  		if (value === valueToEqual) {
-  			thisInstance.each(function() {
-  			  $(this).isShown();
-  			});
-  		} else {
-  			thisInstance.each(function() {
-  			  $(this).isHidden();
-  			});
-  		}
-  	});
-
-    return this;
-  };
-}( jQuery ));
-
 
 
 $(document).on('preloadingComplete', function() {
