@@ -101,6 +101,11 @@ $(document).on('preloadingComplete', function() {
 
 //idea  - fallback hiding if is-hidden class is not set TODO
 
+(function( $ ) {
+  $.fn.ReactiveLocalStorage = function() {
+    return this;
+  };
+}( jQuery ));
 
 (function( $ ) {
   $.fn.ReactiveLocalStorage__onlyShowWhenParamEquals = function(paramName, valueToEqual) {
