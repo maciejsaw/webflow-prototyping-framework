@@ -4,13 +4,13 @@ var ReactiveLocalStorage = (function() {
 
 	function isLocalStorageNameSupported() {
 	    var testKey = 'test', storage = window.sessionStorage;
-	    try 
+	    try
 	    {
 	        storage.setItem(testKey, '1');
 	        storage.removeItem(testKey);
 	        return true;
-	    } 
-	    catch (error) 
+	    }
+	    catch (error)
 	    {
 	    	console.error('Local Storage is not working in Safari incognito mode');
 	        return false;
@@ -22,16 +22,16 @@ var ReactiveLocalStorage = (function() {
 	var saveParamObjectToLocalStorageAsString;
 	if ( isLocalStorageNameSupported() ) {
 		saveParamObjectToLocalStorageAsString = function(paramsObject) {
-			paramsString = $.param(paramsObject);
+			paramsString = JSON.stringify(paramsObject);
 			localStorage.setItem('paramsString', paramsString);
 		};
 		checkIfParamsAreAlreadyStoredInLocalStorage();
 	} else {
 		saveParamObjectToLocalStorageAsString = function(paramsObject) {
-			paramsString = $.param(paramsObject);
+			paramsString = JSON.stringify(paramsObject);
 		};
 		var paramsObject = {};
-		paramsString = "";
+		paramsString = JSON.stringify({});
 	}
 
 	function checkIfParamsAreAlreadyStoredInLocalStorage() {
@@ -39,7 +39,16 @@ var ReactiveLocalStorage = (function() {
 			var paramsObject = {};
 			saveParamObjectToLocalStorageAsString(paramsObject);
 		} else {
-			paramsString = localStorage.getItem('paramsString');
+			var stringFromLocalStorage = localStorage.getItem('paramsString');
+			try {
+				JSON.parse(stringFromLocalStorage);
+				paramsString = stringFromLocalStorage;
+			} catch(err) {
+				console.error('couldn not parse local storage string');
+				console.error(err);
+				paramsString = JSON.stringify({});
+			}
+
 		}
 	}
 
@@ -53,32 +62,32 @@ var ReactiveLocalStorage = (function() {
 
 	function getParam(key) {
 		//this return only values, not direct access to paramsObject
-		//that's why we deparam here
-		return deparam(paramsString)[key]; 
+		//that's why we JSON.parse here
+		return JSON.parse(paramsString)[key];
 	}
 
 	function getAllParams() {
-		return deparam(paramsString);
+		return JSON.parse(paramsString);
 	}
 
 	function setParam(key, value, options) {
 		options = options || {};
 
-		var paramsObject = deparam(paramsString);
+		var paramsObject = JSON.parse(paramsString);
 
 		if (paramsObject[key] !== value) {
 			paramsObject[key] = value;
 			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged'); 
+			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
 		}
 
 	}
 
 	function setDefaultParam(key, value) {
-		var paramsObject = deparam(paramsString);
+		var paramsObject = JSON.parse(paramsString);
 
 		if (typeof paramsObject[key] == 'undefined') {
-			setParam(key, value); 
+			setParam(key, value);
 		}
 	}
 
@@ -156,19 +165,19 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function removeParam(key, options) {
-		var paramsObject = deparam(paramsString);
+		var paramsObject = JSON.parse(paramsString);
 
 		options = options || {};
 
 		if (typeof paramsObject[key] !== 'undefined') {
 			delete paramsObject[key];
 			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged'); 
+			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
 		}
 	}
 
 	function setFreshParams(newParamsObj) {
-		var paramsObject = deparam(paramsString);
+		var paramsObject = JSON.parse(paramsString);
 		saveParamObjectToLocalStorageAsString(paramsObject);
 		retriggerOnParamChangeForAll();
 	}
@@ -176,7 +185,7 @@ var ReactiveLocalStorage = (function() {
 	var actionsOnParamChange = {};
 	function onParamChange(key, actionFunction, options) {
 		$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
-			var paramsObject = deparam(paramsString);
+			var paramsObject = JSON.parse(paramsString);
 			var value = paramsObject[key];
 			actionFunction(value);
 		});
@@ -190,7 +199,7 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function retriggerOnParamChange(key) {
-		var paramsObject = deparam(paramsString);
+		var paramsObject = JSON.parse(paramsString);
 		var param = paramsObject[key];
 		var arrayOfFunctionsAssociatedWithThisParam = actionsOnParamChange[key];
 		$.each(arrayOfFunctionsAssociatedWithThisParam, function(index, value) {
@@ -202,12 +211,6 @@ var ReactiveLocalStorage = (function() {
 		$.each(actionsOnParamChange, function(key, value) {
 			retriggerOnParamChange(key);
 		});
-	}
-
-	function refreshFromLocalStorage() {
-		//use it for syncing content in different open tabs, for example fake email etc.
-		checkIfParamsAreAlreadyStoredInLocalStorage();
-		retriggerOnParamChangeForAll();
 	}
 
 	return {
@@ -227,7 +230,6 @@ var ReactiveLocalStorage = (function() {
 		onParamChange: onParamChange,
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
-		refreshFromLocalStorage: refreshFromLocalStorage,
 		removeParam: removeParam,
 		appendToBeginningOfTheArray: appendToBeginningOfTheArray,
 		appendToArray: appendToArray,

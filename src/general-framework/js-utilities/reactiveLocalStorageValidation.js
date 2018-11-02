@@ -73,14 +73,11 @@ function handleErrorForElement(elm, validationResult) {
 //based on DOM attributes
 ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 	elm.find('[validated-param]').filter(':visible').each(function() {
-		console.log($(this).closest('.is-hidden').length);
-		if ( $(this).closest('.is-hidden').length === 0 ) { //only validate visible fields
-			var relatedField = $(this);
-			var paramToValidate = $(this).attr('validated-param');
-			ReactiveLocalStorage.validateParam(paramToValidate, function(validationResult) {
-				handleErrorForElement(relatedField, validationResult);
-			});
-		}
+		var relatedField = $(this);
+		var paramToValidate = $(this).attr('validated-param');
+		ReactiveLocalStorage.validateParam(paramToValidate, function(validationResult) {
+			handleErrorForElement(relatedField, validationResult);
+		});
 	});
 	var numberOfErrors = elm.find('[has-error]').length;
 
@@ -115,24 +112,16 @@ $(document).on('preloadingComplete', function() {
 	$(document).on('focus', '[validated-param][validate-on-blur]:not([is-touched])', function() {
 
 		var relatedInput = $(this);
-		console.log('focus' + relatedInput.val());
 
 		var relatedParam = $(this).attr('validated-param');
 
-    	relatedInput.attr('is-touched', 'true');
+  	relatedInput.attr('is-touched', 'true');
 
-    	ReactiveLocalStorage.onParamChange(relatedParam, function(value) {
-	    	ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
-	    		handleErrorForElement(relatedInput, validationResult);
-	    	});
-	    });
-
-    	//also validate on blur even if param did not change
-	    relatedInput.on('blur', function() {
-	    	if (relatedInput.val() === ReactiveLocalStorage.getParam(relatedParam)) {
-	    		ReactiveLocalStorage.retriggerOnParamChange(relatedParam);
-	    	}
-	    });
+    relatedInput.on('blur', function() {
+    	ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
+    		handleErrorForElement(relatedInput, validationResult);
+    	});
+    });
 
 	});
 });
@@ -164,30 +153,36 @@ $(document).on('preloadingComplete', function() {
 $(document).on('preloadingComplete', function() {
 	$(document).on('click', '[validated-param][validate-on-change]:not([is-touched])', function() {
 		var relatedParam = $(this).attr('validated-param');
-    	var relatedInput = $(this);
+  	var relatedInput = $(this);
 
-    	relatedInput.attr('is-touched', 'true');
+  	relatedInput.attr('is-touched', 'true');
 
-    	ReactiveLocalStorage.onParamChange(relatedParam, function(value) {
-	    	ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
-	    		handleErrorForElement(relatedInput, validationResult);
-	    	});
-	    });
+  	ReactiveLocalStorage.onParamChange(relatedParam, function(value) {
+    	ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
+    		handleErrorForElement(relatedInput, validationResult);
+    	});
+    });
 
 	});
 });
 
 
 $(document).on('preloadingComplete', function() {
-  $(document).on('click', '[validated-param][has-error]', function() {
+  $(document).on('click', 'input[validated-param][has-error]', function() {
     var relatedParam = $(this).attr('validated-param');
     var relatedInput = $(this);
-    $(document).on('input', relatedInput, function() {
-    	ReactiveLocalStorage.setParam(relatedParam, relatedInput.val());
-    	ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
-    	  handleErrorForElement(relatedInput, validationResult);
+
+    if (!relatedInput.attr('was-clicked-when-had-error')) {
+    	relatedInput.on('input', function() {
+    		ReactiveLocalStorage.setParam(relatedParam, relatedInput.val());
+    		ReactiveLocalStorage.validateParam(relatedParam, function(validationResult) {
+    		  handleErrorForElement(relatedInput, validationResult);
+    		});
     	});
-    });
+
+    	relatedInput.attr('was-clicked-when-had-error', 'true');
+    }
+
   });
 });
 
