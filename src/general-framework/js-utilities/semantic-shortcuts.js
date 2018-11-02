@@ -1,5 +1,7 @@
-//helpful shortcuts for showing and hiding with addClass and removeClass
+//helpful shortcuts for shorter code
 
+
+/* shorter version of addClass and removeClass */
 (function( $ ) {
   $.fn.isHidden = function(customClass) {
 
@@ -26,6 +28,7 @@
   };
 }( jQuery ));
 
+/* Synonyms for above functions */
 (function( $ ) {
   $.fn.isNotShown = $.fn.isHidden;
 }( jQuery ));
@@ -34,6 +37,8 @@
   $.fn.isNotHidden = $.fn.isShown;
 }( jQuery ));
 
+
+/* One line show or hide based on expression */
 (function( $ ) {
   $.fn.isShownWhen = function(expression) {
 
@@ -53,6 +58,7 @@
   };
 }( jQuery ));
 
+/* One line to show or hide element selected by attribute if its value equal to specific value */
 function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   $('['+attributeName+']').each(function() {
     var attrVal = $(this).attr(attributeName);
@@ -60,6 +66,7 @@ function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   });
 }
 
+/* Quick one line showing or hiding element depending on reactive local storage param value */
 (function( $ ) {
   $.fn.onlyShowWhenReactiveLocalStorageParamEquals = function(paramName, valueToEqual) {
 

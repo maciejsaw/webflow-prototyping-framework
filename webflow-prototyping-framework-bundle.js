@@ -547,8 +547,10 @@ function isNotEmpty(val) {
   return !isEmpty(val);
 }
 
-//helpful shortcuts for showing and hiding with addClass and removeClass
+//helpful shortcuts for shorter code
 
+
+/* shorter version of addClass and removeClass */
 (function( $ ) {
   $.fn.isHidden = function(customClass) {
 
@@ -575,6 +577,7 @@ function isNotEmpty(val) {
   };
 }( jQuery ));
 
+/* Synonyms for above functions */
 (function( $ ) {
   $.fn.isNotShown = $.fn.isHidden;
 }( jQuery ));
@@ -583,6 +586,8 @@ function isNotEmpty(val) {
   $.fn.isNotHidden = $.fn.isShown;
 }( jQuery ));
 
+
+/* One line show or hide based on expression */
 (function( $ ) {
   $.fn.isShownWhen = function(expression) {
 
@@ -602,6 +607,7 @@ function isNotEmpty(val) {
   };
 }( jQuery ));
 
+/* One line to show or hide element selected by attribute if its value equal to specific value */
 function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   $('['+attributeName+']').each(function() {
     var attrVal = $(this).attr(attributeName);
@@ -609,6 +615,7 @@ function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   });
 }
 
+/* Quick one line showing or hiding element depending on reactive local storage param value */
 (function( $ ) {
   $.fn.onlyShowWhenReactiveLocalStorageParamEquals = function(paramName, valueToEqual) {
 
