@@ -40,3 +40,5 @@ $(document).on('keydown', function(e) {
 //IDEA TODO - show attributes on hover
 
 //IDEA TODO - show elements binded to this param on hover
+
+//IDEA TODO - in reactive local storage add onAnyParamChange
