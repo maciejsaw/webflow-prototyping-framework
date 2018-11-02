@@ -3315,27 +3315,23 @@ $(document).on('preloadingComplete', function() {
     initTooltipster();
 });
 
-//Elements with action-open-modal should show modals container and 
+//Elements with action-open-modal should show modals container and
 // and show the respective modal modal
 $(document).on('click', '[action-open-modal]', function(event) {
     var modalToLoad = $(this).attr("action-open-modal");
     QueryStringRouter.setParam('modalContent', modalToLoad);
-     
-    hideWebflowDropdowns();      
+
+    hideWebflowDropdowns();
 });
 
 $(document).on('click', '[action-close-modal="true"]', function(event) {
-    if (QueryStringRouter.getNumberOfPreviousNavigationStepsInModal() >= 1) {
-        QueryStringRouter.goBackBeforeModal();
-    } else {
-        QueryStringRouter.removeParam('modalContent', {doNotCreateHistoryState: true});
-    }
+    QueryStringRouter.removeParam('modalContent');
 });
 
 function bindEscButtonToCloseModal() {
     $(document).one('keydown.modal', function(event) {
         if (event.which === 27) {
-            QueryStringRouter.removeParam('modalContent', {doNotCreateHistoryState: true});
+            QueryStringRouter.removeParam('modalContent');
         }
     });
 }
@@ -3343,7 +3339,7 @@ function bindEscButtonToCloseModal() {
 function closeModal() {
     //deselectAll();
     $(".modal-wrapper").fadeOutAndHide(300);
-    $('[modal-id]').addClass('hidden');          
+    $('[modal-id]').addClass('hidden');
 }
 
 QueryStringRouter.onParamChange('modalContent', function(value) {
