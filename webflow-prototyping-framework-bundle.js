@@ -3855,18 +3855,6 @@ $(document).on('preloadingComplete', function() {
 
 //idea  - fallback hiding if is-hidden class is not set TODO
 
-function onlyShowWhen(expression) {
-	if (expression) {
-		thisInstance.each(function() {
-		  $(this).isShown();
-		});
-	} else {
-		thisInstance.each(function() {
-		  $(this).isHidden();
-		});
-	}
-}
-
 
 (function( $ ) {
   $.fn.isShownWhen = function(expression) {
