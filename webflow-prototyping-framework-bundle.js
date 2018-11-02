@@ -2925,8 +2925,20 @@ $(document).on('click', '.w-dropdown-toggle', function(event) {
     var otherDropdownLists = $('.w-dropdown-list').not(thisDropdownList);
     var otherDropdownButtons = $('.w-dropdown-toggle').not(thisDropdownButton);
 
-    thisDropdownButton.toggleClass('w--open');
-    thisDropdownList.toggleClass("w--open");
+    //TODO clean up webflow.js from unneccessary functions like dropdowns
+    //because it is conflicting with our scripts
+    if (thisDropdownButton.hasClass('w--open')) {
+        setTimeout(function() {
+            thisDropdownButton.removeClass('w--open');
+            thisDropdownList.removeClass("w--open");
+        }, 0);
+    } else {
+        setTimeout(function() {
+            thisDropdownButton.addClass('w--open');
+            thisDropdownList.addClass("w--open");
+        }, 0);
+    }
+
     otherDropdownLists.removeClass('w--open');
     otherDropdownButtons.removeClass('w--open');
 });
@@ -2935,7 +2947,7 @@ $(document).on('click.dropdown', document, function(event) {
     //if clicked outside the dropdown button and content, close it
     if ($(event.target).closest(".w-dropdown-toggle").length === 0 && $(event.target).closest(".w-dropdown-list").length === 0) {
         console.log("hide all dropdowns");
-        hideWebflowDropdowns() 
+        hideWebflowDropdowns()
     } else {
         //console.log("don't hide dropdowns");
     }
@@ -2972,7 +2984,7 @@ function inititTabsNextPrevActions() {
         $(this).closest('.w-tab-content').prev('.w-tab-menu').find('.w-tab-link.w--current').prev('.w-tab-link').click();
     });
 }
-  
+
 $(document).ready(function() {
     inititTabsNextPrevActions();
 });
@@ -2981,11 +2993,8 @@ $(document).ready(function() {
 $(document).on('click', '[click-link]', function(e) {
     e.preventDefault();
     console.log('manual link redirect');
-    window.location.href = $(this).attr('click-link'); 
+    window.location.href = $(this).attr('click-link');
 });
-
-
-
 
 jQuery.fn.extend({
     fadeOutAndHide: function(duration, classToAdd, functionAfterFadeOut) {
