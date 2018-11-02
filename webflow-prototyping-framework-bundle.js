@@ -472,110 +472,128 @@ var QueryStringRouter = (function() {
 		return deparam(window.location.search.substring(1))[key];
 	}
 
+	//we store the state in a simple variable
+	//only on page open we will handle the query string URL, later we will always
+	//use variable, because URL might be slow to update and we used to have race conditions
+	var queryString = window.location.search.substring(1);
+
 	//we diff against the previous params, so that we can remove the params that are not present
 	//in the query string from the reactive params
-	var previousQueryStringParams = {};
+	var previousQueryString = "";
+
 	function processQueryStringParams() {
-		var queryStringParams = getQueryStringParams();
+		var previous = deparam(previousQueryString);
+		var updated = deparam(queryString);
 
 		//check what previous params are not present in the new query string
-		$.each(previousQueryStringParams, function(key, value) {
-			if (typeof queryStringParams[key] == 'undefined') {
-				$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
-				console.log('param '+key+' was removed');
-			}
-		});
-
-		$.each(queryStringParams, function(key, value) {
-			if (queryStringParams[key] !== previousQueryStringParams[key]) { //only trigger event if param changed
+		$.each(previous, function(key, value) {
+			if (typeof updated[key] == 'undefined') {
 				$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
 			}
 		});
 
-		previousQueryStringParams = queryStringParams;
+		$.each(updated, function(key, value) {
+			if (JSON.stringify(updated[key]) !== JSON.stringify(previous[key]) )  { //only trigger event if param changed
+				$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
+			}
+		});
+
+		previousQueryString = $.param(updated);
 	}
 
 	//when document loads
 	processQueryStringParams();
 
-	var popstateDebouncingTimer; //needed to fix browsers not handling well multiple popstates at once
 	$(window).on('popstate', function() {
-		clearTimeout(popstateDebouncingTimer);
-		popstateDebouncingTimer = setTimeout(function() {
-			processQueryStringParams();
-		}, 10);
+		queryString = window.location.search.substring(1);
+		processQueryStringParams();
 	});
 
+	var processingDebouncingTimer; //needed to limit number of processing when multiple params are changed
+	$(window).on('queryStringRouter__processParams', function() {
+		clearTimeout(processingDebouncingTimer);
+		setTimeout(function() {
+			processQueryStringParams();
+		}, 50);
+	});
+
+	var doNotCreateHistoryState = true;
+  var udpateURLTimer;
+	function updateURL(options) {
+		options = options || {};
+
+		console.log('received updateURL event');
+		clearTimeout(udpateURLTimer);
+
+		//if at least one ot trigger does not have the options doNotCreateHistoryState,
+		//we should create a new state in the debounced function
+		if (!options.doNotCreateHistoryState) {
+			doNotCreateHistoryState = false;
+		}
+
+		udpateURLTimer = setTimeout(function() {
+			var updated = deparam(queryString);
+			var newQueryString = $.param(updated);
+
+			if (doNotCreateHistoryState === true) {
+				setTimeout(function() {
+					window.history.replaceState(updated,'', '?'+newQueryString);
+				}, 100);
+			} else {
+				setTimeout(function() {
+					window.history.pushState(updated,'', '?'+newQueryString);
+					doNotCreateHistoryState = true;
+					console.log('pushedNewHistoryState');
+				}, 100);
+			}
+
+		}, 100);
+
+	}
+
 	function setParam(key, value, options) {
-		var queryStringParams = getQueryStringParams();
+		var queryStringParams = deparam(queryString);
 
 		if (queryStringParams[key] !== value) {
 			queryStringParams[key] = value;
-			var newQueryString = $.param(queryStringParams);
+			queryString = $.param(queryStringParams);
 
 			options = options || {};
-			if (options.doNotCreateHistoryState === true) {
-				window.history.replaceState('','', '?'+newQueryString);
-			} else if (options.isInModal === true) {
-				var calculateNumberOfPreviousNaviationStepsInModal = function() {
-					var number = getNumberOfPreviousNavigationStepsInModal();
-					number = number + 1;
-					console.log(number);
-					return number;
-				};
 
-				window.history.pushState({numberOfPreviousNavigationStepsInModal: calculateNumberOfPreviousNaviationStepsInModal()},'', '?'+newQueryString);
-			} else {
-				window.history.pushState('','', '?'+newQueryString);
-			}
+			updateURL(options);
 
-			$(window).trigger('popstate');
+			$(window).trigger('queryStringRouter__processParams');
 		}
 
-	}
-
-	function goBackBeforeModal() {
-		var numberOfStepsToGoBack = getNumberOfPreviousNavigationStepsInModal();
-		if (numberOfStepsToGoBack >= 1) {
-			window.history.go(-numberOfStepsToGoBack - 1);
-		}
 	}
 
 	function removeParam(key, options) {
-		var queryStringParams = getQueryStringParams();
+		var queryStringParams = deparam(queryString);
+
 		if (typeof queryStringParams[key] !== 'undefined') {
 			delete queryStringParams[key];
+			queryString = $.param(queryStringParams);
 
-			var newQueryString = $.param(queryStringParams);
+			updateURL(options);
 
-			options = options || {};
-			if (options.doNotCreateHistoryState === true) {
-				window.history.replaceState('','', '?'+newQueryString);
-			} else {
-				window.history.pushState('','', '?'+newQueryString);
-			}
-
-			$(window).trigger('popstate');
+			$(window).trigger('queryStringRouter__processParams');
 		}
 	}
 
 	function setFreshParams(newParamsObj, options) {
-		var newQueryString = $.param(newParamsObj);
+		queryString = $.param(newParamsObj);
 
-		options = options || {};
-		if (options.doNotCreateHistoryState === true) {
-			window.history.replaceState('','', '?'+newQueryString);
-		} else {
-			window.history.pushState('','', '?'+newQueryString);
-		}
-		$(window).trigger('popstate');
+		updateURL(options);
+
+		$(window).trigger('queryStringRouter__processParams');
 	}
 
 	var actionsOnParamChange = {};
 	function onParamChange(key, actionFunction) {
 		$(document).on('QueryStringRouter__'+key+'__paramChanged', function(event) {
-			var paramsObject = getQueryStringParams();
+			var paramsObject = deparam(queryString);
 			var value = paramsObject[key];
+			console.log('query string param changed - '+key+' '+value);
 			actionFunction(value);
 		});
 
@@ -591,7 +609,8 @@ var QueryStringRouter = (function() {
 	}
 
 	function retriggerOnParamChange(key) {
-		var param = getQueryStringParam(key);
+		var queryStringParams = deparam(queryString);
+		var param = queryStringParams[key];
 		var arrayOfFunctionsAssociatedWithThisParam = actionsOnParamChange[key];
 		$.each(arrayOfFunctionsAssociatedWithThisParam, function(index, value) {
 			value(param);
@@ -612,16 +631,6 @@ var QueryStringRouter = (function() {
 		});
 	}
 
-	function getNumberOfPreviousNavigationStepsInModal() {
-		if (window.history && window.history.state) {
-			if (typeof window.history.state.numberOfPreviousNavigationStepsInModal === 'number') {
-				return window.history.state.numberOfPreviousNavigationStepsInModal;
-			} else {
-				return 0;
-			}
-		}
-	}
-
 	return {
 		setParam: setParam,
 		getParam: getQueryStringParam,
@@ -632,10 +641,10 @@ var QueryStringRouter = (function() {
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
 		removeParam: removeParam,
-		version: '21',
-		goBackBeforeModal: goBackBeforeModal,
-		getNumberOfPreviousNavigationStepsInModal: getNumberOfPreviousNavigationStepsInModal,
+		version: '24',
 		releaseNotes: {
+			v24: 'the state variable stored as param string instead of object',
+      v23: 'not getting the query string each time its updated, because it was buggy in some browsers and large params',
 			v22: 'added optional counting of states inside modal and ability to go back before modal',
 			v21: 'only fire events when param changed',
 			v2: 'removed Meteor and uses simple jQuery events',
