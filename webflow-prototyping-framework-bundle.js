@@ -3894,50 +3894,6 @@ $(document).on('preloadingComplete', function() {
 //idea  - fallback hiding if is-hidden class is not set TODO
 
 
-(function( $ ) {
-  $.fn.isShownWhen = function(expression) {
-
-  	var thisInstance = this;
-
-  	console.log(expression);
-
-	if (!!expression) {
-		thisInstance.each(function() {
-		  $(this).isShown();
-		});
-	} else {
-		thisInstance.each(function() {
-		  $(this).isHidden();
-		});
-	}
-
-    return this;
-  };
-}( jQuery ));
-
-(function( $ ) {
-  $.fn.onlyShowWhenReactiveLocalStorageParamEquals = function(paramName, valueToEqual) {
-
-  	var thisInstance = this;
-
-  	ReactiveLocalStorage.onParamChange(paramName, function(value) {
-  		if (value === valueToEqual) {
-  			thisInstance.each(function() {
-  			  $(this).isShown();
-  			});
-  		} else {
-  			thisInstance.each(function() {
-  			  $(this).isHidden();
-  			});
-  		}
-  	});
-
-    return this;
-  };
-}( jQuery ));
-
-
-
 $(document).on('preloadingComplete', function() {
 
 	var bindedTabParams = {};
