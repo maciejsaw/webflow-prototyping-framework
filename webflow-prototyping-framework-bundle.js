@@ -583,6 +583,27 @@ function isNotEmpty(val) {
   $.fn.isNotHidden = $.fn.isShown;
 }( jQuery ));
 
+(function( $ ) {
+  $.fn.isShownWhen = function(expression) {
+
+    var thisInstance = this;
+
+    console.log(expression);
+
+  if (!!expression) {
+    thisInstance.each(function() {
+      $(this).isShown();
+    });
+  } else {
+    thisInstance.each(function() {
+      $(this).isHidden();
+    });
+  }
+
+    return this;
+  };
+}( jQuery ));
+
 
 
 //QueryStringRouter - designed by Maciej Sawicki documented on https://github.com/maciejsaw/query-string-router
