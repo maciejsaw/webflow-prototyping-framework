@@ -4252,7 +4252,14 @@ On.touchstartOrClick = function(selector, eventHandlerFunction) {
 };
 
 function webflowPrototypingFrameworkShowDebugOverlay() {
+
+
 	var allParams = ReactiveLocalStorage.getAllParams();
+
+	const allParamsOrdered = {};
+	Object.keys(allParams).sort().forEach(function(key) {
+	  allParamsOrdered[key] = allParams[key];
+	});
 
 	var overlay = $('<div js-debug-overlay style="position:fixed; left: 30px; bottom: 0; padding: 10px; max-height: 300px; max-width: 600px; background: #fff; overflow: auto; z-index: 1000; box-shadow: 10px 10px 108px 0px rgba(0,0,0,0.75);"></div>');
 
@@ -4280,17 +4287,6 @@ $(document).on('keydown', function(e) {
 	}
 });
 
-//https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
-function dynamicSort(property) {
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
+
 
 //# sourceMappingURL=webflow-prototyping-framework-bundle.js.map
