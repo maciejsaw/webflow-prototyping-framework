@@ -1,4 +1,3 @@
-
 //helpful shortcuts for showing and hiding with addClass and removeClass
 
 (function( $ ) {
