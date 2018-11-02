@@ -83,16 +83,42 @@ $(document).on('preloadingComplete', function() {
 	});
 });
 
-function ReactiveLocalStorageShowByExpression() {
-	ReactiveLocalStorage.onParamChange(paramName, function(value) {
-		var bindedItems = $('[data-param="'+paramName+'"]');
-		bindedItems.each(function() {
-			var $this = $(this);
-			var param = $this.attr('data-param');
-			var expression = $this.attr('visible-when');
-			if (!!expression) {
-				$this.removeClass('is-hidden');
-			}
-		});
-	});
-}
+//unfinished idea
+// function ReactiveLocalStorageShowWhen(paramName) {
+// 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
+// 		var bindedItems = $('[when-'+paramName+'-equals-'+value+']');
+// 		$.each(bindedItems, function() {
+// 			var attrVal = $this.attr('[when-'+paramName+'-equals-'+value+']');
+
+// 			if (attrVal === 'show') {
+// 				$(this).removeClass('is-hidden');
+// 			} else if (attrVal === 'hide') {
+// 				$(this).addClass('is-hidden');
+// 			}
+// 		});
+// 	});
+// }
+
+//idea  - fallback hiding if is-hidden class is not set TODO
+
+(function( $ ) {
+  $.fn.ReactiveLocalStorage.onlyShowWhenParamEquals = function(paramName, valueToEqual) {
+
+  	var thisInstance = this;
+
+  	ReactiveLocalStorage.onParamChange(paramName, function(value) {
+  		if (value === valueToEqual) {
+  			thisInstance.each(function() {
+  			  $(this).isShown();
+  			});
+  		} else {
+  			thisInstance.each(function() {
+  			  $(this).isHidden();
+  			});
+  		}
+  	});
+
+    return this;
+  };
+}( jQuery ));
+
