@@ -64,7 +64,11 @@ gulp.task('concatMainAppScripts', function() {
         // .pipe(gulp.dest(jsDestination));
 });
 
-gulp.task('buildScriptsThenAddAndCommit', ['concatGeneralFrameworkScripts', 'concatMainAppScripts'], function() {
+gulp.task('buildAllScripts', ['concatGeneralFrameworkScripts', 'concatMainAppScripts'], function() {
+    return gulp.src('.');
+});
+
+gulp.task('buildScriptsThenAddAndCommit', ['buildAllScripts'], function() {
     return gulp.src('.')
   		.pipe(git.add())
   		.pipe(git.commit('automatic commit from webflow-prototyping-framework'));
