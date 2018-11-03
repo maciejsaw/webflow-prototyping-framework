@@ -2,7 +2,7 @@ function webflowPrototypingFrameworkShowDebugOverlay() {
 
 	var allParams = ReactiveLocalStorage.getAllParams();
 
-	const allParamsOrdered = {};
+	var allParamsOrdered = {};
 	Object.keys(allParams).sort().forEach(function(key) {
 	  allParamsOrdered[key] = allParams[key];
 	});

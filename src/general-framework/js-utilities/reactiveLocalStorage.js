@@ -67,7 +67,12 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function getAllParams() {
-		return JSON.parse(paramsString);
+		var allParams = JSON.parse(paramsString);
+		var allParamsOrdered = {};
+		Object.keys(allParams).sort().forEach(function(key) {
+		  allParamsOrdered[key] = allParams[key];
+		});
+		return allParamsOrdered;
 	}
 
 	function setParam(key, value, options) {
