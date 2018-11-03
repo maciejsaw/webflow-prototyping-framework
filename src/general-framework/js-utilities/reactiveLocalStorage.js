@@ -184,11 +184,21 @@ var ReactiveLocalStorage = (function() {
 
 	var actionsOnParamChange = {};
 	function onParamChange(key, actionFunction, options) {
-		$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
+		var handleActionFunction = function() {
 			var paramsObject = JSON.parse(paramsString);
 			var value = paramsObject[key];
 			actionFunction(value);
-		});
+		};
+
+		if (option.fireOnlyOnce === true) {
+			$(document).one('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
+				handleActionFunction();
+			});
+		} else {
+			$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
+				handleActionFunction();
+			});
+		}
 
 		//store the action on param in a separate array, so that we can retrigger this route manually
 		//because this might be needed for ajax loaded content etc.
