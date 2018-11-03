@@ -84,7 +84,7 @@ function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
 
 /* Easier to write selecting by attribute */
 (function( $ ) {
-  $.elemWithAttr = function(attrName, attrValue) {
+  $.elementWithAttr = function(attrName, attrValue) {
     if ($.isEmptyObject(attrValue)) {
       return $('['+attrName+']');
     } else {
@@ -92,6 +92,27 @@ function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
     }
   };
 }( jQuery ));
+
+//easier to read syntax for attribute selectors
+function elementWithAttr(attrName, attrValue) {
+  if ($.isEmptyObject(attrValue)) {
+    return '['+attrName+']';
+  } else {
+    return '['+attrName+'="'+attrValue+'"]';
+  }
+}
+
+/* Easier to write document on */
+(function( $ ) {
+  $.On = function(event, selector, callbackFunction) {
+    var returned = $(document).on(event, selector, callbackFunction);
+    return returned;
+  };
+}( jQuery ));
+
+
+
+
 
 // function ReactiveLocalStorageIsSetToTrueWhen(paramName, expression) {
 //   if (!!expression) {
