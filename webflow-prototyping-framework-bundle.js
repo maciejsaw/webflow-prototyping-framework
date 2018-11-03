@@ -973,6 +973,7 @@ var ReactiveLocalStorage = (function() {
 			paramsObject[key] = value;
 			saveParamObjectToLocalStorageAsString(paramsObject);
 			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
+			$(document).trigger('reactiveLocalStorage__anyParamChanged');
 		}
 
 	}
@@ -1105,6 +1106,19 @@ var ReactiveLocalStorage = (function() {
 
 	}
 
+	function onAnyParamChange(actionFunction) {
+		$(document).on('reactiveLocalStorage__anyParamChanged', function(event) {
+			actionFunction();
+		});
+
+		//store the action on param in a separate array, so that we can retrigger this route manually
+		//because this might be needed for ajax loaded content etc.
+		if (typeof actionsOnParamChange.anyParam === 'undefined') {
+			actionsOnParamChange.anyParam = [];
+		}
+		actionsOnParamChange.anyParam.push(actionFunction);
+	}
+
 	function onlyOnceWhenParamChanges(key, actionFunction) {
 		onParamChange(key, actionFunction, {fireOnlyOnce: true});
 	}
@@ -1140,6 +1154,7 @@ var ReactiveLocalStorage = (function() {
 		getParam: getParam,
 		onParamChange: onParamChange,
 		onlyOnceWhenParamChanges: onlyOnceWhenParamChanges,
+		onAnyParamChange: onAnyParamChange,
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
 		removeParam: removeParam,
