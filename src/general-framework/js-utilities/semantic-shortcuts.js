@@ -110,10 +110,35 @@ function elementWithAttr(attrName, attrValue) {
   };
 }( jQuery ));
 
+/* Synonyms for state management libraries */
+(function( $ ) {
+  $.State = function(storageType) {
+    storageType = storageType || 'localStorage';
 
+    if (storageType === 'localStorage') {
+      return ReactiveLocalStorage;
+    } else if (storageType.toLoweCase() === 'url') {
+      return QueryStringRouter;
+    } else if (storageType.toLoweCase() === 'session') {
+      //TODO
+    } 
+  };
+}( jQuery ));
 
+/*
+$.State('localStorage').onParamChange('introShown', function(value) {
+  $.elementWithAttr('ref-continue-button').isShownWhen(value === 'true');
+});
 
+*/
+/*
+IDEA
 
+State.Storage.onChange('introShown', function(value) {
+  $.elementWithAttr('ref-continue-button').isShownWhen(value === 'true');
+});
+
+*/
 // function ReactiveLocalStorageIsSetToTrueWhen(paramName, expression) {
 //   if (!!expression) {
 //     ReactiveLocalStorage.setParam(paramName, 'true');
