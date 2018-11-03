@@ -184,13 +184,15 @@ var ReactiveLocalStorage = (function() {
 
 	var actionsOnParamChange = {};
 	function onParamChange(key, actionFunction, options) {
+		options = options || {};
+
 		var handleActionFunction = function() {
 			var paramsObject = JSON.parse(paramsString);
 			var value = paramsObject[key];
 			actionFunction(value);
 		};
 
-		if (option.fireOnlyOnce === true) {
+		if (options.fireOnlyOnce === true) {
 			$(document).one('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
 				handleActionFunction();
 			});
