@@ -1073,14 +1073,15 @@ var ReactiveLocalStorage = (function() {
 			$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
 				handleActionFunction();
 			});
+
+			//store the action on param in a separate array, so that we can retrigger this route manually
+			//because this might be needed for ajax loaded content etc.
+			if (typeof actionsOnParamChange[key] === 'undefined') {
+				actionsOnParamChange[key] = [];
+			}
+			actionsOnParamChange[key].push(actionFunction);
 		}
 
-		//store the action on param in a separate array, so that we can retrigger this route manually
-		//because this might be needed for ajax loaded content etc.
-		if (typeof actionsOnParamChange[key] === 'undefined') {
-			actionsOnParamChange[key] = [];
-		}
-		actionsOnParamChange[key].push(actionFunction);
 	}
 
 	function retriggerOnParamChange(key) {
