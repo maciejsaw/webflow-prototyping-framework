@@ -82,6 +82,17 @@ function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   };
 }( jQuery ));
 
+/* Easier to write selecting by attribute */
+(function( $ ) {
+  $.elemWithAttr = function(attrName, attrValue) {
+    if ($.isEmptyObject(attrValue)) {
+      return $('['+attrName+']');
+    } else {
+      return $('['+attrName+'="'+attrValue+'"]');
+    }
+  };
+}( jQuery ));
+
 // function ReactiveLocalStorageIsSetToTrueWhen(paramName, expression) {
 //   if (!!expression) {
 //     ReactiveLocalStorage.setParam(paramName, 'true');
