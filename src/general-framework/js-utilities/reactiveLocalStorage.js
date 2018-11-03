@@ -216,6 +216,10 @@ var ReactiveLocalStorage = (function() {
 
 	}
 
+	function onlyOnceWhenParamChanges(key, actionFunction) {
+		onParamChange(key, actionFunction, {fireOnlyOnce: true});
+	}
+
 	function retriggerOnParamChange(key) {
 		var paramsObject = JSON.parse(paramsString);
 		var param = paramsObject[key];
@@ -246,6 +250,7 @@ var ReactiveLocalStorage = (function() {
 		setDefaultParam: setDefaultParam,
 		getParam: getParam,
 		onParamChange: onParamChange,
+		onlyOnceWhenParamChanges: onlyOnceWhenParamChanges,
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
 		removeParam: removeParam,
