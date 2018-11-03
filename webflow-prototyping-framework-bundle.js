@@ -4380,7 +4380,6 @@ function webflowPrototypingFrameworkHideDebugOverlay() {
 }
 
 $(document).on('keydown', function(e) {
-	console.log('keydown');
 	if ( e.shiftKey && ( e.which === 192 ) ) {
 	 	if ($('[js-debug-overlay]').length === 0) {
 	 		webflowPrototypingFrameworkShowDebugOverlay();
