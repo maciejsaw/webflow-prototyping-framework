@@ -4018,6 +4018,12 @@ function ReactiveLocalStorageHideIfParamUndefined(paramName) {
 }
 
 $(document).on('preloadingComplete', function() {
+	$('[is-hidden-on-load]').isHidden();
+	$('[add-class-on-load]').each(function() {
+		var classToAdd = $(this).attr('add-class-on-load');
+		$(this).addClass(classToAdd);
+	});
+
 	$('[depends-on-param]').each(function() {
 		var paramToDependOn = $(this).attr('depends-on-param');
 		ReactiveLocalStorageDependVisibilityOnParam(paramToDependOn);
@@ -4036,6 +4042,9 @@ $(document).on('preloadingComplete', function() {
 		}
 	});
 });
+
+
+
 
 //unfinished idea
 // function ReactiveLocalStorageShowWhen(paramName) {
