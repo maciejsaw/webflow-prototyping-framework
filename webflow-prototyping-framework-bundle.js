@@ -607,11 +607,39 @@ function isNotEmpty(val) {
   };
 }( jQuery ));
 
+/* One line show or hide based on expression */
+(function( $ ) {
+  $.fn.addClassWhen = function(expression, classToAdd) {
+
+    var thisInstance = this;
+
+    if (!!expression) {
+      thisInstance.each(function() {
+        $(this).addClass(classToAdd);
+      });
+    } else {
+      thisInstance.each(function() {
+        $(this).removeClass(classToAdd);
+      });
+    }
+
+    return this;
+  };
+}( jQuery ));
+
 /* One line to show or hide element selected by attribute if its value equal to specific value */
 function showOnlyElementsWithAttributeXMatchingY(attributeName, valueToMatch) {
   $('['+attributeName+']').each(function() {
     var attrVal = $(this).attr(attributeName);
     $(this).isShownWhen(attrVal === valueToMatch);
+  });
+}
+
+/* One line to show or hide element selected by attribute if its value equal to specific value */
+function addClassToElementsWithAttributeXMatchingY(attributeName, valueToMatch, classToAdd) {
+  $('['+attributeName+']').each(function() {
+    var attrVal = $(this).attr(attributeName);
+    $(this).addClassWhen(attrVal === valueToMatch, classToAdd);
   });
 }
 
@@ -674,13 +702,14 @@ function elementWithAttr(attrName, attrValue) {
   };
 }( jQuery ));
 
+
 /*
 $.State('localStorage').onParamChange('introShown', function(value) {
   $.elementWithAttr('ref-continue-button').isShownWhen(value === 'true');
 });
-
 */
 /*
+
 IDEA
 
 State.Storage.onChange('introShown', function(value) {
