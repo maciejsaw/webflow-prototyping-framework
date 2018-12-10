@@ -712,7 +712,7 @@ $(document).on('click', '[action-set-param]', function() {
 $(document).on('click', '[action-set-querystring]', function() {
   var paramToSet = $(this).attr('action-set-querystring');
   var valueToSet = $(this).attr('value-to-set');
-  ReactiveLocalStorage.setParam(paramToSet, valueToSet);
+  QueryStringRouter.setParam(paramToSet, valueToSet);
 });
 
 /*
