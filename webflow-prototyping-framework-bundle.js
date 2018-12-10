@@ -4177,6 +4177,28 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 	}, 1500);
 }
 
+/* shorter version of addClass and removeClass */
+(function( $ ) {
+  $.fn.showSpinnerInside = function(actionAfter) {
+
+    this.each(function() {
+      var clickedButtonElm = $(this);
+
+      clickedButtonElm.closest('[js-selector="button-with-spinner"]').addClass('is-inactive-with-preloader')
+        .find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
+
+      setTimeout(function() {
+      	clickedButtonElm.closest('[js-selector="button-with-spinner"]').removeClass('is-inactive-with-preloader')
+      	  .find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
+
+      	actionAfter();
+      }, 1500);
+    });
+
+    return this;
+  };
+}( jQuery ));
+
 function showLoadingInButton(elm) {
 	elm = $(elm);
 	elm.addClass('is-grayed-out');
