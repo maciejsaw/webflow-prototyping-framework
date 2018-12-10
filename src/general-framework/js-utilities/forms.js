@@ -29,7 +29,7 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 
 /* shorter version of addClass and removeClass */
 (function( $ ) {
-  $.fn.showSpinnerInside = function(actionAfter) {
+  $.fn.showSpinnerInsideThisButton = function(actionAfter) {
 
     this.each(function() {
       var clickedButtonElm = $(this);
