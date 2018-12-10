@@ -25,6 +25,8 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	});
 }
 
+//IDEA todo add synonym for "shown" and not only show, common typo
+
 function ReactiveLocalStorageHideWhenParamEquals(paramName) {
 	ReactiveLocalStorage.onParamChange(paramName, function(value) {
 		$('[depends-on-param="'+paramName+'"]').not('[action-hide-when-param-equals="'+value+'"]').not('[action-show-when-param-equals]').not('[action-show-when-param-not-equals]').removeClass('is-hidden');
