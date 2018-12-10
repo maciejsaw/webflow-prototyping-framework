@@ -709,9 +709,21 @@ $(document).on('click', '[action-set-param]', function() {
   ReactiveLocalStorage.setParam(paramToSet, valueToSet);
 });
 
+$(document).on('click', '[set-param]', function() {
+  var paramToSet = $(this).attr('set-param');
+  var valueToSet = $(this).attr('set-value');
+  ReactiveLocalStorage.setParam(paramToSet, valueToSet);
+});
+
 $(document).on('click', '[action-set-querystring]', function() {
   var paramToSet = $(this).attr('action-set-querystring');
   var valueToSet = $(this).attr('value-to-set');
+  QueryStringRouter.setParam(paramToSet, valueToSet);
+});
+
+$(document).on('click', '[set-querystring]', function() {
+  var paramToSet = $(this).attr('set-querystring');
+  var valueToSet = $(this).attr('set-value');
   QueryStringRouter.setParam(paramToSet, valueToSet);
 });
 
