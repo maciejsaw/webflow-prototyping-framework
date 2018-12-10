@@ -3293,6 +3293,17 @@ $(document).on('click', '[click-link]', function(e) {
     window.location.href = $(this).attr('click-link');
 });
 
+//links with attributes, without link blocks
+$(document).on('click', '[action-go-to-url]', function(e) {
+    e.preventDefault();
+    console.log('manual link redirect');
+    window.location.href = $(this).attr('action-go-to-url');
+});
+
+//IDEA todo - add auto wrapping in link block with address
+
+
+
 jQuery.fn.extend({
     fadeOutAndHide: function(duration, classToAdd, functionAfterFadeOut) {
 
