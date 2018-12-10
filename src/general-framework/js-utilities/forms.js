@@ -27,18 +27,18 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 	}, 1500);
 }
 
-/* shorter version of addClass and removeClass */
+/* showing spinner briefly inside a button */
 (function( $ ) {
   $.fn.showSpinnerInsideThisButton = function(actionAfter) {
 
     this.each(function() {
       var clickedButtonElm = $(this);
 
-      clickedButtonElm.closest('[js-selector="button-with-spinner"]').addClass('is-inactive-with-preloader')
+      clickedButtonElm.addClass('is-inactive-with-preloader')
         .find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
 
       setTimeout(function() {
-      	clickedButtonElm.closest('[js-selector="button-with-spinner"]').removeClass('is-inactive-with-preloader')
+      	clickedButtonElm.removeClass('is-inactive-with-preloader')
       	  .find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
 
       	actionAfter();
