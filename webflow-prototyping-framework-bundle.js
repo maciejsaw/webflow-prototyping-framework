@@ -4019,6 +4019,14 @@ function ReactiveLocalStorageDependVisibilityOnParam(paramName) {
 	});
 }
 
+$(document).on('preloadingComplete', function() {
+	$('[depends-on-param][show-by-default]').each(function() {
+		var param = $(this).attr('depends-on-param');
+		var valueToSet = $(this).attr('action-show-when-param-equals');
+		ReactiveLocalStorage.setDefaultParam(param, valueToSet);
+	});
+});
+
 //IDEA todo add synonym for "shown" and not only show, common typo
 
 function ReactiveLocalStorageHideWhenParamEquals(paramName) {
