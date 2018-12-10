@@ -670,9 +670,21 @@ function elementWithAttr(attrName, attrValue) {
       return QueryStringRouter;
     } else if (storageType.toLoweCase() === 'session') {
       //TODO
-    } 
+    }
   };
 }( jQuery ));
+
+$(document).on('click', '[action-set-param]', function() {
+  var paramToSet = $(this).attr('action-set-param');
+  var valueToSet = $(this).attr('value-to-set');
+  ReactiveLocalStorage.setParam(paramToSet, valueToSet);
+});
+
+$(document).on('click', '[action-set-querystring]', function() {
+  var paramToSet = $(this).attr('action-set-param');
+  var valueToSet = $(this).attr('value-to-set');
+  ReactiveLocalStorage.setParam(paramToSet, valueToSet);
+});
 
 /*
 $.State('localStorage').onParamChange('introShown', function(value) {
@@ -713,6 +725,11 @@ ReactiveState('is-logged-in').isSetToTrueWhen('is-finished-loggin-in', 'true');
 
 //this way we can have more methods on params and support chaining?
 
+*/
+
+/*
+IDEA add default subpage
+Define default state from Webflow attribute
 */
 
 
