@@ -24,6 +24,10 @@ html {
   white-space: normal;
 }
 
+[white-space="nowrap"] {
+  white-space: nowrap;
+}
+
 [cursor="resize"] {
   cursor: ew-resize;
 }
