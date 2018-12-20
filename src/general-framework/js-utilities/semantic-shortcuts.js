@@ -1,3 +1,19 @@
+//fix common typos
+function fixCommonAttrTypos() {
+  $('[action-shown-when-param-equals]').each(function() {
+    var attrValue = $(this).attr('action-shown-when-param-equals');
+    $(this).removeAttr('action-shown-when-param-equals');
+    $(this).attr('action-show-when-param-equals', attrValue);
+  });
+}
+
+fixCommonAttrTypos();
+$(document).on('preloadingComplete', function() {
+  fixCommonAttrTypos();
+});
+
+
+
 //helpful shortcuts for shorter code
 
 
