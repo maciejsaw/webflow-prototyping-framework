@@ -194,6 +194,14 @@ $(document).on('click', '[set-querystring]', function() {
   QueryStringRouter.setParam(paramToSet, valueToSet);
 });
 
+$(document).on('click', 'preloadingComplete', function() {
+  $('[action-text-input][default-value]').each(function() {
+    var paramToSet = $(this).attr('action-text-input');
+    var valueToSet = $(this).attr('default-value');
+    ReactiveLocalStorage.setDefaultParam(paramToSet, valueToSet);
+  });
+});
+
 /*
 $.State('localStorage').onParamChange('introShown', function(value) {
   $.elementWithAttr('ref-continue-button').isShownWhen(value === 'true');
