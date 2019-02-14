@@ -194,7 +194,7 @@ $(document).on('click', '[set-querystring]', function() {
   QueryStringRouter.setParam(paramToSet, valueToSet);
 });
 
-$(document).on('click', 'preloadingComplete', function() {
+$(document).on('preloadingComplete', function() {
   $('[action-text-input][default-value]').each(function() {
     var paramToSet = $(this).attr('action-text-input');
     var valueToSet = $(this).attr('default-value');

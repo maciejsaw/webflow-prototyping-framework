@@ -547,6 +547,22 @@ function isNotEmpty(val) {
   return !isEmpty(val);
 }
 
+//fix common typos
+function fixCommonAttrTypos() {
+  $('[action-shown-when-param-equals]').each(function() {
+    var attrValue = $(this).attr('action-shown-when-param-equals');
+    $(this).removeAttr('action-shown-when-param-equals');
+    $(this).attr('action-show-when-param-equals', attrValue);
+  });
+}
+
+fixCommonAttrTypos();
+$(document).on('preloadingComplete', function() {
+  fixCommonAttrTypos();
+});
+
+
+
 //helpful shortcuts for shorter code
 
 
@@ -725,6 +741,14 @@ $(document).on('click', '[set-querystring]', function() {
   var paramToSet = $(this).attr('set-querystring');
   var valueToSet = $(this).attr('set-value');
   QueryStringRouter.setParam(paramToSet, valueToSet);
+});
+
+$(document).on('preloadingComplete', function() {
+  $('[action-text-input][default-value]').each(function() {
+    var paramToSet = $(this).attr('action-text-input');
+    var valueToSet = $(this).attr('default-value');
+    ReactiveLocalStorage.setDefaultParam(paramToSet, valueToSet);
+  });
 });
 
 /*
