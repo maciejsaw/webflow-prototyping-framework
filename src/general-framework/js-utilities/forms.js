@@ -1,6 +1,6 @@
 //prevent submitting forms by clicking enter
 $(document).on('preloadingComplete', function() {
-	$('form').each(function() {
+	$('form').not('.w-password-page').each(function() {
 		$(this).on('submit', function (event){
 			event.preventDefault();
 		});
