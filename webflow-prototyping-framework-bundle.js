@@ -4193,6 +4193,7 @@ $(document).on('preloadingComplete', function() {
 	$('form').not('.w-password-page').each(function() {
 		$(this).on('submit', function (event){
 			event.preventDefault();
+			console.log('Form submit prevented by webflow prototyping framework...')
 		});
 	});
 });
