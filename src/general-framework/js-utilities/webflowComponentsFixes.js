@@ -91,4 +91,3 @@ $(document).on('click', '[action-go-to-url]', function(e) {
 });
 
 //IDEA todo - add auto wrapping in link block with address
-
