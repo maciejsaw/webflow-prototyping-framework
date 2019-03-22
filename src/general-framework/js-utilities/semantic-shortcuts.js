@@ -210,6 +210,13 @@ $(document).on('preloadingComplete', function() {
   });
 });
 
+$(document).on('preloadingComplete', function() {
+  $('[textarea-rows]').each(function() {
+    var rows = $(this).attr('textarea-rows');
+    $(this).attr('rows', rows);
+  });
+});
+
 /*
 $.State('localStorage').onParamChange('introShown', function(value) {
   $.elementWithAttr('ref-continue-button').isShownWhen(value === 'true');
