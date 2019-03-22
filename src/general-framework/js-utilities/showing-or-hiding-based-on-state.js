@@ -83,6 +83,7 @@ function ReactiveLocalStorageHideIfParamUndefined(paramName) {
 
 $(document).on('preloadingComplete', function() {
 	$('[is-hidden-on-load]').isHidden();
+	$('[hide-on-load]').isHidden();
 	$('[add-class-on-load]').each(function() {
 		var classToAdd = $(this).attr('add-class-on-load');
 		$(this).addClass(classToAdd);
