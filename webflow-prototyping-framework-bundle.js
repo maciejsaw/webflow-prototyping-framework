@@ -4182,10 +4182,10 @@ $(document).on('preloadingComplete', function() {
 
 //prevent submitting forms by clicking enter
 $(document).on('preloadingComplete', function() {
-	$('form').not('.w-password-page').each(function() {
+	$('form').not('.w-password-page').not('[js-selector]').each(function() {
 		$(this).on('submit', function (event){
 			event.preventDefault();
-			console.log('Form submit prevented by webflow prototyping framework...')
+			console.log('Form submit prevented by webflow prototyping framework...');
 		});
 	});
 });
