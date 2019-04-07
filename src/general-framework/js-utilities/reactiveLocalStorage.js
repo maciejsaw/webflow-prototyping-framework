@@ -4,13 +4,13 @@ var ReactiveLocalStorage = (function() {
 
 	function isLocalStorageNameSupported() {
 	    var testKey = 'test', storage = window.sessionStorage;
-	    try
+	    try 
 	    {
 	        storage.setItem(testKey, '1');
 	        storage.removeItem(testKey);
 	        return true;
-	    }
-	    catch (error)
+	    } 
+	    catch (error) 
 	    {
 	    	console.error('Local Storage is not working in Safari incognito mode');
 	        return false;
@@ -63,16 +63,11 @@ var ReactiveLocalStorage = (function() {
 	function getParam(key) {
 		//this return only values, not direct access to paramsObject
 		//that's why we JSON.parse here
-		return JSON.parse(paramsString)[key];
+		return JSON.parse(paramsString)[key]; 
 	}
 
 	function getAllParams() {
-		var allParams = JSON.parse(paramsString);
-		var allParamsOrdered = {};
-		Object.keys(allParams).sort().forEach(function(key) {
-		  allParamsOrdered[key] = allParams[key];
-		});
-		return allParamsOrdered;
+		return JSON.parse(paramsString);
 	}
 
 	function setParam(key, value, options) {
@@ -83,8 +78,7 @@ var ReactiveLocalStorage = (function() {
 		if (paramsObject[key] !== value) {
 			paramsObject[key] = value;
 			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
-			$(document).trigger('reactiveLocalStorage__anyParamChanged');
+			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged'); 
 		}
 
 	}
@@ -93,7 +87,7 @@ var ReactiveLocalStorage = (function() {
 		var paramsObject = JSON.parse(paramsString);
 
 		if (typeof paramsObject[key] == 'undefined') {
-			setParam(key, value);
+			setParam(key, value); 
 		}
 	}
 
@@ -140,7 +134,7 @@ var ReactiveLocalStorage = (function() {
 		var newValue = options.newValue;
 
 		$.grep(array, function(elementOfArray, indexInArray){
-			if (elementOfArray['id'] === idToLookFor) {
+			if (elementOfArray['id'] === idToLookFor || elementOfArray['ID'] === idToLookFor) {
 				elementOfArray[propertyToUpdate] = newValue;
 			}
 		});
@@ -167,7 +161,12 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function findInArrayXObjectWithIdY(paramNameWithArray, idThatShouldMatch) {
-		return findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'id', idThatShouldMatch);
+		var result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'id', idThatShouldMatch);
+		if (typeof result === 'undefined' || result.length === 0) {
+			//fallback for differt way to write id --> ID 
+			result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'ID', idThatShouldMatch);
+		}
+		return result;
 	}
 
 	function removeParam(key, options) {
@@ -178,7 +177,7 @@ var ReactiveLocalStorage = (function() {
 		if (typeof paramsObject[key] !== 'undefined') {
 			delete paramsObject[key];
 			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
+			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged'); 
 		}
 	}
 
@@ -190,48 +189,18 @@ var ReactiveLocalStorage = (function() {
 
 	var actionsOnParamChange = {};
 	function onParamChange(key, actionFunction, options) {
-		options = options || {};
-
-		var handleActionFunction = function() {
+		$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
 			var paramsObject = JSON.parse(paramsString);
 			var value = paramsObject[key];
 			actionFunction(value);
-		};
-
-		if (options.fireOnlyOnce === true) {
-			$(document).one('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
-				handleActionFunction();
-			});
-		} else {
-			$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
-				handleActionFunction();
-			});
-
-			//store the action on param in a separate array, so that we can retrigger this route manually
-			//because this might be needed for ajax loaded content etc.
-			if (typeof actionsOnParamChange[key] === 'undefined') {
-				actionsOnParamChange[key] = [];
-			}
-			actionsOnParamChange[key].push(actionFunction);
-		}
-
-	}
-
-	function onAnyParamChange(actionFunction) {
-		$(document).on('reactiveLocalStorage__anyParamChanged', function(event) {
-			actionFunction();
 		});
 
 		//store the action on param in a separate array, so that we can retrigger this route manually
 		//because this might be needed for ajax loaded content etc.
-		if (typeof actionsOnParamChange.anyParam === 'undefined') {
-			actionsOnParamChange.anyParam = [];
+		if (typeof actionsOnParamChange[key] === 'undefined') {
+			actionsOnParamChange[key] = [];
 		}
-		actionsOnParamChange.anyParam.push(actionFunction);
-	}
-
-	function onlyOnceWhenParamChanges(key, actionFunction) {
-		onParamChange(key, actionFunction, {fireOnlyOnce: true});
+		actionsOnParamChange[key].push(actionFunction);
 	}
 
 	function retriggerOnParamChange(key) {
@@ -249,6 +218,17 @@ var ReactiveLocalStorage = (function() {
 		});
 	}
 
+	function toggleParam(key, value1, value2) {
+		var previousValue = getParam(key);
+		console.log(previousValue);
+
+		if (previousValue !== value1) {
+			setParam(key, value1);
+		} else if (previousValue !== value2) {
+			setParam(key, value2);
+		}
+	}
+
 	return {
 		varsion: {
 			version: 4,
@@ -259,13 +239,12 @@ var ReactiveLocalStorage = (function() {
 			},
 		},
 		setParam: setParam,
+		toggleParam: toggleParam,
 		getAllParams: getAllParams,
 		setFreshParams: setFreshParams,
 		setDefaultParam: setDefaultParam,
 		getParam: getParam,
 		onParamChange: onParamChange,
-		onlyOnceWhenParamChanges: onlyOnceWhenParamChanges,
-		onAnyParamChange: onAnyParamChange,
 		retriggerOnParamChange: retriggerOnParamChange,
 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
 		removeParam: removeParam,
