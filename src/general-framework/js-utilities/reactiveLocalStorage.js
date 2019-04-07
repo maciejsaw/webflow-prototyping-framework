@@ -219,6 +219,9 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function toggleParam(key, value1, value2) {
+		if (typeof value1 === 'undefined') {value1 = 'true'};
+		if (typeof value2 === 'undefined') {value2 = 'false'};
+
 		var previousValue = getParam(key);
 		console.log(previousValue);
 
