@@ -127,6 +127,7 @@ function delay(t, fn) {
 
 //inspired by
 //https://gist.github.com/maxwihlborg/1911a28f988444db3ddc
+//TODO fix it
 function debounce(fn, wait) {
   var timeout;
   var debouncedFunction = function() {
