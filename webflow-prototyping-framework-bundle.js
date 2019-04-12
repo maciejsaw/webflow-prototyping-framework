@@ -596,7 +596,7 @@ function debounce(fn, wait) {
     }, wait || 100);
   };
   debouncedFunction();
-  return fn;
+  return debouncedFunction;
 }
 
 //fix common typos
