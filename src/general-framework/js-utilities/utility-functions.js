@@ -88,46 +88,8 @@ function isNotEmpty(val) {
   return !isEmpty(val);
 }
 
-(function( $ ) {
-  $.fn.delay = function (t, fn) {
-    // private instance variables
-    var queue = [], self, timer;
-
-    function schedule(t, fn) {
-        timer = setTimeout(function() {
-            timer = null;
-            fn();
-
-            if (queue.length) {
-                var item = queue.shift();
-                schedule(item.t, item.fn);
-            }
-        }, t);
-    }
-    self = {
-        delay: function(t, fn) {
-            // if already queuing things or running a timer,
-            //   then just add to the queue
-            if (queue.length || timer) {
-                queue.push({fn: fn, t: t});
-            } else {
-                // no queue or timer yet, so schedule the timer
-                schedule(t, fn);
-            }
-            return self;
-        },
-        cancel: function() {
-            clearTimeout(timer);
-            queue = [];
-            return self;
-        }
-    };
-    return self.delay(t, fn);
-  };
-}( jQuery ));
-
 //https://stackoverflow.com/questions/6921275/is-it-possible-to-chain-settimeout-functions-in-javascript
-function (t, fn) {
+function delay(t, fn) {
     // private instance variables
     var queue = [], self, timer;
 
