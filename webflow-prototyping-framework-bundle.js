@@ -584,6 +584,35 @@ function delay(t, fn) {
     return self.delay(t, fn);
 }
 
+
+//https://gist.github.com/maxwihlborg/1911a28f988444db3ddc
+/**
+ * Simple debounce function; usage:
+ *
+ * Create a function that only can be called once every 500 ms
+ *
+ *      var df = debounce(function() {
+ *          ... func body ...
+ *      }, 500)
+ *
+ * Bind the function to an event
+ *
+ *      document.addEventListener('keydown', df);
+ *
+ * @param fn   {function} function you want to debounce
+ * @param wait {number}   interval wait in ms
+ */
+function debounce(fn, wait) {
+  var timeout;
+  return function() {
+    var ctx = this, args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        fn.apply(ctx, args);
+    }, wait || 100);
+  };
+};
+
 //fix common typos
 function fixCommonAttrTypos() {
   $('[action-shown-when-param-equals]').each(function() {
