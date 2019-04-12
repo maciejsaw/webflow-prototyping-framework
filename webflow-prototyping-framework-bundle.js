@@ -588,14 +588,14 @@ function delay(t, fn) {
 //https://gist.github.com/maxwihlborg/1911a28f988444db3ddc
 function debounce(fn, wait) {
   var timeout;
-  fn = function() {
+  var debouncedFunction = function() {
     var ctx = this, args = arguments;
     clearTimeout(timeout);
     timeout = setTimeout(function() {
         fn.apply(ctx, args);
     }, wait || 100);
   };
-  fn();
+  debouncedFunction();
   return fn;
 }
 
