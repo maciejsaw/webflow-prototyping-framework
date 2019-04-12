@@ -611,7 +611,7 @@ function debounce(fn, wait) {
         fn.apply(ctx, args);
     }, wait || 100);
   };
-};
+}
 
 //fix common typos
 function fixCommonAttrTypos() {
