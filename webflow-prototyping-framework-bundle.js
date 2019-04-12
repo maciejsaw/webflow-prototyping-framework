@@ -548,7 +548,6 @@ function isNotEmpty(val) {
 }
 
 //https://stackoverflow.com/questions/6921275/is-it-possible-to-chain-settimeout-functions-in-javascript
-debugger;
 function delay(t, fn) {
     // private instance variables
     var queue = [], self, timer;
