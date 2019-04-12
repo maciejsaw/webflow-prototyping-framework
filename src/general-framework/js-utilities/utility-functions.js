@@ -125,7 +125,6 @@ function delay(t, fn) {
     return self.delay(t, fn);
 }
 
-
 //inspired by
 //https://gist.github.com/maxwihlborg/1911a28f988444db3ddc
 function debounce(fn, wait) {
