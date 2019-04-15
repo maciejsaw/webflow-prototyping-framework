@@ -143,19 +143,4 @@ function debounce(debounceName, wait, fn) {
   thisTimout = setTimeout(function() {
     fn();
   }, wait);
-
-  console.log(this);
-  console.log(arguments);
-
-  // window.debounceGlobalTimers
-  // var timeout;
-  // var debouncedFunctionToReturn = function() {
-  //   var ctx = this, args = arguments;
-  //   clearTimeout(timeout);
-  //   timeout = setTimeout(function() {
-  //       fn.apply(ctx, args);
-  //   }, wait || 100);
-  // };
-
-  //return debouncedFunctionToReturn;
 }
