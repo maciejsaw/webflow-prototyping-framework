@@ -596,10 +596,9 @@ function delay(t, fn) {
 
 //inspired by
 //https://gist.github.com/maxwihlborg/1911a28f988444db3ddc
-//TODO fix it
-function debounce(fn, wait) {
+function debouncedFunction(fn, wait) {
   var timeout;
-  var debouncedFunction = function() {
+  var debouncedFunctionToReturn = function() {
     var ctx = this, args = arguments;
     clearTimeout(timeout);
     timeout = setTimeout(function() {
@@ -607,7 +606,7 @@ function debounce(fn, wait) {
     }, wait || 100);
   };
   debouncedFunction();
-  return debouncedFunction;
+  return debouncedFunctionToReturn;
 }
 
 //fix common typos
