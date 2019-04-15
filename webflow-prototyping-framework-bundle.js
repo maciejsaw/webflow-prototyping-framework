@@ -838,17 +838,30 @@ function delay(t, fn) {
     return self.delay(t, fn);
 }
 
-//inspired by
-//https://gist.github.com/maxwihlborg/1911a28f988444db3ddc
-function debouncedFunction(fn, wait) {
-  var timeout;
-  var debouncedFunctionToReturn = function() {
-    var ctx = this, args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-        fn.apply(ctx, args);
-    }, wait || 100);
-  };
+//debouncing that allows easy code block handling in ReactibeLocalStorage, without separate functions and scopes
+window.debounceGlobalTimers = {};
+function debounce(debounceName, wait, fn) {
+
+  var thisTimout = window.debounceGlobalTimers[debounceName];
+
+  if (thisTimout) { clearTimeout(thisTimout) }
+
+  thisTimout = setTimeout(function() {
+    fn();
+  }, wait);
+
+  console.log(this);
+  console.log(arguments);
+
+  // window.debounceGlobalTimers
+  // var timeout;
+  // var debouncedFunctionToReturn = function() {
+  //   var ctx = this, args = arguments;
+  //   clearTimeout(timeout);
+  //   timeout = setTimeout(function() {
+  //       fn.apply(ctx, args);
+  //   }, wait || 100);
+  // };
 
   return debouncedFunctionToReturn;
 }
