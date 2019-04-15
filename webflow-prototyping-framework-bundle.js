@@ -842,6 +842,9 @@ function delay(t, fn) {
 debounceGlobalTimers = {};
 function debounce(debounceName, wait, fn) {
 
+  console.log(arguments);
+  console.log(this);
+
   if (typeof wait === 'function') {
     fn = wait;
     wait = 100;
