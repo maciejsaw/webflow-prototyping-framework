@@ -863,7 +863,7 @@ function debounce(debounceName, wait, fn) {
   //   }, wait || 100);
   // };
 
-  return debouncedFunctionToReturn;
+  //return debouncedFunctionToReturn;
 }
 
 //fix common typos
