@@ -135,6 +135,7 @@ function debounce(debounceName, wait, fn) {
   }
 
   console.log(debounceGlobalTimers[debounceName]);
+  console.log(debounceGlobalTimers);
 
   if (debounceGlobalTimers[debounceName]) {
     clearTimeout(debounceGlobalTimers[debounceName]);
