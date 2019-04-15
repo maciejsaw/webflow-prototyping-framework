@@ -849,7 +849,7 @@ function debouncedFunction(fn, wait) {
         fn.apply(ctx, args);
     }, wait || 100);
   };
-  debouncedFunction();
+
   return debouncedFunctionToReturn;
 }
 
