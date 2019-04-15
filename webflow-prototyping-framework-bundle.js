@@ -842,6 +842,11 @@ function delay(t, fn) {
 window.debounceGlobalTimers = {};
 function debounce(debounceName, wait, fn) {
 
+  if (typeof wait === 'function') {
+    fn = wait;
+    wait = 100;
+  }
+
   var thisTimout = window.debounceGlobalTimers[debounceName];
 
   if (thisTimout) { clearTimeout(thisTimout) }
