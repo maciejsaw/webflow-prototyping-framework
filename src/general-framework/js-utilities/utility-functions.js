@@ -136,7 +136,9 @@ function debounce(debounceName, wait, fn) {
 
   var thisTimout = window.debounceGlobalTimers[debounceName];
 
-  if (thisTimout) { clearTimeout(thisTimout) }
+  if (thisTimout) {
+    clearTimeout(thisTimout);
+  }
 
   thisTimout = setTimeout(function() {
     fn();
