@@ -839,7 +839,7 @@ function delay(t, fn) {
 }
 
 //debouncing that allows easy code block handling in ReactibeLocalStorage, without separate functions and scopes
-window.debounceGlobalTimers = {};
+debounceGlobalTimers = {};
 function debounce(debounceName, wait, fn) {
 
   if (typeof wait === 'function') {
@@ -847,17 +847,16 @@ function debounce(debounceName, wait, fn) {
     wait = 100;
   }
 
-  var thisTimout = window.debounceGlobalTimers[debounceName];
+  console.log(debounceGlobalTimers[debounceName]);
 
-  if (thisTimout) {
-    clearTimeout(thisTimout);
+  if (debounceGlobalTimers[debounceName]) {
+    clearTimeout(debounceGlobalTimers[debounceName]);
   }
 
-  thisTimout = setTimeout(function() {
+  debounceGlobalTimers[debounceName] = setTimeout(function() {
     fn();
   }, wait);
 
-  debugger;
 }
 
 //fix common typos
