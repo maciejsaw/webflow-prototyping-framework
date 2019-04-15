@@ -143,4 +143,6 @@ function debounce(debounceName, wait, fn) {
   thisTimout = setTimeout(function() {
     fn();
   }, wait);
+
+  debugger;
 }

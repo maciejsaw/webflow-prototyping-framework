@@ -856,6 +856,8 @@ function debounce(debounceName, wait, fn) {
   thisTimout = setTimeout(function() {
     fn();
   }, wait);
+
+  debugger;
 }
 
 //fix common typos
