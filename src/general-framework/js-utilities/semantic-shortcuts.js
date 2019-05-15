@@ -211,6 +211,22 @@ $(document).on('preloadingComplete', function() {
 });
 
 $(document).on('preloadingComplete', function() {
+  $('[action-set-param][default-value]').each(function() {
+    var paramToSet = $(this).attr('action-set-param');
+    var valueToSet = $(this).attr('default-value');
+    ReactiveLocalStorage.setDefaultParam(paramToSet, valueToSet);
+  });
+});
+
+$(document).on('preloadingComplete', function() {
+  $('[action-set-param][value-on-load]').each(function() {
+    var paramToSet = $(this).attr('action-set-param');
+    var valueToSet = $(this).attr('default-value');
+    ReactiveLocalStorage.setParam(paramToSet, valueToSet);
+  });
+});
+
+$(document).on('preloadingComplete', function() {
   $('[textarea-rows]').each(function() {
     var rows = $(this).attr('textarea-rows');
     $(this).attr('rows', rows);
