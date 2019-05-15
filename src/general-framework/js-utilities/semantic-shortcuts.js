@@ -221,7 +221,7 @@ $(document).on('preloadingComplete', function() {
 $(document).on('preloadingComplete', function() {
   $('[action-set-param][value-on-load]').each(function() {
     var paramToSet = $(this).attr('action-set-param');
-    var valueToSet = $(this).attr('default-value');
+    var valueToSet = $(this).attr('value-on-load');
     ReactiveLocalStorage.setParam(paramToSet, valueToSet);
   });
 });
