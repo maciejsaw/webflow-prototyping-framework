@@ -4,13 +4,13 @@ var ReactiveLocalStorage = (function() {
 
 	function isLocalStorageNameSupported() {
 	    var testKey = 'test', storage = window.sessionStorage;
-	    try 
+	    try
 	    {
 	        storage.setItem(testKey, '1');
 	        storage.removeItem(testKey);
 	        return true;
-	    } 
-	    catch (error) 
+	    }
+	    catch (error)
 	    {
 	    	console.error('Local Storage is not working in Safari incognito mode');
 	        return false;
@@ -63,7 +63,7 @@ var ReactiveLocalStorage = (function() {
 	function getParam(key) {
 		//this return only values, not direct access to paramsObject
 		//that's why we JSON.parse here
-		return JSON.parse(paramsString)[key]; 
+		return JSON.parse(paramsString)[key];
 	}
 
 	function getAllParams() {
@@ -78,7 +78,7 @@ var ReactiveLocalStorage = (function() {
 		if (paramsObject[key] !== value) {
 			paramsObject[key] = value;
 			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged'); 
+			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
 		}
 
 	}
@@ -87,7 +87,7 @@ var ReactiveLocalStorage = (function() {
 		var paramsObject = JSON.parse(paramsString);
 
 		if (typeof paramsObject[key] == 'undefined') {
-			setParam(key, value); 
+			setParam(key, value);
 		}
 	}
 
@@ -163,7 +163,7 @@ var ReactiveLocalStorage = (function() {
 	function findInArrayXObjectWithIdY(paramNameWithArray, idThatShouldMatch) {
 		var result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'id', idThatShouldMatch);
 		if (typeof result === 'undefined' || result.length === 0) {
-			//fallback for differt way to write id --> ID 
+			//fallback for differt way to write id --> ID
 			result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'ID', idThatShouldMatch);
 		}
 		return result;
@@ -177,12 +177,12 @@ var ReactiveLocalStorage = (function() {
 		if (typeof paramsObject[key] !== 'undefined') {
 			delete paramsObject[key];
 			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged'); 
+			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
 		}
 	}
 
 	function setFreshParams(newParamsObj) {
-		var paramsObject = JSON.parse(paramsString);
+		var paramsObject = JSON.parse(newParamsObj);
 		saveParamObjectToLocalStorageAsString(paramsObject);
 		retriggerOnParamChangeForAll();
 	}
