@@ -104,6 +104,14 @@ var QueryStringRouter = (function() {
 
 	}
 
+	function setDefaultParam(key, value) {
+		var queryStringParams = deparam(queryString);
+
+		if (typeof queryStringParams[key] == 'undefined') {
+			setParam(key, value, {doNotCreateHistoryState: true});
+		}
+	}
+
 	function removeParam(key, options) {
 		var queryStringParams = deparam(queryString);
 
