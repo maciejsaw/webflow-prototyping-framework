@@ -106,6 +106,9 @@ $(document).on('preloadingComplete', function() {
 			//keep the elements
 		}
 	});
+
+	$('[is-hidden-on-load]').removeAttr('is-hidden-on-load').attr('was-hidden-on-load', 'true');
+	$('[hide-on-load]').removeAttr('hide-on-load').attr('was-hidden-on-load', 'true');
 });
 
 
