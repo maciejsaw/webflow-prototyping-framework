@@ -953,7 +953,6 @@ var QueryStringRouter = (function() {
 	function updateURL(options) {
 		options = options || {};
 
-		console.log('received updateURL event');
 		clearTimeout(udpateURLTimer);
 
 		//if at least one ot trigger does not have the options doNotCreateHistoryState,
@@ -974,7 +973,6 @@ var QueryStringRouter = (function() {
 				setTimeout(function() {
 					window.history.pushState(updated,'', '?'+newQueryString);
 					doNotCreateHistoryState = true;
-					console.log('pushedNewHistoryState');
 				}, 100);
 			}
 
@@ -1024,7 +1022,6 @@ var QueryStringRouter = (function() {
 		$(document).on('QueryStringRouter__'+key+'__paramChanged', function(event) {
 			var paramsObject = deparam(queryString);
 			var value = paramsObject[key];
-			console.log('query string param changed - '+key+' '+value);
 			actionFunction(value);
 		});
 
@@ -1036,7 +1033,7 @@ var QueryStringRouter = (function() {
 		actionsOnParamChange[key].push(actionFunction);
 
 		//when the onParamChanged is being defined, also retrigger the state
-		retriggerOnParamChange(key);
+		//retriggerOnParamChange(key);
 	}
 
 	function retriggerOnParamChange(key) {
@@ -1056,8 +1053,10 @@ var QueryStringRouter = (function() {
 
 	function setDefaultRootParams(paramsObjects) {
 		$(document).ready(function() {
-			if (window.location.pathname === "/" & window.location.search === "") {
-				setFreshParams(paramsObjects, {doNotCreateHistoryState: true});
+			if (window.location.pathname === "/" && window.location.search === "") {
+				$.each(paramsObjects, function(key, value) {
+					setParam(key, value, {doNotCreateHistoryState: true});
+				});
 			}
 		});
 	}
@@ -4195,6 +4194,9 @@ $(document).on('preloadingComplete', function() {
 			//keep the elements
 		}
 	});
+
+	$('[is-hidden-on-load]').removeAttr('is-hidden-on-load').attr('was-hidden-on-load', 'true');
+	$('[hide-on-load]').removeAttr('hide-on-load').attr('was-hidden-on-load', 'true');
 });
 
 
