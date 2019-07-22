@@ -1071,6 +1071,7 @@ var QueryStringRouter = (function() {
 
 	return {
 		setParam: setParam,
+		setDefaultParam: setDefaultParam,
 		getParam: getQueryStringParam,
 		getAllParams: getQueryStringParams,
 		setFreshParams: setFreshParams,
