@@ -4306,13 +4306,16 @@ var showSpinnerInButton = showSpinnerInClickedButton;
 
     this.each(function() {
       var clickedButtonElm = $(this);
+      var spinnerIcon = clickedButtonElm.find('[js-selector="button-spinner-icon"]');
+      var textNearSpinner = $(this).find('[js-selector="button-text-near-spinner"]');
 
-      clickedButtonElm.addClass('is-inactive-with-preloader')
-        .find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
+      clickedButtonElm.addClass('is-inactive-with-preloader');
+      spinnerIcon.removeClass('is-hidden');
+      textNearSpinner.addClass('is-with-spinner-shown');
 
       setTimeout(function() {
-      	clickedButtonElm.removeClass('is-inactive-with-preloader')
-      	  .find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
+      	clickedButtonElm.removeClass('is-inactive-with-preloader');
+      	spinnerIcon.addClass('is-hidden');
 
       	actionAfter();
       }, 1500);
@@ -4322,6 +4325,7 @@ var showSpinnerInButton = showSpinnerInClickedButton;
   };
 }( jQuery ));
 
+//TODO refactor multiple ways to show loading in spinner
 function showLoadingInButton(elm) {
 	elm = $(elm);
 	elm.addClass('is-grayed-out');
