@@ -4316,6 +4316,7 @@ var showSpinnerInButton = showSpinnerInClickedButton;
       setTimeout(function() {
       	clickedButtonElm.removeClass('is-inactive-with-preloader');
       	spinnerIcon.addClass('is-hidden');
+      	textNearSpinner.removeClass('is-with-spinner-shown');
 
       	actionAfter();
       }, 1500);
