@@ -4282,16 +4282,23 @@ $(document).on('click', '[stop-propagation]', function(event) {
 });
 
 function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
-	clickedButtonElm.closest('[js-selector="button-with-spinner"]').addClass('is-inactive-with-preloader')
-	  .find('[js-selector="button-spinner-icon"]').removeClass('is-hidden');
+	var button = clickedButtonElm.closest('[js-selector="button-with-spinner"]');
+	var spinnerIcon = clickedButtonElm.find('[js-selector="button-spinner-icon"]');
+
+	button.addClass('is-inactive-with-preloader');
+	clickedButtonElm.addClass('is-inactive-with-preloader');
+	spinnerIcon.removeClass('is-hidden');
 
 	setTimeout(function() {
-		clickedButtonElm.closest('[js-selector="button-with-spinner"]').removeClass('is-inactive-with-preloader')
-		  .find('[js-selector="button-spinner-icon"]').addClass('is-hidden');
+		clickedButtonElm.removeClass('is-inactive-with-preloader');
+		button.removeClass('is-inactive-with-preloader');
+		spinnerIcon.addClass('is-hidden');
 
 		actionAfter();
 	}, 1500);
 }
+
+var showSpinnerInButton = showSpinnerInClickedButton;
 
 /* showing spinner briefly inside a button */
 (function( $ ) {
