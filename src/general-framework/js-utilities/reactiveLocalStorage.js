@@ -257,6 +257,7 @@ var ReactiveLocalStorage = (function() {
 		if ($.isEmptyObject(allParams)) {
 			clearAllParams();
 		} else {
+			debugger
 			setFreshParams(allParams);
 		}
 	}
