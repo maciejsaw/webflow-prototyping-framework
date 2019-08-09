@@ -1347,7 +1347,7 @@ var ReactiveLocalStorage = (function() {
 		if ($.isEmptyObject(allParams)) {
 			clearAllParams();
 		} else {
-			setFreshParams(allParams);
+			saveParamObjectToLocalStorageAsString(allParams);
 		}
 	}
 
