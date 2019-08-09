@@ -1276,8 +1276,7 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function setFreshParams(newParamsObj) {
-		var paramsObject = JSON.parse(newParamsObj);
-		saveParamObjectToLocalStorageAsString(paramsObject);
+		saveParamObjectToLocalStorageAsString(newParamsObj);
 		retriggerOnParamChangeForAll();
 	}
 
