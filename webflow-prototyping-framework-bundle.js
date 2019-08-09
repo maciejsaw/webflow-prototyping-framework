@@ -1331,15 +1331,24 @@ var ReactiveLocalStorage = (function() {
 	}
 
 	function clearAllButLeave(paramsToLeaveArray) {
-		console.log(getAllParams());
+
+		if (typeof paramsToLeaveArray === 'undefined') {
+			console.error('You need to provide paramsToLeaveArray');
+			return;
+		}
+
 		var allParams = getAllParams();
 		console.log(allParams);
-		// $.each(allParams, function(key, value) {
-		// 	if ( $.inArray(key, paramsToLeaveArray) !== true ) {
-		// 		delete allParams[key];
-		// 	}
-		// });
-		//debugger
+
+		$.each(allParams, function(key, value) {
+			console.log(key);
+			console.log(value);
+
+			// if ( $.inArray(key, paramsToLeaveArray) !== true ) {
+			// 	delete allParams[key];
+			// }
+		});
+
 		setFreshParams(allParams);
 	}
 
