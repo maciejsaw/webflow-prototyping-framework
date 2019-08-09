@@ -239,11 +239,11 @@ var ReactiveLocalStorage = (function() {
 	function clearAllButLeave(paramsToLeaveArray) {
 		console.log(getAllParams());
 		var allParams = getAllParams();
-		$.each(allParams, function(key, value) {
-			if ( $.inArray(key, paramsToLeaveArray) !== true ) {
-				delete allParams[key];
-			}
-		});
+		// $.each(allParams, function(key, value) {
+		// 	if ( $.inArray(key, paramsToLeaveArray) !== true ) {
+		// 		delete allParams[key];
+		// 	}
+		// });
 		debugger
 		console.log
 		setFreshParams(allParams);
