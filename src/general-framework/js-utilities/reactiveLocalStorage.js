@@ -273,6 +273,7 @@ var ReactiveLocalStorage = (function() {
 		findInArrayXObjectWithPropertyYMatchingZ: findInArrayXObjectWithPropertyYMatchingZ,
 		updateObjectInArray: updateObjectInArray,
 		clearAllParams: clearAllParams,
+		clearAllButLeave: clearAllButLeave,
 	};
 
 })();
