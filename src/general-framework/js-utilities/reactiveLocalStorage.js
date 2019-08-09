@@ -243,7 +243,7 @@ var ReactiveLocalStorage = (function() {
 				delete allParams[key];
 			}
 		});
-		debugger;
+		debugger
 		setFreshParams(allParams);
 	}
 
