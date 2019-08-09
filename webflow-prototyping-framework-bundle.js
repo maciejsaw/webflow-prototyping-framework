@@ -1338,18 +1338,21 @@ var ReactiveLocalStorage = (function() {
 		}
 
 		var allParams = getAllParams();
-		console.log(allParams);
 
 		$.each(allParams, function(key, value) {
 			console.log(key);
 			console.log(value);
 
-			// if ( $.inArray(key, paramsToLeaveArray) !== true ) {
-			// 	delete allParams[key];
-			// }
+			if ( $.inArray(key, paramsToLeaveArray) > -1 ) {
+				delete allParams[key];
+			}
 		});
 
-		setFreshParams(allParams);
+		if ($.isEmptyObject(allParams)) {
+			clearAllParams();
+		} else {
+			setFreshParams(allParams);
+		}
 	}
 
 	return {
