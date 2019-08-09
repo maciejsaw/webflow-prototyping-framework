@@ -1339,7 +1339,6 @@ var ReactiveLocalStorage = (function() {
 		// 	}
 		// });
 		debugger
-		console.log
 		setFreshParams(allParams);
 	}
 
