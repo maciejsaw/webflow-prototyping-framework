@@ -1343,7 +1343,7 @@ var ReactiveLocalStorage = (function() {
 			console.log(key);
 			console.log(value);
 
-			if ( $.inArray(key, paramsToLeaveArray) > -1 ) {
+			if ( $.inArray(key, paramsToLeaveArray) === -1 ) {
 				delete allParams[key];
 			}
 		});
