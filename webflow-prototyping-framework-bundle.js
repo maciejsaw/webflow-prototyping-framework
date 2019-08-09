@@ -1339,9 +1339,6 @@ var ReactiveLocalStorage = (function() {
 		var allParams = getAllParams();
 
 		$.each(allParams, function(key, value) {
-			console.log(key);
-			console.log(value);
-
 			if ( $.inArray(key, paramsToLeaveArray) === -1 ) {
 				delete allParams[key];
 			}
@@ -1350,7 +1347,6 @@ var ReactiveLocalStorage = (function() {
 		if ($.isEmptyObject(allParams)) {
 			clearAllParams();
 		} else {
-			debugger
 			setFreshParams(allParams);
 		}
 	}
