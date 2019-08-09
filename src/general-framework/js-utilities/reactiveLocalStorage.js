@@ -232,8 +232,19 @@ var ReactiveLocalStorage = (function() {
 		}
 	}
 
-	function clearParams() {
+	function clearAllParams() {
 		localStorage.removeItem('paramsString');
+	}
+
+	function clearAllButLeave(paramsToLeaveArray) {
+		var allParams = getAllParams();
+		$.each(allParams, function(key, value) {
+			if ( $.inArray(key, paramsToLeaveArray) !== true ) {
+				delete allParams[key];
+			}
+		});
+
+		setFreshParams(allParams);
 	}
 
 	return {
@@ -261,7 +272,7 @@ var ReactiveLocalStorage = (function() {
 		findInArrayXObjectWithIdY: findInArrayXObjectWithIdY,
 		findInArrayXObjectWithPropertyYMatchingZ: findInArrayXObjectWithPropertyYMatchingZ,
 		updateObjectInArray: updateObjectInArray,
-		clearAllParams: clearParams,
+		clearAllParams: clearAllParams,
 	};
 
 })();
