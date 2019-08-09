@@ -1337,7 +1337,7 @@ var ReactiveLocalStorage = (function() {
 				delete allParams[key];
 			}
 		});
-
+		debugger;
 		setFreshParams(allParams);
 	}
 
