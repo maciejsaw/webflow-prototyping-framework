@@ -1326,8 +1326,12 @@ var ReactiveLocalStorage = (function() {
 		}
 	}
 
+	function clearParams() {
+		localStorage.removeItem('paramsString');
+	}
+
 	return {
-		varsion: {
+		version: {
 			version: 4,
 			versionNotes: {
 				5: 'Removed default retrigger on param change while creating the onParamChage',
@@ -1351,6 +1355,7 @@ var ReactiveLocalStorage = (function() {
 		findInArrayXObjectWithIdY: findInArrayXObjectWithIdY,
 		findInArrayXObjectWithPropertyYMatchingZ: findInArrayXObjectWithPropertyYMatchingZ,
 		updateObjectInArray: updateObjectInArray,
+		clearAllParams: clearParams,
 	};
 
 })();
