@@ -3976,6 +3976,22 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
 
 });
 
+$(document).on('click', '[action-text-input][only-numbers]', function(event) {
+
+    // Old browsers fallback
+    if (!event || !event.key) {
+      return true;
+    }
+
+    console.log(event.key);
+
+    var isNumber = !!event.key.match(/^[0-9]*$/) || (event.charCode >= 47 && event.charCode <= 57);
+    var isEnter = event.key === 'Enter';
+    var isDelete = event.key === 'Backspace' || event.key === 'Delete';
+    var isArrow = event.key.includes('Arrow');
+    return isNumber || isEnter || isDelete || isArrow;
+});
+
 //This will bind all checkboxes with attribute [action-checkbox] the Reactive Local Storage, so that we can update rest ot the page based on this state
 //either on input or on focus out
 
