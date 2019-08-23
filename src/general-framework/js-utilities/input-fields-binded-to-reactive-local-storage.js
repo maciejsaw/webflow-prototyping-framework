@@ -63,4 +63,6 @@ $(document).on('keypress', '[allow-only-number]', function(event) {
     } else {
         return isNumber || isEnter || isDelete || isArrow;
     }
+
+    debugger;
 });
