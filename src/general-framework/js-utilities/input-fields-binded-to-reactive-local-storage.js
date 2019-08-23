@@ -59,9 +59,9 @@ $(document).on('keypress', '[allow-only-number]', function(event) {
     console.log($(event.currentTarget).val());
 
     if ($(event.currentTarget).val().includes('.') || $(event.currentTarget).val().includes(',')) {
-        return isNumber || isEnter || isDelete || isArrow || isComa || isDot;
-    } else {
         return isNumber || isEnter || isDelete || isArrow;
+    } else {
+        return isNumber || isEnter || isDelete || isArrow || isComa || isDot;
     }
 
     debugger;
