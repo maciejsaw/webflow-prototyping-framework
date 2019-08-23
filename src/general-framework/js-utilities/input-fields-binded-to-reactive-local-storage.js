@@ -28,7 +28,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
 
 });
 
-$(document).on('click', '[action-text-input][allow-numbers-only]', function(event) {
+$(document).on('keypress', '[action-text-input][allow-numbers-only]', function(event) {
 
     // Old browsers fallback
     if (!event || !event.key) {
