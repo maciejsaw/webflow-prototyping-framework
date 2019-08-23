@@ -3990,7 +3990,7 @@ $(document).on('keypress', '[allow-only-integer]', function(event) {
     return isNumber || isEnter || isDelete || isArrow;
 });
 
-$(document).on('keypress', '[allow-only-number]', function(event) {
+$(document).on('keypress input', '[allow-only-number]', function(event) {
 
     // Old browsers fallback
     if (!event || !event.key) {
