@@ -3976,20 +3976,34 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
 
 });
 
-$(document).on('keypress', '[allow-numbers-only]', function(event) {
+$(document).on('keypress', '[allow-only-integer]', function(event) {
 
     // Old browsers fallback
     if (!event || !event.key) {
       return true;
     }
 
-    console.log(event.key);
-
     var isNumber = !!event.key.match(/^[0-9]*$/) || (event.charCode >= 47 && event.charCode <= 57);
     var isEnter = event.key === 'Enter';
     var isDelete = event.key === 'Backspace' || event.key === 'Delete';
     var isArrow = event.key.includes('Arrow');
     return isNumber || isEnter || isDelete || isArrow;
+});
+
+$(document).on('keypress', '[allow-only-number]', function(event) {
+
+    // Old browsers fallback
+    if (!event || !event.key) {
+      return true;
+    }
+
+    var isNumber = !!event.key.match(/^[0-9]*$/) || (event.charCode >= 47 && event.charCode <= 57);
+    var isEnter = event.key === 'Enter';
+    var isDelete = event.key === 'Backspace' || event.key === 'Delete';
+    var isArrow = event.key.includes('Arrow');
+    var isComa = event.key.includes('.');
+    var isDot = event.key.includes(',');
+    return isNumber || isEnter || isDelete || isArrow || isComa || isDot;
 });
 
 //This will bind all checkboxes with attribute [action-checkbox] the Reactive Local Storage, so that we can update rest ot the page based on this state
