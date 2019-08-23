@@ -4003,7 +4003,12 @@ $(document).on('keypress', '[allow-only-number]', function(event) {
     var isArrow = event.key.includes('Arrow');
     var isComa = event.key.includes('.');
     var isDot = event.key.includes(',');
-    return isNumber || isEnter || isDelete || isArrow || isComa || isDot;
+
+    if ($(event.currentTarget).val().includes('.') || $(event.currentTarget).val().includes(',')) {
+        return isNumber || isEnter || isDelete || isArrow || isComa || isDot;
+    } else {
+        return isNumber || isEnter || isDelete || isArrow;
+    }
 });
 
 //This will bind all checkboxes with attribute [action-checkbox] the Reactive Local Storage, so that we can update rest ot the page based on this state
