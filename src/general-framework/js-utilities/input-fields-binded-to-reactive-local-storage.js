@@ -56,13 +56,10 @@ $(document).on('keypress', '[allow-only-number]', function(event) {
     var isComa = event.key.includes('.');
     var isDot = event.key.includes(',');
 
-    console.log($(event.currentTarget).val());
-
     if ($(event.currentTarget).val().includes('.') || $(event.currentTarget).val().includes(',')) {
         return isNumber || isEnter || isDelete || isArrow;
     } else {
         return isNumber || isEnter || isDelete || isArrow || isComa || isDot;
     }
 
-    debugger;
 });
