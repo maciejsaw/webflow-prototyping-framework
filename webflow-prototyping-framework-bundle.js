@@ -1327,6 +1327,7 @@ var ReactiveLocalStorage = (function() {
 
 	function clearAllParams() {
 		localStorage.removeItem('paramsString');
+		saveParamObjectToLocalStorageAsString({});
 	}
 
 	function clearAllButLeave(paramsToLeaveArray) {
