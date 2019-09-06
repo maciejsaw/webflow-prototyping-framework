@@ -1303,13 +1303,13 @@ var ReactiveLocalStorage = (function() {
 		$.each(arrayOfFunctionsAssociatedWithThisParam, function(index, value) {
 			value(param);
 		});
+		debugger;
 	}
 
 	function retriggerOnParamChangeForAll() {
 		$.each(actionsOnParamChange, function(key, value) {
 			retriggerOnParamChange(key);
 		});
-		debugger;
 	}
 
 	function toggleParam(key, value1, value2) {
