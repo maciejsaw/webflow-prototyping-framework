@@ -209,7 +209,6 @@ var ReactiveLocalStorage = (function() {
 		$.each(arrayOfFunctionsAssociatedWithThisParam, function(index, value) {
 			value(param);
 		});
-		debugger;
 	}
 
 	function retriggerOnParamChangeForAll() {
