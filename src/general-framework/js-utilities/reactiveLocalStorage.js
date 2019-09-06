@@ -215,6 +215,7 @@ var ReactiveLocalStorage = (function() {
 		$.each(actionsOnParamChange, function(key, value) {
 			retriggerOnParamChange(key);
 		});
+		debugger;
 	}
 
 	function toggleParam(key, value1, value2) {
