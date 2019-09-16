@@ -34,6 +34,8 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
     });
 });
 
+//TODO think how to create easy syntax for situation, when displayed chosen value should
+//be different from choice values in the list, for example with suffix "1000 EUR"
 function renderSelectDropdownChosenValue($dropdown, value, targetSelector) {
     var target = $dropdown.find(targetSelector);
     if (target.length > 0) {
