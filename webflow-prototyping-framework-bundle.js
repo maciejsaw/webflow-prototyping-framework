@@ -603,11 +603,11 @@ function debounce(debounceName, wait, fn) {
 
 }
 
-function roundToNextMultiple(input, multiple) {
+function roundToNextMultiple(x, multiple) {
   return Math.ceil(x/multiple)*multiple;
 }
 
-function roundToPrevMultiple(input, multiple) {
+function roundToPrevMultiple(x, multiple) {
   return Math.ceil(x/multiple)*multiple - multiple;
 }
 
