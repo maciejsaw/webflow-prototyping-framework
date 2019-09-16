@@ -4014,22 +4014,6 @@ $(document).on('keypress', '[allow-only-number]', function(event) {
 
 });
 
-$(document).on('input', '[action-select-dropdown-search-input]', function() {
-  var thisDropdown = $(this).closest('[action-select-dropdown]');
-  var thisChosenItems = thisDropdown.find('[choice-value]');
-  var searchQuery = $(this).val().toLowerCase();
-
-  thisChosenItems.each(function() {
-    var attrVal = $(this).attr('choice-value').toLowerCase();
-    var textVal = $(this).html();
-    if (attrVal.includes(searchQuery) || textVal.includes(searchQuery)) {
-        $(this).isShown();
-    } else {
-        $(this).isHidden();
-    }
-  });
-});
-
 //This will bind all checkboxes with attribute [action-checkbox] the Reactive Local Storage, so that we can update rest ot the page based on this state
 //either on input or on focus out
 
