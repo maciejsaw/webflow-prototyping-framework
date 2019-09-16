@@ -3927,16 +3927,17 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             otherNotChosenItems.addClass('is-hidden');
 
             if (thisDropdown.find('[js-select-dropdown-chosen-text]').length > 0) {
-                renderSelectDropdownChosenValue(thisDropdown, value);
+                renderSelectDropdownChosenValue(thisDropdown, value, 'js-select-dropdown-chosen-text');
             }
         });
     });
 });
 
-function renderSelectDropdownChosenValue($dropdown, value) {
-    if ($dropdown.find('[js-select-dropdown-chosen-text]').length > 0) {
+function renderSelectDropdownChosenValue($dropdown, value, targetSelector) {
+    var target = $dropdown.find(targetSelector);
+    if (target.length > 0) {
         var chosen = $dropdown.find('[chosen-value]').not('[chosen-value="not-selected"]').first();
-        chosen.find('[js-select-dropdown-chosen-text]').text(value);
+        chosen.find(targetSelector).text(value);
         chosen.attr('chosen-value', value);
         if (isNotEmpty(value) && value !== 'not-selected') {
             chosen.removeClass('is-hidden');
