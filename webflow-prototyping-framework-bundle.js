@@ -3925,19 +3925,6 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
     });
 });
 
-function renderSelectDropdownChosenValue($dropdown, value) {
-    if ($dropdown.find('[js-select-dropdown-chosen-text]').length > 0) {
-        var chosen = $dropdown.find('[chosen-value]').not('[chosen-value="not-selected"]').first();
-        chosen.find('[js-select-dropdown-chosen-text]').text(value);
-        chosen.attr('chosen-value', value);
-        if (isNotEmpty(value) && value !== 'not-selected') {
-            chosen.removeClass('is-hidden');
-        } else {
-            chosen.addClass('is-hidden');
-        }
-    }
-}
-
 $(document).on('input', '[action-select-dropdown-search-input]', function() {
   var thisDropdown = $(this).closest('[action-select-dropdown]');
   var thisChosenItems = thisDropdown.find('[choice-value]');
