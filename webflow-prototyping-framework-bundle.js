@@ -3927,7 +3927,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             otherNotChosenItems.addClass('is-hidden');
 
             if (thisDropdown.find('[js-select-dropdown-chosen-text]').length > 0) {
-                renderSelectDropdownChosenValue(thisDropdown, value, 'js-select-dropdown-chosen-text');
+                renderSelectDropdownChosenValue(thisDropdown, value, '[js-select-dropdown-chosen-text]');
             }
         });
     });
