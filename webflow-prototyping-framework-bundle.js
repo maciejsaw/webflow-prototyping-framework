@@ -3400,8 +3400,8 @@ function submitEmailRegistrationForm() {
 */
 
 function hideWebflowDropdowns() {
-    $(".w-dropdown-list").removeClass("w--open");
-    $(".w-dropdown-toggle").removeClass("w--open");
+    $(".w-dropdown-list").removeClass("w--open").removeAttr('is-open');
+    $(".w-dropdown-toggle").removeClass("w--open").removeAttr('is-open');
 }
 
 //open and close Webflow dropdowns in ajax-loaded content
