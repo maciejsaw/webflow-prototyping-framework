@@ -3913,8 +3913,12 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
         var paramToChange = thisDropdown.attr('action-select-dropdown');
 
         //default state is the first from the dropdown chosen-values options
-        var firstAvailableChoice = thisDropdown.find('[chosen-value]').attr('chosen-value');
-        ReactiveLocalStorage.setDefaultParam(paramToChange, firstAvailableChoice );
+        //only if no other default was set, waiting 3 seconds
+        //TODO remove this after old code updated
+        setTimeout(function() {
+            var firstAvailableChoice = thisDropdown.find('[chosen-value]').attr('chosen-value');
+            ReactiveLocalStorage.setDefaultParam(paramToChange, firstAvailableChoice );
+        }, 3000);
 
         ReactiveLocalStorage.onParamChange(paramToChange, function(value) {
             var chosenItem = $('[action-select-dropdown="'+paramToChange+'"]').find('[chosen-value="'+value+'"]');
