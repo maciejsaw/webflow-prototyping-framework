@@ -603,6 +603,14 @@ function debounce(debounceName, wait, fn) {
 
 }
 
+function roundToNextMultiple(input, multiple) {
+  return Math.ceil(x/multiple)*multiple;
+}
+
+function roundToPrevMultiple(input, multiple) {
+  return Math.ceil(x/multiple)*multiple - multiple;
+}
+
 //fix common typos
 function fixCommonAttrTypos() {
   $('[action-shown-when-param-equals]').each(function() {

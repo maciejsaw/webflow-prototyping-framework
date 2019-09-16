@@ -143,3 +143,11 @@ function debounce(debounceName, wait, fn) {
   }, wait);
 
 }
+
+function roundToNextMultiple(input, multiple) {
+  return Math.ceil(x/multiple)*multiple;
+}
+
+function roundToPrevMultiple(input, multiple) {
+  return Math.ceil(x/multiple)*multiple - multiple;
+}
