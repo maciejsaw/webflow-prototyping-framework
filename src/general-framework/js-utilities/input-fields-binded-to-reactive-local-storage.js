@@ -63,3 +63,19 @@ $(document).on('keypress', '[allow-only-number]', function(event) {
     }
 
 });
+
+$(document).on('input', '[action-select-dropdown-search-input]', function() {
+  var thisDropdown = $(this).closest('[action-select-dropdown]');
+  var thisChosenItems = thisDropdown.find('[choice-value]');
+  var searchQuery = $(this).val().toLowerCase();
+
+  thisChosenItems.each(function() {
+    var attrVal = $(this).attr('choice-value').toLowerCase();
+    var textVal = $(this).html();
+    if (attrVal.includes(searchQuery) || textVal.includes(searchQuery)) {
+        $(this).isShown();
+    } else {
+        $(this).isHidden();
+    }
+  });
+});
