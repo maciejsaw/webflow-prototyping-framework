@@ -49,10 +49,10 @@ function renderSelectDropdownChosenValue($dropdown, value) {
 
 $(document).on('input', '[action-select-dropdown-search-input]', function() {
   var thisDropdown = $(this).closest('[action-select-dropdown]');
-  var thisChosenItems = thisDropdown.find('[choice-value]');
+  var thisChoices = thisDropdown.find('[choice-value]').not('data-bind-repeatable-template');
   var searchQuery = $(this).val().toLowerCase();
 
-  thisChosenItems.each(function() {
+  thisChoices.each(function() {
     var attrVal = $(this).attr('choice-value').toLowerCase();
     var textVal = $(this).html();
     if (attrVal.includes(searchQuery) || textVal.includes(searchQuery)) {
