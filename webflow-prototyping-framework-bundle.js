@@ -3413,22 +3413,24 @@ $(document).on('click', '.w-dropdown-toggle', function(event) {
     var otherDropdownLists = $('.w-dropdown-list').not(thisDropdownList);
     var otherDropdownButtons = $('.w-dropdown-toggle').not(thisDropdownButton);
 
+    var isOpen = thisDropdownButton.hasClass('w--open') || thisDropdownButton.is('[is-open]');
+
     //TODO clean up webflow.js from unneccessary functions like dropdowns
     //because it is conflicting with our scripts
-    if (thisDropdownButton.hasClass('w--open')) {
+    if (isOpen) {
         setTimeout(function() {
-            thisDropdownButton.removeClass('w--open');
-            thisDropdownList.removeClass("w--open");
+            thisDropdownButton.removeClass('w--open').removeAttr('is-open');
+            thisDropdownList.removeClass("w--open").removeAttr('is-open');
         }, 0);
     } else {
         setTimeout(function() {
-            thisDropdownButton.addClass('w--open');
-            thisDropdownList.addClass("w--open");
+            thisDropdownButton.addClass('w--open').attr('is-open', 'true');
+            thisDropdownList.addClass("w--open").attr('is-open', 'true');
         }, 0);
     }
 
-    otherDropdownLists.removeClass('w--open');
-    otherDropdownButtons.removeClass('w--open');
+    otherDropdownLists.removeClass('w--open').removeAttr('is-open');
+    otherDropdownButtons.removeClass('w--open').removeAttr('is-open');
 });
 
 $(document).on('click.dropdown', document, function(event) {
