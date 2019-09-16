@@ -3948,7 +3948,7 @@ function renderSelectDropdownChosenValue($dropdown, value) {
 
 $(document).on('input', '[action-select-dropdown-search-input]', function() {
   var thisDropdown = $(this).closest('[action-select-dropdown]');
-  var thisChoices = thisDropdown.find('[choice-value]').not('data-bind-repeatable-template');
+  var thisChoices = thisDropdown.find('[choice-value]').not('[data-bind-repeatable-template]');
   var searchQuery = $(this).val().toLowerCase();
 
   thisChoices.each(function() {
