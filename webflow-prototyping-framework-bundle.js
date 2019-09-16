@@ -3920,7 +3920,6 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
             var otherNotChosenItems = $('[action-select-dropdown="'+paramToChange+'"]').find('[chosen-value]').not(chosenItem);
             chosenItem.removeClass('is-hidden');
             otherNotChosenItems.addClass('is-hidden');
-            renderSelectDropdownChosenValue(thisDropdown, value);
         });
     });
 });
