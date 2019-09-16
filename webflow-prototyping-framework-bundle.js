@@ -3924,6 +3924,21 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
     });
 });
 
+$(document).on('input', '[action-select-dropdown-search-input]', function() {
+  var thisDropdown = $(this).closest('[action-select-dropdown]');
+  var thisChosenItems = thisDropdown.find('[choice-value]');
+  var searchQuery = $(this).val().toLowerCase();
+
+  thisChosenItems.each(function() {
+    var attrVal = $(this).attr('choice-value').toLowerCase();
+    var textVal = $(this).html();
+    if (attrVal.includes(searchQuery) || textVal.includes(searchQuery)) {
+        $(this).isShown();
+    } else {
+        $(this).isHidden();
+    }
+  });
+});
 
 //Each checkbox state is stored in reactivelocalstorage
 $(document).on('click', '[action-radio-buttons] [chosen-value]', function(event) {
