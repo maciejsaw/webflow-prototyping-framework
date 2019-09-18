@@ -1100,6 +1100,10 @@ var QueryStringRouter = (function() {
 
 })();
 
+if (typeof QSR === 'undefined') {
+  var QSR = QueryStringRouter;
+}
+
 var ReactiveLocalStorage = (function() {
 
 	var paramsString; //this will be a string containing params to save in local storage

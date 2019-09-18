@@ -199,3 +199,7 @@ var QueryStringRouter = (function() {
 	};
 
 })();
+
+if (typeof QSR === 'undefined') {
+  var QSR = QueryStringRouter;
+}
