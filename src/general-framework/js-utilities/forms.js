@@ -19,15 +19,18 @@ $(document).on('click', '[stop-propagation]', function(event) {
 function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 	var button = clickedButtonElm.closest('[js-selector="button-with-spinner"]');
 	var spinnerIcon = clickedButtonElm.find('[js-selector="button-spinner-icon"]');
+	var textNearSpinner = clickedButtonElm.find('[js-selector="button-text-near-spinner"]');
 
 	button.addClass('is-inactive-with-preloader');
 	clickedButtonElm.addClass('is-inactive-with-preloader');
 	spinnerIcon.removeClass('is-hidden');
+	textNearSpinner.addClass('is-with-spinner-shown');
 
 	setTimeout(function() {
 		clickedButtonElm.removeClass('is-inactive-with-preloader');
 		button.removeClass('is-inactive-with-preloader');
 		spinnerIcon.addClass('is-hidden');
+		textNearSpinner.removeClass('is-with-spinner-shown');
 
 		actionAfter();
 	}, 1500);
