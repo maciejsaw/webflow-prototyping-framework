@@ -1399,6 +1399,10 @@ var ReactiveLocalStorage = (function() {
 
 })();
 
+if (typeof RLS === 'undefined') {
+  var RLS = ReactiveLocalStorage;
+}
+
 //EXAMPLES:
 
 // ReactiveLocalStorage.onParamChange('openModal' , function(value) {
