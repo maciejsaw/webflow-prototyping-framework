@@ -38,7 +38,7 @@ function showSpinnerInClickedButton(clickedButtonElm, actionAfter) {
 
 var showSpinnerInButton = showSpinnerInClickedButton;
 
-/* showing spinner briefly inside a button */
+/* showing spinner briefly inside a button (only for ptototyping) */
 (function( $ ) {
   $.fn.showSpinnerInsideThisButton = function(actionAfter) {
 
