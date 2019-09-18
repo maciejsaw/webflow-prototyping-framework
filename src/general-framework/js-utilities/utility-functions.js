@@ -153,7 +153,7 @@ function roundToPrevMultiple(x, multiple) {
 }
 
 if (typeof RLS === 'undefined') {
-  var RLS = ReactibeLocalStorage;
+  var RLS = ReactiveLocalStorage;
 }
 
 if (typeof QSR === 'undefined') {
