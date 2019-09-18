@@ -151,11 +151,3 @@ function roundToNextMultiple(x, multiple) {
 function roundToPrevMultiple(x, multiple) {
   return Math.ceil(x/multiple)*multiple - multiple;
 }
-
-if (typeof RLS === 'undefined') {
-  var RLS = ReactiveLocalStorage;
-}
-
-if (typeof QSR === 'undefined') {
-  var QSR = QueryStringRouter;
-}

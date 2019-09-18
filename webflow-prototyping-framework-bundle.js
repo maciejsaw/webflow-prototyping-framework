@@ -611,14 +611,6 @@ function roundToPrevMultiple(x, multiple) {
   return Math.ceil(x/multiple)*multiple - multiple;
 }
 
-if (typeof RLS === 'undefined') {
-  var RLS = ReactiveLocalStorage;
-}
-
-if (typeof QSR === 'undefined') {
-  var QSR = QueryStringRouter;
-}
-
 //fix common typos
 function fixCommonAttrTypos() {
   $('[action-shown-when-param-equals]').each(function() {
