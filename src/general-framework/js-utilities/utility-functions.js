@@ -149,5 +149,5 @@ function roundToNextMultiple(x, multiple) {
 }
 
 function roundToPrevMultiple(x, multiple) {
-  return Math.ceil(x/multiple)*multiple - multiple;
+  return Math.floor(x/multiple)*multiple;
 }
