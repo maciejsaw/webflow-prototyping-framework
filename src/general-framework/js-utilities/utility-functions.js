@@ -152,5 +152,10 @@ function roundToPrevMultiple(x, multiple) {
   return Math.ceil(x/multiple)*multiple - multiple;
 }
 
-var RLS = ReactibeLocalStorage;
-var QSR = QueryStringRouter;
+if (typeof RLS === 'undefined') {
+  var RLS = ReactibeLocalStorage;
+}
+
+if (typeof QSR === 'undefined') {
+  var QSR = QueryStringRouter;
+}
