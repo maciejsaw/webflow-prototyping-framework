@@ -29,6 +29,7 @@ var generalFrameworkScripts = [
 	"./src/general-framework/js-utilities/radio-buttons-binded-to-reactive-local-storage.js",
 	"./src/general-framework/js-utilities/input-fields-binded-to-reactive-local-storage.js",
 	"./src/general-framework/js-utilities/checkboxes-binded-to-reactive-local-storage.js",
+	"./src/general-framework/js-utilities/slider.js",
 	"./src/general-framework/js-utilities/data-binding-and-data-lists.js",
 	"./src/general-framework/js-utilities/showing-or-hiding-based-on-state.js",
 	"./src/general-framework/js-utilities/tabs.js",
