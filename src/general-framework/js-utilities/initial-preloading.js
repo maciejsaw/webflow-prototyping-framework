@@ -15,7 +15,8 @@ function recursivelyPreloadElements() {
 		elementsThatWillBePreloaded.each(function() {
 			var elemToLoad = $(this).attr('preload-from');
 			var $this = $(this);
-			$this.load(elemToLoad + " .content-to-load", function() {
+			var loadURL = window.location.origin+'/'+elemToLoad;
+			$this.load(loadURL + " .content-to-load", function() {
 				$this.attr('preloading-done', 'true');
 				checkIfEverythingIsPreloaded();
 			});
