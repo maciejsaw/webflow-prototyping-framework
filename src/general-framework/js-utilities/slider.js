@@ -69,6 +69,8 @@ function initSlidersDragging() {
 
     $sliderHandle.on('movestart.sliderMove', function(event) {
 
+      console.log('test');
+
       //if move angle is less than 45 degrees...
       var angleRatio = getAngleRatio(event.deltaX, event.deltaY);
       if (angleRatio > 1 ) {
