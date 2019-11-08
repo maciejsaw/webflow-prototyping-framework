@@ -118,6 +118,7 @@ function initSlidersDragging() {
     });
 
     $swipableArea.on('click', function(event) {
+      console.log(event);
       var eventVieportPageX = event.pageX - window.scrollX;
       var rect = $swipableArea[0].getBoundingClientRect();
       var clickedDistanceInElem = eventVieportPageX.toFixed(0) - rect.left.toFixed(0);
