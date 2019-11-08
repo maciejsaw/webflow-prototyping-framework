@@ -4826,7 +4826,7 @@ function initSlidersDragging() {
 
     $swipableArea.on('click', function(event) {
       var clickedXCoordinate = event.pageX - $swipableArea.offset.left;
-      var sliderWidth = $swipableArea.outerWidth;
+      var sliderWidth = $swipableArea.outerWidth();
       console.log(clickedXCoordinate);
       var percetangeThatWasSet = clickedXCoordinate / sliderWidth;
       var resultNumber = (maxValue - minValue)*percetangeThatWasSet + Number(minValue);
