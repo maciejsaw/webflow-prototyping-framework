@@ -120,7 +120,7 @@ function initSlidersDragging() {
     $swipableArea.on('click', function(event) {
       var clickedXCoordinate = event.pageX - this.offsetLeft;
       var sliderWidth = this.outerWidth;
-
+      console.log(clickedXCoordinate);
       var percetangeThatWasSet = clickedXCoordinate / sliderWidth;
       var resultNumber = (maxValue - minValue)*percetangeThatWasSet + Number(minValue);
       var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
