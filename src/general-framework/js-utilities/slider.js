@@ -119,16 +119,20 @@ function initSlidersDragging() {
 
     $swipableArea.on('click', function(event) {
       console.log(event);
-      var eventVieportPageX = event.pageX - window.scrollX;
-      var rect = $swipableArea[0].getBoundingClientRect();
-      var clickedDistanceInElem = eventVieportPageX.toFixed(0) - rect.left.toFixed(0);
-      var sliderWidth = $swipableArea.outerWidth();
-      var clickedPercentage = clickedDistanceInElem / sliderWidth;
-      var resultNumber = (maxValue - minValue)*clickedPercentage + Number(minValue);
-      if (resultNumber > maxValue) {resultNumber = maxValue }
-      if (resultNumber < minValue) {resultNumber = minValue }
-      var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
-      ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
+      //only apply click logic if an area outside of handle is clicked
+      if ($(event.target).closest('[js-slider-handle]').length === 0) {
+        var eventVieportPageX = event.pageX - window.scrollX;
+        var rect = $swipableArea[0].getBoundingClientRect();
+        var clickedDistanceInElem = eventVieportPageX.toFixed(0) - rect.left.toFixed(0);
+        var sliderWidth = $swipableArea.outerWidth();
+        var clickedPercentage = clickedDistanceInElem / sliderWidth;
+        var resultNumber = (maxValue - minValue)*clickedPercentage + Number(minValue);
+        if (resultNumber > maxValue) {resultNumber = maxValue }
+        if (resultNumber < minValue) {resultNumber = minValue }
+        var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
+        ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
+      }
+
     });
 
   });
