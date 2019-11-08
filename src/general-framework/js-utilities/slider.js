@@ -117,15 +117,9 @@ function initSlidersDragging() {
       }
     });
 
-    function getElementOffsetLeftInDocument(elem) {
-      var offsetToMeasure = {};
-      while (!$.isEmptyObject(elem.parentOffset)) {
-        offsetToMeasure = elem.parentOffset;
-      }
-      return offsetToMeasure.offsetLeft;
-    }
-
     $swipableArea.on('click', function(event) {
+      console.log(event);
+
       var clickedXCoordinate = event.pageX - $swipableArea.offset().left;
       var sliderWidth = $swipableArea.outerWidth();
       console.log(clickedXCoordinate);
