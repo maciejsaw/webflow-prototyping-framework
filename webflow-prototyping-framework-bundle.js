@@ -4826,12 +4826,9 @@ function initSlidersDragging() {
 
     $swipableArea.on('click', function(event) {
       console.log(event);
-
-      var clickedXCoordinate = event.pageX - $swipableArea.offset().left;
-      var sliderWidth = $swipableArea.outerWidth();
-      console.log(clickedXCoordinate);
-      var percetangeThatWasSet = clickedXCoordinate / sliderWidth;
-      var resultNumber = (maxValue - minValue)*percetangeThatWasSet + Number(minValue);
+      var areaCoordinates = $swipableArea.getBoundingClientRect;
+      var clickedPercentage = (event.pageX - areaCoordinates.left) / (areaCoordinates.right - areaCoordinates.left);
+      var resultNumber = (maxValue - minValue)*clickedPercentage + Number(minValue);
       var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
       ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
       debugger
