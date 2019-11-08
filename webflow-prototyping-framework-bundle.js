@@ -4828,12 +4828,10 @@ function initSlidersDragging() {
       console.log(event);
       var eventVieportPageX = event.pageX - window.scrollX;
       var rect = $swipableArea[0].getBoundingClientRect();
-      console.log(areaCoordinates);
       var clickedPercentage = (eventVieportPageX - rect.left) / (rect.right - rect.left);
       var resultNumber = (maxValue - minValue)*clickedPercentage + Number(minValue);
       var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
       ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
-      debugger
     });
 
   });
