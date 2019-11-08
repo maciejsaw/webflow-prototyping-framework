@@ -118,7 +118,6 @@ function initSlidersDragging() {
     });
 
     $swipableArea.on('click', function(event) {
-      console.log(this);
       var clickedXCoordinate = event.pageX - $swipableArea.offsetLeft;
       var sliderWidth = $swipableArea.outerWidth;
       console.log(clickedXCoordinate);
@@ -126,6 +125,7 @@ function initSlidersDragging() {
       var resultNumber = (maxValue - minValue)*percetangeThatWasSet + Number(minValue);
       var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
       ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
+      debugger
     });
 
   });
