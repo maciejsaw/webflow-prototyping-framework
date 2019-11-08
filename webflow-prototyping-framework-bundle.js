@@ -3794,8 +3794,7 @@ function showErrorForElement(elm, validationResult) {
 	}
 
 	errorMsgFromElm = elm.attr('err-txt__'+validationResult);
-	console.log(errorMsgFromElm);
-	console.log(validationResult);
+
 	if (typeof errorMsgFromElm !== "undefined") {
 		errorMsg = errorMsgFromElm;
 	}
@@ -3841,8 +3840,6 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 
 	//var numberOfErrors = elm.find('[has-error]').length;
 	if (numberOfErrors === 0) {
-		console.log('no errors');
-		console.log(callbacksObject);
 		if (callbacksObject && callbacksObject.onSuccess) {
 			callbacksObject.onSuccess();
 		}
@@ -3856,7 +3853,6 @@ ReactiveLocalStorage.validateElementChildren = function(elm, callbacksObject) {
 
 ReactiveLocalStorage.setDefaultParamAndValidationRules = function(param, options) {
 	if (options && typeof options.default !== 'undefined') {
-		console.log(options);
 		ReactiveLocalStorage.setDefaultParam(param, options.default);
 	}
 	ReactiveLocalStorage.registerParamValidator(param, options.validationFunction);
