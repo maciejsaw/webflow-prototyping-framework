@@ -120,7 +120,7 @@ function initSlidersDragging() {
     $swipableArea.on('click', function(event) {
       console.log(event);
       var eventVieportPageX = event.pageX - window.scrollX;
-      var areaCoordinates = $swipableArea[0].getBoundingClientRect;
+      var areaCoordinates = $swipableArea[0].getBoundingClientRect();
       var clickedPercentage = (eventVieportPageX - areaCoordinates.left) / (areaCoordinates.right - areaCoordinates.left);
       var resultNumber = (maxValue - minValue)*clickedPercentage + Number(minValue);
       var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
