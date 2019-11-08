@@ -4831,8 +4831,8 @@ function initSlidersDragging() {
       var sliderWidth = $swipableArea.outerWidth();
       var clickedPercentage = clickedDistanceInElem / sliderWidth;
       var resultNumber = (maxValue - minValue)*clickedPercentage + Number(minValue);
-      if (resultNumber > maxValue) {resultNumber = maxValue; }
-      if (resultNumber < minValue) {resultNumber = minValue; }
+      if (resultNumber > maxValue) {resultNumber = maxValue }
+      if (resultNumber < minValue) {resultNumber = minValue }
       var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
       ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
     });
