@@ -118,6 +118,7 @@ function initSlidersDragging() {
     });
 
     $swipableArea.on('click', function(event) {
+      console.log(this);
       var clickedXCoordinate = event.pageX - this.offsetLeft;
       var sliderWidth = this.outerWidth;
       console.log(clickedXCoordinate);
