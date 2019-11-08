@@ -117,6 +117,16 @@ function initSlidersDragging() {
       }
     });
 
+    $swipableArea.on('click', function(event) {
+      var clickedXCoordinate = event.pageX - this.offsetLeft;
+      var sliderWidth = this.outerWidth;
+
+      var percetangeThatWasSet = clickedXCoordinate / sliderWidth;
+      var resultNumber = (maxValue - minValue)*percetangeThatWasSet + Number(minValue);
+      var resultNumberRounded = roundToClosestMultipleOf(interval, resultNumber);
+      ReactiveLocalStorage.setParam(bindedParam, resultNumberRounded);
+    });
+
   });
 }
 
