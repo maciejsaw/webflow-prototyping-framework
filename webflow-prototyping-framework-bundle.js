@@ -4826,7 +4826,7 @@ function initSlidersDragging() {
 
     function getElementOffsetLeftInDocument(elem) {
       var offsetToMeasure = {};
-      while (typeof elem.offsetParent !== 'undefined' && elem.offsetParent !== null) {
+      while (!$.isEmptyObject(elem.parentOffset)) {
         offsetToMeasure = elem.parentOffset;
       }
       return offsetToMeasure.offsetLeft;
