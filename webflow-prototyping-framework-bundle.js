@@ -4824,6 +4824,14 @@ function initSlidersDragging() {
       }
     });
 
+    function getElementOffsetLeftInDocument(elem) {
+      var offsetToMeasure = {};
+      while (typeof elem.offsetParent !== 'undefined' && elem.offsetParent !== null) {
+        offsetToMeasure = elem.parentOffset;
+      }
+      return offsetToMeasure.offsetLeft;
+    }
+
     $swipableArea.on('click', function(event) {
       var clickedXCoordinate = event.pageX - $swipableArea.offset().left;
       var sliderWidth = $swipableArea.outerWidth();
