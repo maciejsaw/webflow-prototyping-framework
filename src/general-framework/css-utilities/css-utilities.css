@@ -91,7 +91,9 @@ textarea {
   pointer-events: none;
 }
 
-.bem-button-with-spinner.is-inactive-with-preloader, .bem-button.is-inactive-with-preloader {
+.bem-button-with-spinner.is-inactive-with-preloader,
+.bem-button.is-inactive-with-preloader,
+[is-inactive-with-preloader] {
   pointer-events: none;
 }
 
