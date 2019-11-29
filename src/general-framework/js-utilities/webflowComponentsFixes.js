@@ -52,43 +52,15 @@ $(document).on('click', '[data-w-tab][ajax="true"]', function() {
     console.log('ajaxTabs');
 });
 
-/* automatic triangles for popup boxes [unfinished]
-function addBoxTriangle() {
-    var box_background_color;
-    var box_border_color;
-    box_background_color === $('[box-triangle]').css('background-color');
-    box_border_color === $('[box-triangle]').css('border-color');
-
-    //triangles
-    var triangle
-} */
-
-//sequential tabs, to use tabs as step by step flow
-function inititTabsNextPrevActions() {
-    $(document).on('click', '[tabs-nav="next"]', function() {
-        $(this).closest('.w-tab-content').prev('.w-tab-menu').find('.w-tab-link.w--current').next('.w-tab-link').click();
-    });
-
-    $(document).on('click', '[tabs-nav="prev"]', function() {
-        $(this).closest('.w-tab-content').prev('.w-tab-menu').find('.w-tab-link.w--current').prev('.w-tab-link').click();
-    });
-}
-
-$(document).ready(function() {
-    inititTabsNextPrevActions();
-});
-
 //links with attributes, without link blocks
 $(document).on('click', '[click-link]', function(e) {
     e.preventDefault();
-    console.log('manual link redirect');
     window.location.href = $(this).attr('click-link');
 });
 
 //links with attributes, without link blocks
 $(document).on('click', '[action-go-to-url]', function(e) {
     e.preventDefault();
-    console.log('manual link redirect');
     window.location.href = $(this).attr('action-go-to-url');
 });
 

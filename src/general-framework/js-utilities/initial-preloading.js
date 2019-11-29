@@ -5,7 +5,6 @@
 //we can define for what specific events we wait until we show the UI,
 //for example we may want to preload not only subpages, but additional promo modals etc.
 
-
 function recursivelyPreloadElements() {
 	var preloadMissingElements = function() {
 		var elementsThatWillBePreloaded = $('[preload-from]').not('[preloading-started]').not('[preloading-done]');
@@ -47,9 +46,9 @@ function initTheUIAfterPreloading() {
 	$(document).trigger('preloadingComplete');
 	QueryStringRouter.retriggerOnParamChangeForAll();
 	ReactiveLocalStorage.retriggerOnParamChangeForAll();
-	console.log('retriggerOnParamChangeForAll');
-	if ($('.initial-load-overlay').length > 0) {
-		$('.initial-load-overlay').fadeOutAndHide(500);
+	var $initalLoadOverlay = $('.initial-load-overlay, [initial-load-overlay]');
+	if ($initalLoadOverlay.length > 0) {
+		$initalLoadOverlay.fadeOutAndHide(500);
 	}
 }
 
@@ -62,9 +61,7 @@ function waitForInitialAjaxLoadingToFinishThenShowUI(eventsToWaitFor, callbackFu
 			//TODO refactor so that it checks if the specific events happened, not number of elements
 			numberOfEventsThatHappened = numberOfEventsThatHappened + 1;
 			if (numberOfEventsThatHappened === eventsToWaitFor.length) {
-				console.log('preloading complete start');
 				if (typeof callbackFunction === 'function') { callbackFunction(); }
-				console.log('preloading complete end');
 			}
 		});
 	});
