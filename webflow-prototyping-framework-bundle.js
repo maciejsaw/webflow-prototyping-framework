@@ -1244,7 +1244,7 @@ var QueryStringRouter = (function() {
 	}
 
 	//when document loads
-	processQueryStringParams();
+	//processQueryStringParams();
 
 	$(window).on('popstate', function() {
 		queryString = window.location.search.substring(1);
@@ -1260,7 +1260,7 @@ var QueryStringRouter = (function() {
 	});
 
 	var doNotCreateHistoryState = true;
-  var udpateURLTimer;
+    var udpateURLTimer;
 	function updateURL(options) {
 		options = options || {};
 
