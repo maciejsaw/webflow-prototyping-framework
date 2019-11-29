@@ -266,7 +266,7 @@ var ReactiveLocalStorage = (function() {
 		version: {
 			version: 6,
 			versionNotes: {
-				6: 'Added debuncing for storing in localStorage'
+				6: 'Added debuncing for storing in localStorage'.
 				5: 'Removed default retrigger on param change while creating the onParamChage',
 				4: 'Added options to disable retrigger on param change while creating onParamChange',
 				3: 'Added fallback for Safari incognito not supporting localStorage',
