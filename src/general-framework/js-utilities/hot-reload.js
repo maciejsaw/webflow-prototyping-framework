@@ -6,13 +6,6 @@ function reloadCssWithoutReloadingPage() {
   });
 }
 
-var initHotReloadingOfScriptsBundleTimer = {};
-function initHotReloadingOfScriptsBundle(interval) {
-  reloadJSBundleWithoutReloadingPage();
-  interval = interval || 5000;
-  initHotReloadingOfScriptsBundleTimer = setInterval(reloadJSBundleWithoutReloadingPage, interval);
-}
-
 var initHotReloadingOfCSSTimer = {};
 function initHotReloadingOfCSS(interval) {
   reloadCssWithoutReloadingPage();
