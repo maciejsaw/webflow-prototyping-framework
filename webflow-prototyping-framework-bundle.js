@@ -1429,10 +1429,14 @@ var ReactiveLocalStorage = (function() {
 	//the condition is to degrade to regular variables if localStorage is not supported,
 	//especially happens in Safari iOS incognito mode
 	var saveParamObjectToLocalStorageAsString;
+	var saveParamObjectToLocalStorageAsString__debounceTimer;
 	if ( isLocalStorageNameSupported() ) {
 		saveParamObjectToLocalStorageAsString = function(paramsObject) {
 			paramsString = JSON.stringify(paramsObject);
-			localStorage.setItem('paramsString', paramsString);
+			clearTimeout(saveParamObjectToLocalStorageAsString__debounceTimer);
+			saveParamObjectToLocalStorageAsString__debounceTimer = setTimeout(function() {
+				localStorage.setItem('paramsString', paramsString);
+			}, 50);
 		};
 		checkIfParamsAreAlreadyStoredInLocalStorage();
 	} else {
