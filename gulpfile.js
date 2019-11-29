@@ -39,6 +39,7 @@ var generalFrameworkScripts = [
 	"./src/general-framework/js-utilities/collapsible-sections.js",
 	"./src/general-framework/js-utilities/eventBindingUtilities.js",
 	"./src/general-framework/js-utilities/debug-overlay.js",
+	"./src/general-framework/js-utilities/hot-reload.js",
 ];
 
 var mainAppScripts = [
