@@ -158,7 +158,7 @@ textarea {
 }
 
 
-input[type=text] {
+input[type=text], input[type=number] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
