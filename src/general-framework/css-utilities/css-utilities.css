@@ -75,7 +75,7 @@ textarea {
   animation: yellowHighlight 6s ease;
 }
 
-.bem-select-dropdown__button[is-disabled] {
+.bem-select-dropdown__button[disabled] {
   pointer-events: none;
 }
 
