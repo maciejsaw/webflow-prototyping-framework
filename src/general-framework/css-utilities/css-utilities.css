@@ -75,6 +75,10 @@ textarea {
   animation: yellowHighlight 6s ease;
 }
 
+.bem-select-dropdown__button[is-disabled] {
+  pointer-events: none;
+}
+
 .is-grayed-out {
   pointer-events: none;
 }
