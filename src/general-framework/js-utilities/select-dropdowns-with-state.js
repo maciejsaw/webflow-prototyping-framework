@@ -17,6 +17,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
         //only if no other default was set, waiting 3 seconds
         //TODO remove this after old code updated
         var firstAvailableChoice = thisDropdown.find('[chosen-value]').attr('chosen-value');
+        debugger
         setTimeout(function() {
             if (typeof ReactiveLocalStorage.getParam(paramToChange) !== 'undefined') {
                 ReactiveLocalStorage.setDefaultParam(paramToChange, firstAvailableChoice );
