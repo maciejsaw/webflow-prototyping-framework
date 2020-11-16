@@ -20,7 +20,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
 
         setTimeout(function() {
             if (typeof ReactiveLocalStorage.getParam(paramToChange) !== 'undefined') {
-                debugger
+                console.log(firstAvailableChoice);
                 ReactiveLocalStorage.setDefaultParam(paramToChange, firstAvailableChoice );
             }
         }, 3000);
