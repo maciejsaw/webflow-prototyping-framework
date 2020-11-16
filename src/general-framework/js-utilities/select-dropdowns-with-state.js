@@ -19,7 +19,7 @@ $(document).on('preloadingComplete', function() { //need to wait for all the aja
         var firstAvailableChoice = thisDropdown.find('[chosen-value]').attr('chosen-value');
 
         setTimeout(function() {
-            if (typeof ReactiveLocalStorage.getParam(paramToChange) !== 'undefined') {
+            if (typeof ReactiveLocalStorage.getParam(paramToChange) === 'undefined') {
                 console.log(firstAvailableChoice);
                 ReactiveLocalStorage.setDefaultParam(paramToChange, firstAvailableChoice );
             }
