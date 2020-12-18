@@ -1411,301 +1411,305 @@ if (typeof QSR === 'undefined') {
   var QSR = QueryStringRouter;
 }
 
-var ReactiveLocalStorage = (function() {
+// var ReactiveLocalStorage = (function() {
 
-	var paramsString; //this will be a string containing params to save in local storage
+// 	var paramsString; //this will be a string containing params to save in local storage
 
-	function isLocalStorageNameSupported() {
-	    var testKey = 'test', storage = window.sessionStorage;
-	    try
-	    {
-	        storage.setItem(testKey, '1');
-	        storage.removeItem(testKey);
-	        return true;
-	    }
-	    catch (error)
-	    {
-	    	console.error('Local Storage is not working in Safari incognito mode');
-	        return false;
-	    }
-	}
+// 	function isLocalStorageNameSupported() {
+// 	    var testKey = 'test', storage = window.sessionStorage;
+// 	    try
+// 	    {
+// 	        storage.setItem(testKey, '1');
+// 	        storage.removeItem(testKey);
+// 	        return true;
+// 	    }
+// 	    catch (error)
+// 	    {
+// 	    	console.error('Local Storage is not working in Safari incognito mode');
+// 	        return false;
+// 	    }
+// 	}
 
-	//the condition is to degrade to regular variables if localStorage is not supported,
-	//especially happens in Safari iOS incognito mode
-	var saveParamObjectToLocalStorageAsString;
-	var saveParamObjectToLocalStorageAsString__debounceTimer;
-	if ( isLocalStorageNameSupported() ) {
-		saveParamObjectToLocalStorageAsString = function(paramsObject) {
-			paramsString = JSON.stringify(paramsObject);
-			clearTimeout(saveParamObjectToLocalStorageAsString__debounceTimer);
-			saveParamObjectToLocalStorageAsString__debounceTimer = setTimeout(function() {
-				localStorage.setItem('paramsString', paramsString);
-			}, 50);
-		};
-		checkIfParamsAreAlreadyStoredInLocalStorage();
-	} else {
-		saveParamObjectToLocalStorageAsString = function(paramsObject) {
-			paramsString = JSON.stringify(paramsObject);
-		};
-		var paramsObject = {};
-		paramsString = JSON.stringify({});
-	}
+// 	//the condition is to degrade to regular variables if localStorage is not supported,
+// 	//especially happens in Safari iOS incognito mode
+// 	var saveParamObjectToLocalStorageAsString;
+// 	var saveParamObjectToLocalStorageAsString__debounceTimer;
+// 	if ( isLocalStorageNameSupported() ) {
+// 		saveParamObjectToLocalStorageAsString = function(paramsObject) {
+// 			paramsString = JSON.stringify(paramsObject);
+// 			clearTimeout(saveParamObjectToLocalStorageAsString__debounceTimer);
+// 			saveParamObjectToLocalStorageAsString__debounceTimer = setTimeout(function() {
+// 				localStorage.setItem('paramsString', paramsString);
+// 			}, 50);
+// 		};
+// 		checkIfParamsAreAlreadyStoredInLocalStorage();
+// 	} else {
+// 		saveParamObjectToLocalStorageAsString = function(paramsObject) {
+// 			paramsString = JSON.stringify(paramsObject);
+// 		};
+// 		var paramsObject = {};
+// 		paramsString = JSON.stringify({});
+// 	}
 
-	function checkIfParamsAreAlreadyStoredInLocalStorage() {
-		if (typeof localStorage.getItem('paramsString') == 'undefined' || localStorage.getItem('paramsString') == null) {
-			var paramsObject = {};
-			saveParamObjectToLocalStorageAsString(paramsObject);
-		} else {
-			var stringFromLocalStorage = localStorage.getItem('paramsString');
-			try {
-				JSON.parse(stringFromLocalStorage);
-				paramsString = stringFromLocalStorage;
-			} catch(err) {
-				console.error('couldn not parse local storage string');
-				console.error(err);
-				paramsString = JSON.stringify({});
-			}
+// 	function checkIfParamsAreAlreadyStoredInLocalStorage() {
+// 		if (typeof localStorage.getItem('paramsString') == 'undefined' || localStorage.getItem('paramsString') == null) {
+// 			var paramsObject = {};
+// 			saveParamObjectToLocalStorageAsString(paramsObject);
+// 		} else {
+// 			var stringFromLocalStorage = localStorage.getItem('paramsString');
+// 			try {
+// 				JSON.parse(stringFromLocalStorage);
+// 				paramsString = stringFromLocalStorage;
+// 			} catch(err) {
+// 				console.error('couldn not parse local storage string');
+// 				console.error(err);
+// 				paramsString = JSON.stringify({});
+// 			}
 
-		}
-	}
+// 		}
+// 	}
 
-	//at the beginning, check if params are stored in local storage
-	// if (typeof localStorage.getItem('paramsString') == 'undefined' || localStorage.getItem('paramsString') == null) {
-	// 	var paramsObject = {};
-	// 	saveParamObjectToLocalStorageAsString(paramsObject);
-	// } else {
-	// 	paramsString = localStorage.getItem('paramsString');
-	// }
+// 	//at the beginning, check if params are stored in local storage
+// 	// if (typeof localStorage.getItem('paramsString') == 'undefined' || localStorage.getItem('paramsString') == null) {
+// 	// 	var paramsObject = {};
+// 	// 	saveParamObjectToLocalStorageAsString(paramsObject);
+// 	// } else {
+// 	// 	paramsString = localStorage.getItem('paramsString');
+// 	// }
 
-	function getParam(key) {
-		//this return only values, not direct access to paramsObject
-		//that's why we JSON.parse here
-		return JSON.parse(paramsString)[key];
-	}
+// 	function getParam(key) {
+// 		//this return only values, not direct access to paramsObject
+// 		//that's why we JSON.parse here
+// 		return JSON.parse(paramsString)[key];
+// 	}
 
-	function getAllParams() {
-		return JSON.parse(paramsString);
-	}
+// 	function getAllParams() {
+// 		return JSON.parse(paramsString);
+// 	}
 
-	function setParam(key, value, options) {
-		options = options || {};
+// 	function setParam(key, value, options) {
+// 		options = options || {};
 
-		var paramsObject = JSON.parse(paramsString);
+// 		var paramsObject = JSON.parse(paramsString);
 
-		if (paramsObject[key] !== value) {
-			paramsObject[key] = value;
-			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
-		}
+// 		if (paramsObject[key] !== value) {
+// 			paramsObject[key] = value;
+// 			saveParamObjectToLocalStorageAsString(paramsObject);
+// 			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
+// 		}
 
-	}
+// 	}
 
-	function setDefaultParam(key, value) {
-		var paramsObject = JSON.parse(paramsString);
+// 	function setDefaultParam(key, value) {
+// 		var paramsObject = JSON.parse(paramsString);
 
-		if (typeof paramsObject[key] == 'undefined') {
-			setParam(key, value);
-		}
-	}
+// 		if (typeof paramsObject[key] == 'undefined') {
+// 			setParam(key, value);
+// 		}
+// 	}
 
-	function appendToBeginningOfTheArray(paramNameThatContainsArray, objectToAppend) {
-		var array = getParam(paramNameThatContainsArray);
+// 	function appendToBeginningOfTheArray(paramNameThatContainsArray, objectToAppend) {
+// 		var array = getParam(paramNameThatContainsArray);
 
-		if (typeof array === 'undefined') {
-			array = [];
-		}
+// 		if (typeof array === 'undefined') {
+// 			array = [];
+// 		}
 
-		array.unshift(objectToAppend);
+// 		array.unshift(objectToAppend);
 
-		setParam(paramNameThatContainsArray, array);
-	}
+// 		setParam(paramNameThatContainsArray, array);
+// 	}
 
-	function appendToArray(paramNameThatContainsArray, objectToAppend) {
-		var array = getParam(paramNameThatContainsArray);
+// 	function appendToArray(paramNameThatContainsArray, objectToAppend) {
+// 		var array = getParam(paramNameThatContainsArray);
 
-		if (typeof array === 'undefined') {
-			array = [];
-		}
+// 		if (typeof array === 'undefined') {
+// 			array = [];
+// 		}
 
-		array.push(objectToAppend);
+// 		array.push(objectToAppend);
 
-		setParam(paramNameThatContainsArray, array);
-	}
+// 		setParam(paramNameThatContainsArray, array);
+// 	}
 
-	function removeElementFromArrayXWithIdY(paramNameThatContainsArray, idThatShouldBeRemoved) {
-		var array = getParam(paramNameThatContainsArray);
+// 	function removeElementFromArrayXWithIdY(paramNameThatContainsArray, idThatShouldBeRemoved) {
+// 		var array = getParam(paramNameThatContainsArray);
 
-		array = $.grep(array, function(elementOfArray, indexInArray){
-			return elementOfArray.id != idThatShouldBeRemoved;
-		});
+// 		array = $.grep(array, function(elementOfArray, indexInArray){
+// 			return elementOfArray.id != idThatShouldBeRemoved;
+// 		});
 
-		setParam(paramNameThatContainsArray, array);
-	}
+// 		setParam(paramNameThatContainsArray, array);
+// 	}
 
-	function updateObjectInArray(paramNameThatContainsArray, options) {
-		var array = getParam(paramNameThatContainsArray);
+// 	function updateObjectInArray(paramNameThatContainsArray, options) {
+// 		var array = getParam(paramNameThatContainsArray);
 
-		//this is to show the schema of options here in code
-		var idToLookFor = options.findObjectWithId;
-		var propertyToUpdate = options.propertyToUpdate;
-		var newValue = options.newValue;
+// 		//this is to show the schema of options here in code
+// 		var idToLookFor = options.findObjectWithId;
+// 		var propertyToUpdate = options.propertyToUpdate;
+// 		var newValue = options.newValue;
 
-		$.grep(array, function(elementOfArray, indexInArray){
-			if (elementOfArray['id'] === idToLookFor || elementOfArray['ID'] === idToLookFor) {
-				elementOfArray[propertyToUpdate] = newValue;
-			}
-		});
+// 		$.grep(array, function(elementOfArray, indexInArray){
+// 			if (elementOfArray['id'] === idToLookFor || elementOfArray['ID'] === idToLookFor) {
+// 				elementOfArray[propertyToUpdate] = newValue;
+// 			}
+// 		});
 
-		setParam(paramNameThatContainsArray, array);
-	}
+// 		setParam(paramNameThatContainsArray, array);
+// 	}
 
-	function findInArrayXObjectWithPropertyYMatchingZ(paramNameThatContainsArray, objectPropertyToSearchIn, propertyValueThatShouldMatch) {
-		var array = getParam(paramNameThatContainsArray);
+// 	function findInArrayXObjectWithPropertyYMatchingZ(paramNameThatContainsArray, objectPropertyToSearchIn, propertyValueThatShouldMatch) {
+// 		var array = getParam(paramNameThatContainsArray);
 
-		if ($.isArray(array)) {
-			var filteredData = $.grep(array, function(elementOfArray, indexInArray){
-				return elementOfArray[objectPropertyToSearchIn] === propertyValueThatShouldMatch;
-			});
-			if (filteredData.length > 0) {
-				return filteredData[0];
-			} else {
-				return [];
-			}
-		} else {
-			return [];
-		}
+// 		if ($.isArray(array)) {
+// 			var filteredData = $.grep(array, function(elementOfArray, indexInArray){
+// 				return elementOfArray[objectPropertyToSearchIn] === propertyValueThatShouldMatch;
+// 			});
+// 			if (filteredData.length > 0) {
+// 				return filteredData[0];
+// 			} else {
+// 				return [];
+// 			}
+// 		} else {
+// 			return [];
+// 		}
 
-	}
+// 	}
 
-	function findInArrayXObjectWithIdY(paramNameWithArray, idThatShouldMatch) {
-		var result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'id', idThatShouldMatch);
-		if (typeof result === 'undefined' || result.length === 0) {
-			//fallback for differt way to write id --> ID
-			result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'ID', idThatShouldMatch);
-		}
-		return result;
-	}
+// 	function findInArrayXObjectWithIdY(paramNameWithArray, idThatShouldMatch) {
+// 		var result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'id', idThatShouldMatch);
+// 		if (typeof result === 'undefined' || result.length === 0) {
+// 			//fallback for differt way to write id --> ID
+// 			result = findInArrayXObjectWithPropertyYMatchingZ(paramNameWithArray, 'ID', idThatShouldMatch);
+// 		}
+// 		return result;
+// 	}
 
-	function removeParam(key, options) {
-		var paramsObject = JSON.parse(paramsString);
+// 	function removeParam(key, options) {
+// 		var paramsObject = JSON.parse(paramsString);
 
-		options = options || {};
+// 		options = options || {};
 
-		if (typeof paramsObject[key] !== 'undefined') {
-			delete paramsObject[key];
-			saveParamObjectToLocalStorageAsString(paramsObject);
-			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
-		}
-	}
+// 		if (typeof paramsObject[key] !== 'undefined') {
+// 			delete paramsObject[key];
+// 			saveParamObjectToLocalStorageAsString(paramsObject);
+// 			$(document).trigger('reactiveLocalStorage__'+key+'__paramChanged');
+// 		}
+// 	}
 
-	function setFreshParams(newParamsObj) {
-		saveParamObjectToLocalStorageAsString(newParamsObj);
-		retriggerOnParamChangeForAll();
-	}
+// 	function setFreshParams(newParamsObj) {
+// 		saveParamObjectToLocalStorageAsString(newParamsObj);
+// 		retriggerOnParamChangeForAll();
+// 	}
 
-	var actionsOnParamChange = {};
-	function onParamChange(key, actionFunction, options) {
-		$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
-			var paramsObject = JSON.parse(paramsString);
-			var value = paramsObject[key];
-			actionFunction(value);
-		});
+// 	var actionsOnParamChange = {};
+// 	function onParamChange(key, actionFunction, options) {
+// 		$(document).on('reactiveLocalStorage__'+key+'__paramChanged', function(event) {
+// 			var paramsObject = JSON.parse(paramsString);
+// 			var value = paramsObject[key];
+// 			actionFunction(value);
+// 		});
 
-		//store the action on param in a separate array, so that we can retrigger this route manually
-		//because this might be needed for ajax loaded content etc.
-		if (typeof actionsOnParamChange[key] === 'undefined') {
-			actionsOnParamChange[key] = [];
-		}
-		actionsOnParamChange[key].push(actionFunction);
-	}
+// 		//store the action on param in a separate array, so that we can retrigger this route manually
+// 		//because this might be needed for ajax loaded content etc.
+// 		if (typeof actionsOnParamChange[key] === 'undefined') {
+// 			actionsOnParamChange[key] = [];
+// 		}
+// 		actionsOnParamChange[key].push(actionFunction);
+// 	}
 
-	function retriggerOnParamChange(key) {
-		var paramsObject = JSON.parse(paramsString);
-		var param = paramsObject[key];
-		var arrayOfFunctionsAssociatedWithThisParam = actionsOnParamChange[key];
-		$.each(arrayOfFunctionsAssociatedWithThisParam, function(index, value) {
-			value(param);
-		});
-	}
+// 	function retriggerOnParamChange(key) {
+// 		var paramsObject = JSON.parse(paramsString);
+// 		var param = paramsObject[key];
+// 		var arrayOfFunctionsAssociatedWithThisParam = actionsOnParamChange[key];
+// 		$.each(arrayOfFunctionsAssociatedWithThisParam, function(index, value) {
+// 			value(param);
+// 		});
+// 	}
 
-	function retriggerOnParamChangeForAll() {
-		$.each(actionsOnParamChange, function(key, value) {
-			retriggerOnParamChange(key);
-		});
-	}
+// 	function retriggerOnParamChangeForAll() {
+// 		$.each(actionsOnParamChange, function(key, value) {
+// 			retriggerOnParamChange(key);
+// 		});
+// 	}
 
-	function toggleParam(key, value1, value2) {
-		if (typeof value1 === 'undefined') {value1 = 'true'};
-		if (typeof value2 === 'undefined') {value2 = 'false'};
+// 	function toggleParam(key, value1, value2) {
+// 		if (typeof value1 === 'undefined') {value1 = 'true'};
+// 		if (typeof value2 === 'undefined') {value2 = 'false'};
 
-		var previousValue = getParam(key);
-		console.log(previousValue);
+// 		var previousValue = getParam(key);
+// 		console.log(previousValue);
 
-		if (previousValue !== value1) {
-			setParam(key, value1);
-		} else if (previousValue !== value2) {
-			setParam(key, value2);
-		}
-	}
+// 		if (previousValue !== value1) {
+// 			setParam(key, value1);
+// 		} else if (previousValue !== value2) {
+// 			setParam(key, value2);
+// 		}
+// 	}
 
-	function clearAllParams() {
-		localStorage.removeItem('paramsString');
-		saveParamObjectToLocalStorageAsString({});
-	}
+// 	function clearAllParams() {
+// 		localStorage.removeItem('paramsString');
+// 		saveParamObjectToLocalStorageAsString({});
+// 	}
 
-	function clearAllButLeave(paramsToLeaveArray) {
+// 	function clearAllButLeave(paramsToLeaveArray) {
 
-		if (typeof paramsToLeaveArray === 'undefined') {
-			console.error('You need to provide paramsToLeaveArray');
-			return;
-		}
+// 		if (typeof paramsToLeaveArray === 'undefined') {
+// 			console.error('You need to provide paramsToLeaveArray');
+// 			return;
+// 		}
 
-		var allParams = getAllParams();
+// 		var allParams = getAllParams();
 
-		$.each(allParams, function(key, value) {
-			if ( $.inArray(key, paramsToLeaveArray) === -1 ) {
-				delete allParams[key];
-			}
-		});
+// 		$.each(allParams, function(key, value) {
+// 			if ( $.inArray(key, paramsToLeaveArray) === -1 ) {
+// 				delete allParams[key];
+// 			}
+// 		});
 
-		if ($.isEmptyObject(allParams)) {
-			clearAllParams();
-		} else {
-			saveParamObjectToLocalStorageAsString(allParams);
-		}
-	}
+// 		if ($.isEmptyObject(allParams)) {
+// 			clearAllParams();
+// 		} else {
+// 			saveParamObjectToLocalStorageAsString(allParams);
+// 		}
+// 	}
 
-	return {
-		version: {
-			version: 6,
-			versionNotes: {
-				6: 'Added debuncing for storing in localStorage',
-				5: 'Removed default retrigger on param change while creating the onParamChage',
-				4: 'Added options to disable retrigger on param change while creating onParamChange',
-				3: 'Added fallback for Safari incognito not supporting localStorage',
-			},
-		},
-		setParam: setParam,
-		toggleParam: toggleParam,
-		getAllParams: getAllParams,
-		setFreshParams: setFreshParams,
-		setDefaultParam: setDefaultParam,
-		getParam: getParam,
-		onParamChange: onParamChange,
-		retriggerOnParamChange: retriggerOnParamChange,
-		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
-		removeParam: removeParam,
-		appendToBeginningOfTheArray: appendToBeginningOfTheArray,
-		appendToArray: appendToArray,
-		removeElementFromArrayXWithIdY: removeElementFromArrayXWithIdY,
-		findInArrayXObjectWithIdY: findInArrayXObjectWithIdY,
-		findInArrayXObjectWithPropertyYMatchingZ: findInArrayXObjectWithPropertyYMatchingZ,
-		updateObjectInArray: updateObjectInArray,
-		clearAllParams: clearAllParams,
-		clearAllButLeave: clearAllButLeave,
-	};
+// 	return {
+// 		version: {
+// 			version: 6,
+// 			versionNotes: {
+// 				6: 'Added debuncing for storing in localStorage',
+// 				5: 'Removed default retrigger on param change while creating the onParamChage',
+// 				4: 'Added options to disable retrigger on param change while creating onParamChange',
+// 				3: 'Added fallback for Safari incognito not supporting localStorage',
+// 			},
+// 		},
+// 		setParam: setParam,
+// 		toggleParam: toggleParam,
+// 		getAllParams: getAllParams,
+// 		setFreshParams: setFreshParams,
+// 		setDefaultParam: setDefaultParam,
+// 		getParam: getParam,
+// 		onParamChange: onParamChange,
+// 		retriggerOnParamChange: retriggerOnParamChange,
+// 		retriggerOnParamChangeForAll: retriggerOnParamChangeForAll,
+// 		removeParam: removeParam,
+// 		appendToBeginningOfTheArray: appendToBeginningOfTheArray,
+// 		appendToArray: appendToArray,
+// 		removeElementFromArrayXWithIdY: removeElementFromArrayXWithIdY,
+// 		findInArrayXObjectWithIdY: findInArrayXObjectWithIdY,
+// 		findInArrayXObjectWithPropertyYMatchingZ: findInArrayXObjectWithPropertyYMatchingZ,
+// 		updateObjectInArray: updateObjectInArray,
+// 		clearAllParams: clearAllParams,
+// 		clearAllButLeave: clearAllButLeave,
+// 	};
 
-})();
+// })();
+
+if (typeof ReactiveLocalStorage === 'undefined') {
+  var ReactiveLocalStorage = State;
+}
 
 if (typeof RLS === 'undefined') {
   var RLS = ReactiveLocalStorage;
