@@ -1421,8 +1421,7 @@ function SimplyCreateStateStore(storageName, options) {
 		}
 
 		function setFreshParams(newParamsObj) {
-			var paramsObject = parse(storageString);
-			saveParamObjectAsString(paramsObject, options);
+			saveParamObjectAsString(newParamsObj);
 			retriggerOnParamChangeForAll();
 		}
 
