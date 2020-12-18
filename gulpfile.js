@@ -17,6 +17,8 @@ var generalFrameworkScripts = [
 	"./src/general-framework/js-utilities/utility-functions.js",
 	"./src/general-framework/js-utilities/semantic-shortcuts.js",
 	"./src/general-framework/js-utilities/fallback-localstorage-clear.js",
+	"./src/general-framework/js-utilities/state-manager.js",
+	"./src/general-framework/js-utilities/state-manager-array-operations.js",
 	"./src/general-framework/js-utilities/queryStringRouter.js",
 	"./src/general-framework/js-utilities/reactiveLocalStorage.js",
 	"./node_modules/validator/validator.min.js",
